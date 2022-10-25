@@ -28,6 +28,7 @@
 	<resources mapping="js/**" location="js/" />
 	<resources mapping="images/**" location="images/" />
 	<resources mapping="upload/**" location="upload/" />
+	<resources mapping="fonts/**" location="fonts/" />
 	
 	<!-- 파일업로드 관련 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
