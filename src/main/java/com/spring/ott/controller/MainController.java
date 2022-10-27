@@ -14,13 +14,18 @@ public class MainController {
 	@Autowired MainService mainService;
 	@Autowired BoardService boardService;
 	
+	@RequestMapping("/main.do")
+	public String main() {
+		return "index";
+	}
+	
 	@RequestMapping("/about.do")
 	public String about() {
 		return "services";
 	}
 	
-//	readBoardRankingList (좋아요 받은 수 랭킹 / 레이트 평점 랭킹)
-//	* 작품(자랑게시판) 캐러셀에 쓸 조회
-//	* 추천장소(추천게시판) 캐러셀에 쓸 조회
+//	readBoardRankingList (醫뗭븘�슂 諛쏆� �닔 �옲�궧 / �젅�씠�듃 �룊�젏 �옲�궧)
+//	* �옉�뭹(�옄�옉寃뚯떆�뙋) 罹먮윭���뿉 �벝 議고쉶
+//	* 異붿쿇�옣�냼(異붿쿇寃뚯떆�뙋) 罹먮윭���뿉 �벝 議고쉶
 }
    

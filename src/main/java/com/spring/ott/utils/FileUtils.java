@@ -12,58 +12,48 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.spring.boardweb.BoardFileVO;
-
-//ì‹¤ì œ ì„œë²„ì— íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬ë¥¼ í•´ì£¼ëŠ” í´ë˜ìŠ¤
-public class FileUtils {
-	public List<BoardFileVO> parseFileInfo(int boardSeq, HttpServletRequest request,
-			MultipartHttpServletRequest multipartServletRequest) throws IOException {
-		List<BoardFileVO> fileList = new ArrayList<BoardFileVO>();
+public class FileUtils<T> {
+	public List<MultipartFile> parseFileInfo(int boardSeq, HttpServletRequest request,
+			MultipartHttpServletRequest multipartHttpServletRequest) throws IOException {
+		List<MultipartFile> multipartFileList = new ArrayList<MultipartFile>();
 		
-		//ì„œë²„ì˜ ë£¨íŠ¸ ê²½ë¡œ ê°€ì ¸ì˜¤ê¸°
+		//ÅèÄ¹ ¼­¹ö ·çÆ® °æ·Î °¡Á®¿À±â
 		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		
+		//ÆÄÀÏ¾÷·Îµå Æú´õ ¸¸µé±â
 		String attachPath = "/upload/";
-		
+		System.out.println("path=============================================" + rootPath + attachPath);
 		File directory = new File(rootPath + attachPath);
 		
 		if(directory.exists() == false) {
-			//ì„œë²„ ë£¨íŠ¸ ê²½ë¡œì— upload í´ë” ë§Œë“¤ê¸°
-			directory.mkdir();
+			directory.mkdirs();
 		}
 		
-		//ì²¨ë¶€íŒŒì¼ ëª©ë¡ êº¼ë‚´ì˜¤ê¸°
-		Iterator<String> iterator = multipartServletRequest.getFileNames();
+		//ÆÄÀÏ ÀÌ¸§ ²¨³»±â
+		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 		
 		while(iterator.hasNext()) {
-			//iteratorì— ë‹´ê²¨ìˆëŠ” íŒŒì¼ì´ë¦„ë“¤ë¡œ ì²¨ë¶€íŒŒì¼ êº¼ë‚´ì˜¤ê¸°
-			List<MultipartFile> list = multipartServletRequest.getFiles(iterator.next());
+			//ÆÄÀÏ ÀÌ¸§À¸·Î ÆÄÀÏ °´Ã¼ ²¨³»±â
+			multipartFileList = multipartHttpServletRequest.getFiles(iterator.next());
 			
-			for(MultipartFile multipartFile : list) {
+			//ÀÌ ºÎºĞÀº °¢ ÄÁÆ®·Ñ·¯ÀÇ ÆÄÀÏ¾÷·ÎµåÇÏ´Â ¸Ş¼Òµå¿¡¼­ Ã³¸® 
+			/*for(MultipartFile multipartFile : multipartFileList) {
 				if(!multipartFile.isEmpty()) {
-					BoardFileVO boardFileVO = new BoardFileVO();
+					BoardFileVO boardFile = new BoardFileVO();
 					
-					boardFileVO.setBoardSeq(boardSeq);
-					//í™”ë©´ì— í‘œì¶œí•  ë•Œ ì‚¬ìš©
-					boardFileVO.setOriginalFileName(multipartFile.getOriginalFilename());
-					
-					//ê³ ìœ í•œ íŒŒì¼ëª… ìƒì„±
-					//ì‹¤ì œ ì„œë²„ì— ì €ì¥ë˜ëŠ” íŒŒì¼ëª…
+					boardFile.setBoardSeq(boardSeq);
+					boardFile.setOriginalFileName(multipartFile.getOriginalFilename());
 					String uuid = UUID.randomUUID().toString();
-					boardFileVO.setFileName(uuid + multipartFile.getOriginalFilename());
+					boardFile.setFileName(uuid + multipartFile.getOriginalFilename());
+					boardFile.setFilePath(rootPath + attachPath);
 					
-					boardFileVO.setFilePath(rootPath + attachPath);
+					fileList.add(boardFile);
 					
-					fileList.add(boardFileVO);
-					
-					//íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬
 					File file = new File(rootPath + attachPath + uuid + multipartFile.getOriginalFilename());
 					
 					multipartFile.transferTo(file);
 				}
-			}
+			}*/
 		}
-		
-		return fileList;
+		return multipartFileList;
 	}
 }
