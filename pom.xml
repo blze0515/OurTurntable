@@ -87,6 +87,14 @@
 			<version>2.13.0</version>
 		</dependency>
 		
+		<!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
+			<scope>provided</scope>
+		</dependency>
+					
 		<!-- FileUpload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
