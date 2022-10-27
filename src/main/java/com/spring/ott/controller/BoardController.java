@@ -28,7 +28,7 @@ public class BoardController {
 	
 //	readBoard (게시글 상세 조회)
 //		* 서비스에서 구현할 내용: 
-//			* 댓글 목록 조회
+//			* 댓글 목록 조회 
 //			* 좋아요 카운트 조회
 
 	

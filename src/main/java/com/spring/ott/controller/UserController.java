@@ -16,7 +16,7 @@ public class UserController {
 //	createUser (회원가입)
 	
 	
-//	readUser (로그인) <- 이거…
+//	createSession (로그인)
 	
 	
 //	deleteSession (로그아웃)
