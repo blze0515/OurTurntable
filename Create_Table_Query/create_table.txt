@@ -1,0 +1,211 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema ourturntabledb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema ourturntabledb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `ourturntabledb` DEFAULT CHARACTER SET utf8 ;
+USE `ourturntabledb` ;
+
+-- -----------------------------------------------------
+-- Table `ourturntabledb`.`T_OTT_USER`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ourturntabledb`.`T_OTT_USER` (
+  `USER_ID` VARCHAR(255) NOT NULL,
+  `USER_NAME` VARCHAR(45) NOT NULL,
+  `USER_NICKNAME` VARCHAR(255) NOT NULL,
+  `USER_EMAIL` VARCHAR(45) NOT NULL,
+  `USER_TEL` VARCHAR(45) NOT NULL,
+  `USER_ADRESS` VARCHAR(255) NOT NULL,
+  `USER_ZIPCODE` VARCHAR(45) NOT NULL,
+  `USER_RGSTDATE` DATETIME NOT NULL,
+  `USER_MDFDATE` DATETIME NOT NULL,
+  `USER_ACTIVEYN` CHAR NULL,
+  `USER_ROLE` CHAR NOT NULL,
+  PRIMARY KEY (`USER_ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ourturntabledb`.`T_OTT_BOARD`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ourturntabledb`.`T_OTT_BOARD` (
+  `BOARD_SEQ` INT NOT NULL,
+  `BOARD_CATEGORY` CHAR NOT NULL,
+  `USER_ID` VARCHAR(255) NOT NULL,
+  `BOARD_TITLE` VARCHAR(255) NOT NULL,
+  `BOARD_CONTENT` VARCHAR(5000) NOT NULL,
+  `BOARD_RGSTDATE` DATETIME NOT NULL,
+  `BOARD_MDFDATE` DATETIME NULL,
+  `BOARD_VIEWCOUNT` INT NOT NULL,
+  `BOARD_MFILE` VARCHAR(255) NOT NULL,
+  `BOARD_RSHOPNAME` VARCHAR(255) NOT NULL,
+  `BOARD_RSHOPADRESS` VARCHAR(255) NULL,
+  `BOARD_RSHOPURL` VARCHAR(255) NULL,
+  `BOARD_SYOUTUBELINK` VARCHAR(255) NOT NULL,
+  `BOARD_SUPLOADYN` CHAR NOT NULL,
+  PRIMARY KEY (`BOARD_SEQ`, `BOARD_CATEGORY`),
+  INDEX `fk_T_OTT_BOARD_T_OTT_USER1_idx` (`USER_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_T_OTT_BOARD_T_OTT_USER1`
+    FOREIGN KEY (`USER_ID`)
+    REFERENCES `ourturntabledb`.`T_OTT_USER` (`USER_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ourturntabledb`.`T_OTT_COMMENT`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ourturntabledb`.`T_OTT_COMMENT` (
+  `COMMENT_SEQ` INT NOT NULL,
+  `BOARD_SEQ` INT NOT NULL,
+  `BOARD_CATEGORY` CHAR NOT NULL,
+  `USER_ID` VARCHAR(255) NOT NULL,
+  `COMMENT_CONTENT` VARCHAR(255) NOT NULL,
+  `COMMENT_RATE` FLOAT NOT NULL,
+  INDEX `fk_T_OTT_COMMENT_T_OTT_USER_idx` (`USER_ID` ASC) VISIBLE,
+  PRIMARY KEY (`COMMENT_SEQ`, `BOARD_SEQ`, `BOARD_CATEGORY`),
+  CONSTRAINT `fk_T_OTT_COMMENT_T_OTT_USER`
+    FOREIGN KEY (`USER_ID`)
+    REFERENCES `ourturntabledb`.`T_OTT_USER` (`USER_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_T_OTT_COMMENT_T_OTT_BOARD1`
+    FOREIGN KEY (`BOARD_SEQ` , `BOARD_CATEGORY`)
+    REFERENCES `ourturntabledb`.`T_OTT_BOARD` (`BOARD_SEQ` , `BOARD_CATEGORY`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ourturntabledb`.`T_OTT_IMG`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ourturntabledb`.`T_OTT_IMG` (
+  `IMG_SEQ` INT NOT NULL,
+  `BOARD_SEQ` INT NOT NULL,
+  `BOARD_CATEGORY` CHAR NOT NULL,
+  `IMG_FILE` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`IMG_SEQ`, `BOARD_SEQ`, `BOARD_CATEGORY`),
+  INDEX `fk_T_OTT_IMG_T_OTT_BOARD1_idx` (`BOARD_SEQ` ASC, `BOARD_CATEGORY` ASC) VISIBLE,
+  CONSTRAINT `fk_T_OTT_IMG_T_OTT_BOARD1`
+    FOREIGN KEY (`BOARD_SEQ` , `BOARD_CATEGORY`)
+    REFERENCES `ourturntabledb`.`T_OTT_BOARD` (`BOARD_SEQ` , `BOARD_CATEGORY`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ourturntabledb`.`T_OTT_LIKE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ourturntabledb`.`T_OTT_LIKE` (
+  `USER_ID` VARCHAR(255) NOT NULL,
+  `BOARD_SEQ` INT NOT NULL,
+  `BOARD_CATEGORY` CHAR NOT NULL,
+  `LIKE_DATE` DATETIME NOT NULL,
+  PRIMARY KEY (`USER_ID`, `BOARD_SEQ`, `BOARD_CATEGORY`),
+  INDEX `fk_T_OTT_LIKE_T_OTT_USER1_idx` (`USER_ID` ASC) VISIBLE,
+  INDEX `fk_T_OTT_LIKE_T_OTT_BOARD1_idx` (`BOARD_SEQ` ASC, `BOARD_CATEGORY` ASC) VISIBLE,
+  CONSTRAINT `fk_T_OTT_LIKE_T_OTT_USER1`
+    FOREIGN KEY (`USER_ID`)
+    REFERENCES `ourturntabledb`.`T_OTT_USER` (`USER_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_T_OTT_LIKE_T_OTT_BOARD1`
+    FOREIGN KEY (`BOARD_SEQ` , `BOARD_CATEGORY`)
+    REFERENCES `ourturntabledb`.`T_OTT_BOARD` (`BOARD_SEQ` , `BOARD_CATEGORY`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ourturntabledb`.`T_OTT_POINT`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ourturntabledb`.`T_OTT_POINT` (
+  `POINT_SEQ` INT NOT NULL,
+  `USER_ID` VARCHAR(255) NOT NULL,
+  `POINT_COMMON_CODE` CHAR NOT NULL,
+  `POINT_RECEIVER` VARCHAR(255) NOT NULL,
+  `POINT_MONEY` INT NOT NULL,
+  `POINT_RGSDATE` DATETIME NOT NULL,
+  `POINT_RECENTPAYMENT` DATETIME NULL,
+  `POIND_SCRIPTSPAN` DATETIME NULL,
+  `POINT_SCRIPTCANCELYN` CHAR NULL,
+  PRIMARY KEY (`POINT_SEQ`),
+  INDEX `fk_T_OTT_POINT_T_OTT_USER1_idx` (`USER_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_T_OTT_POINT_T_OTT_USER1`
+    FOREIGN KEY (`USER_ID`)
+    REFERENCES `ourturntabledb`.`T_OTT_USER` (`USER_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ourturntabledb`.`T_OTT_RELATION`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ourturntabledb`.`T_OTT_RELATION` (
+  `USER_ID` VARCHAR(255) NOT NULL,
+  `RELATION_PARTNER` VARCHAR(45) NOT NULL,
+  `RELATION_CONDITION` CHAR NOT NULL,
+  PRIMARY KEY (`USER_ID`),
+  CONSTRAINT `fk_T_OTT_RELATION_T_OTT_USER1`
+    FOREIGN KEY (`USER_ID`)
+    REFERENCES `ourturntabledb`.`T_OTT_USER` (`USER_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ourturntabledb`.`T_OTT_CHATROOM`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ourturntabledb`.`T_OTT_CHATROOM` (
+  `CHATROOM_SEQ` INT NOT NULL,
+  `CHATROOM_MEMBER1` VARCHAR(45) NOT NULL,
+  `CHATROOM_MEMBER2` VARCHAR(45) NOT NULL,
+  `CHATROOM_CREATE` DATETIME NOT NULL,
+  PRIMARY KEY (`CHATROOM_SEQ`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ourturntabledb`.`T_OTT_CHAT`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ourturntabledb`.`T_OTT_CHAT` (
+  `CHAT_SEQ` INT NOT NULL,
+  `CHATROOM_SEQ` INT NOT NULL,
+  `USER_ID` VARCHAR(255) NOT NULL,
+  `CHAT_RECEIVE_ID` VARCHAR(255) NULL,
+  `CHAT_CONTENT` VARCHAR(2000) NULL,
+  `CHAT_RGSDATE` DATETIME NULL,
+  `CHAT_READYN` CHAR NULL,
+  PRIMARY KEY (`CHAT_SEQ`, `CHATROOM_SEQ`),
+  INDEX `fk_T_OTT_CHAT_T_OTT_CHATROOM1_idx` (`CHATROOM_SEQ` ASC) VISIBLE,
+  INDEX `fk_T_OTT_CHAT_T_OTT_USER1_idx` (`USER_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_T_OTT_CHAT_T_OTT_CHATROOM1`
+    FOREIGN KEY (`CHATROOM_SEQ`)
+    REFERENCES `ourturntabledb`.`T_OTT_CHATROOM` (`CHATROOM_SEQ`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_T_OTT_CHAT_T_OTT_USER1`
+    FOREIGN KEY (`USER_ID`)
+    REFERENCES `ourturntabledb`.`T_OTT_USER` (`USER_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
