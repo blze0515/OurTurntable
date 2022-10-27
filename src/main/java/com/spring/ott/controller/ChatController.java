@@ -25,6 +25,8 @@ public class ChatController {
 
 	
 //	deleteChatroom (챗룸 삭제)
+	
+//	updateChatStatus() (채팅메시지 목록 조회 전에 읽음여부 수정)
 
 	
 }

@@ -4,14 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.ott.service.board.BoardService;
 import com.spring.ott.service.main.MainService;
 
 @Controller
 @RequestMapping("/main")
 public class MainController {
 	
-	@Autowired
-	MainService mainService;
+	@Autowired MainService mainService;
+	@Autowired BoardService boardService;
 	
 	@RequestMapping("/about.do")
 	public String about() {
