@@ -12,29 +12,39 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	
+	@RequestMapping("/login.do")
+	public String login() {
+		return "/WEB-INF/views/login";
+	}
+	
+	@RequestMapping("/join.do")
+	public String join() {
+		return "/WEB-INF/views/join";
+	}
+//	createUser ( šŒ ›ê°  …)
 
-//	createUser (íšŒì›ê°€ì…)
+	
+//	createSession (ë¡œê·¸ ¸)
 	
 	
-//	createSession (ë¡œê·¸ì¸)
+//	deleteSession (ë¡œê·¸ •„ ›ƒ)
 	
 	
-//	deleteSession (ë¡œê·¸ì•„ì›ƒ)
-	
-	
-//	readUserIdCheck (ì•„ì´ë”” ì¤‘ë³µì²´í¬)
+//	readUserIdCheck ( •„ ´ ”” ì¤‘ë³µì²´í¬)
 
 	
-//	createFollow (íŒ”ë¡œìš°)
+//	createFollow ( Œ”ë¡œìš°)
 	
 	
 //	createBlock (ì°¨ë‹¨)
 	
 	
-//	deleteFollow (íŒ”ë¡œìš° ì‚­ì œ)
+//	deleteFollow ( Œ”ë¡œìš°  ‚­  œ)
 	
 	
-//	deleteBlock (ì°¨ë‹¨ ì‚­ì œ)
+//	deleteBlock (ì°¨ë‹¨  ‚­  œ)
 	
 
 
