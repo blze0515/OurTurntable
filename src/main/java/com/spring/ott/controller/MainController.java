@@ -21,7 +21,7 @@ public class MainController {
 	
 	@RequestMapping("/about.do")
 	public String about() {
-		return "services";
+		return "/WEB-INF/views/services";
 	}
 	
 //	readBoardRankingList (醫뗭븘�슂 諛쏆� �닔 �옲�궧 / �젅�씠�듃 �룊�젏 �옲�궧)
