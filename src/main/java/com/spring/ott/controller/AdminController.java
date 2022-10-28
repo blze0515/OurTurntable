@@ -17,16 +17,16 @@ public class AdminController {
 	@Autowired UserService userService;
 
 
-//	readUserList (íšŒì› ëª©ë¡ ì¡°íšŒ)
+//	readUserList (È¸¿ø ¸ñ·Ï Á¶È¸)
 	
 	
-//	updateUserState (íšŒì› í™œë™ìƒíƒœ ìˆ˜ì •)
+//	updateUserState (È¸¿ø È°µ¿»óÅÂ ¼öÁ¤)
 	
 	
-//	updateUserGrade(íšŒì› ë“±ê¸‰ ìˆ˜ì •)
+//	updateUserGrade (È¸¿ø µî±Ş ¼öÁ¤)
 	
 	
-//	updateBoardState (ê²Œì‹œê¸€ ìŠ¹ì¸ì—¬ë¶€ ìˆ˜ì •)
+//	updateBoardState (°Ô½Ã±Û ½ÂÀÎ¿©ºÎ ¼öÁ¤)
 	
 	
 }
