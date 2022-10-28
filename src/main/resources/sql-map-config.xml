@@ -17,5 +17,6 @@
 	<!-- 쿼리문 작성할 매퍼 설정 -->
 	<mappers>
 		<mapper resource="mappings/user-mapping.xml"></mapper>
+		<mapper resource="mappings/mypage-mapping.xml"></mapper>
 	</mappers>
 </configuration>
