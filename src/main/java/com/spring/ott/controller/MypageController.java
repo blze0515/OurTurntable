@@ -1,9 +1,17 @@
 package com.spring.ott.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spring.ott.VO.UserVO;
 import com.spring.ott.service.mypage.MypageService;
 
 @Controller
@@ -13,28 +21,52 @@ public class MypageController {
 	@Autowired
 	MypageService mypageService;
 	
-//	updateUser (íšŒì›ì •ë³´ ìˆ˜ì •)
+//	updateUser (È¸¿øÁ¤º¸ ¼öÁ¤)
 	
 	
-//	readFollowList (íŒ”ë¡œìš° ëª©ë¡ ì¡°íšŒ)
+//	readFollowList (ÆÈ·Î¿ì ¸ñ·Ï Á¶È¸)
+	@RequestMapping("/readFollowList.do")
+	public String readFollowList(HttpSession session, Model model) {
+		
+		String userId = "gogo";
+		List<UserVO> followList = mypageService.readFollowList(userId);
+		
+		for(int i=0; i < followList.size(); i++) {
+			System.out.println(followList.get(i).toString());
+		}
+		
+		model.addAttribute("relationUserList", followList);
+		
+		return "/WEB-INF/views/readRelationList";		
+	}
+	
+//	readBlockList (Â÷´Ü ¸ñ·Ï Á¶È¸)
+	@RequestMapping("/readBlockList.do")
+	public String readBlockList() {
+		return "/WEB-INF/views/readRelationList";
+	}
+	
+//	readMystarList (³»°¡ ÈÄ¿øÇÑ»ç¶÷ Á¶È¸)
+	@RequestMapping("/readMystarList.do")
+	public String readMystarList() {
+		return "/WEB-INF/views/readRelationList";
+	}
+	
+//	readMyfanList (³ª¸¦ ÈÄ¿øÇÑ»ç¶÷ Á¶È¸)
+	@RequestMapping("/readMyfanList.do")
+	public String readMyfanList() {
+		return "/WEB-INF/views/readRelationList";
+	}
 	
 	
-//	readBlockList (ì°¨ë‹¨ ëª©ë¡ ì¡°íšŒ)
+//	readMyBoardList (³»°¡ÀÛ¼ºÇÑ °Ô½ÃÆÇ Á¶È¸)
 	
 	
-//	readMystarList (ë‚´ê°€ í›„ì›í•œì‚¬ëŒ ì¡°íšŒ)
+//	readMyReplyList (³»°¡ÀÛ¼ºÇÑ ´ñ±Û Á¶È¸)
 	
 	
-//	readMyfanList (ë‚˜ë¥¼ í›„ì›í•œì‚¬ëŒ ì¡°íšŒ)
-	
-	
-//	readMyBoardList (ë‚´ê°€ì‘ì„±í•œ ê²Œì‹œíŒ ì¡°íšŒ)
-	
-	
-//	readMyReplyList (ë‚´ê°€ì‘ì„±í•œ ëŒ“ê¸€ ì¡°íšŒ)
-	
-	
-//	readMyLikeList (ë‚´ê°€ì¢‹ì•„ìš” ëˆ„ë¥¸ ê²Œì‹œê¸€ ì¡°íšŒ)
+//	readMyLikeList (³»°¡ÁÁ¾Æ¿ä ´©¸¥ °Ô½Ã±Û Á¶È¸)
+
 
 	
 }
