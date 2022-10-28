@@ -13,38 +13,43 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-//	createBoard (게시글 등록)
-//		* 게시판 유형(1,2,3)에 따른 동적 쿼리
+	@RequestMapping("/readBoardList.do")
+	public String about() {
+		return "/WEB-INF/views/readBoardList";
+	}
+	
+//	createBoard (寃뚯떆湲� �벑濡�)
+//		* 寃뚯떆�뙋 �쑀�삎(1,2,3)�뿉 �뵲瑜� �룞�쟻 荑쇰━
 
 	
-//	updateBoard (게시글 수정)
+//	updateBoard (寃뚯떆湲� �닔�젙)
 
 	
-//	deleteBoard (게시글 삭제)
+//	deleteBoard (寃뚯떆湲� �궘�젣)
 
 	
-//	readBoardList (게시글 목록 조회)
+//	readBoardList (寃뚯떆湲� 紐⑸줉 議고쉶)
 
 	
-//	readBoard (게시글 상세 조회)
-//		* 서비스에서 구현할 내용: 
-//			* 댓글 목록 조회 
-//			* 좋아요 카운트 조회
+//	readBoard (寃뚯떆湲� �긽�꽭 議고쉶)
+//		* �꽌鍮꾩뒪�뿉�꽌 援ы쁽�븷 �궡�슜: 
+//			* �뙎湲� 紐⑸줉 議고쉶 
+//			* 醫뗭븘�슂 移댁슫�듃 議고쉶
 
 	
-//	createReply (댓글등록)
+//	createReply (�뙎湲��벑濡�)
 
 	
-//	updateReply (댓글수정)
+//	updateReply (�뙎湲��닔�젙)
 
 	
-//	deleteReply (댓글삭제)
+//	deleteReply (�뙎湲��궘�젣)
 
 	
-//	createBoardLike (좋아요 등록)
+//	createBoardLike (醫뗭븘�슂 �벑濡�)
 
 	
-//	deleteBoardLike (좋아요 삭제)
+//	deleteBoardLike (醫뗭븘�슂 �궘�젣)
 
 	
 }
