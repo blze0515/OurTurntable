@@ -1,9 +1,15 @@
 package com.spring.ott.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.ott.VO.UserVO;
 import com.spring.ott.service.chat.ChatService;
 
 @Controller
@@ -13,20 +19,35 @@ public class ChatController {
 	@Autowired
 	ChatService chatService;
 
-//	createChat (ì±„íŒ…ë©”ì‹œì§€ ë“±ë¡)
-//		* ì„œë¹„ìŠ¤ì—ì„œ êµ¬í˜„í•  ë‚´ìš©: 
-//			* ì²« ì±„íŒ…ì„ ì…ë ¥í•  ë•Œ ì±—ë£¸ì´ ìƒê²¨ì•¼ í•¨
+//	createChat - (Ã¤ÆÃ¸Ş½ÃÁö µî·Ï)
+//    - ¼­ºñ½º¿¡¼­ ±¸ÇöÇÒ ³»¿ë:
+//    - createChatroom (Ã¹ Ã¤ÆÃÀ» ÀÔ·ÂÇÒ ¶§ Ãª·ëÀÌ »ı°Ü¾ß ÇÔ)
+//    - readChatList (Ã¤ÆÃ¸Ş¼¼Áö ¸ñ·Ï Á¶È¸)
+	
+//	readChatList (Ã¤ÆÃ¸Ş½ÃÁö ¸ñ·Ï Á¶È¸)
 
 	
-//	readChatList (ì±„íŒ…ë©”ì„¸ì§€ ëª©ë¡ ì¡°íšŒ)
+//	readChatroomList (Âü¿©ÁßÀÎ Ã¤ÆÃ¹æ ¸ñ·Ï Á¶È¸)
+	@RequestMapping("/readChatroomList.do")
+	public String readFollowList(HttpSession session, Model model) {
+		
+//		String userId = "gogo";
+//		List<UserVO> followingList = mypageService.readFollowingList(userId);
+//		
+//		for(int i=0; i < followingList.size(); i++) {
+//			System.out.println(followingList.get(i).toString());
+//		}
+//		
+//		model.addAttribute("relationUserList", followingList);
+		
+		return "/WEB-INF/views/readChatroomList";		
+	}
 
 	
-//	readChatroomList (ì°¸ì—¬ì¤‘ì¸ ì±—ë£¸ ëª©ë¡ ì¡°íšŒ)
-
+//	deleteChatroom (Ã¤ÆÃ¹æ »èÁ¦)
 	
-//	deleteChatroom (ì±—ë£¸ ì‚­ì œ)
 	
-//	updateChatStatus() (ì±„íŒ…ë©”ì‹œì§€ ëª©ë¡ ì¡°íšŒ ì „ì— ì½ìŒì—¬ë¶€ ìˆ˜ì •)
+//	updateChatStatus() (Ã¤ÆÃ¸Ş½ÃÁöÀÇ ÀĞÀ½»óÅÂ ¼öÁ¤)
 
 	
 }

@@ -15,7 +15,12 @@ public class MypageServiceImpl implements MypageService{
 	MypageDAO mypageDAO;
 
 	@Override
-	public List<UserVO> readFollowList(String userId) {
-		return mypageDAO.readFollowList(userId);
+	public List<UserVO> readFollowingList(String userId) {
+		return mypageDAO.readFollowingList(userId);
+	}
+
+	@Override
+	public List<UserVO> readBlockList(String userId) {
+		return mypageDAO.readBlockList(userId);
 	}
 }

@@ -6,6 +6,8 @@ import com.spring.ott.VO.UserVO;
 
 public interface MypageService {
 
-	List<UserVO> readFollowList(String userId);
+	List<UserVO> readFollowingList(String userId);
+
+	List<UserVO> readBlockList(String userId);
 
 }

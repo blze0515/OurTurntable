@@ -14,7 +14,11 @@ public class MypageDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 
-	public List<UserVO> readFollowList(String userId) {
-		return mybatis.selectList("MypageDAO.readFollowList", userId);
+	public List<UserVO> readFollowingList(String userId) {
+		return mybatis.selectList("MypageDAO.readFollowingList", userId);
+	}
+	
+	public List<UserVO> readBlockList(String userId) {
+		return mybatis.selectList("MypageDAO.readBlockList", userId);
 	}
 }
