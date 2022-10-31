@@ -30,13 +30,13 @@ public class MainController {
 	@RequestMapping("/about.do")
 	public String about(MultipartHttpServletRequest multipartHttpServletRequest,
 			HttpServletRequest request) throws IOException {
-		//FileUpload 예제
+		//FileUpload �삁�젣
 		FileUtils fileUtils = new FileUtils();
 		
-		//실제 멀티파트 파일 리스트
+		//�떎�젣 硫��떚�뙆�듃 �뙆�씪 由ъ뒪�듃
 		List<MultipartFile> multipartFileList = fileUtils.parseFileInfo(multipartHttpServletRequest);
 		
-		//DB에 저장될 파일정보 리스트
+		//DB�뿉 ���옣�맆 �뙆�씪�젙蹂� 由ъ뒪�듃
 //		List<BoardFileVO> boardFileList = new ArrayList<BoardFileVO>();
 		
 		for(MultipartFile multipartFile : multipartFileList) {
@@ -51,7 +51,7 @@ public class MainController {
 //				
 //				boardFileList.add(boardFile);
 				
-				//파일 업로드 처리는 FileUtils의 uploadFile메소드 사용
+				//�뙆�씪 �뾽濡쒕뱶 泥섎━�뒗 FileUtils�쓽 uploadFile硫붿냼�뱶 �궗�슜
 				fileUtils.uploadFile(multipartFile, request);
 			}
 		}
@@ -62,8 +62,8 @@ public class MainController {
 
 	
 	
-//	readBoardRankingList (醫뗭븘 슂 諛쏆   닔  옲 궧 /  젅 씠 듃  룊 젏  옲 궧)
-//	*  옉 뭹( 옄 옉寃뚯떆 뙋) 罹먮윭   뿉  벝 議고쉶
-//	* 異붿쿇 옣 냼(異붿쿇寃뚯떆 뙋) 罹먮윭   뿉  벝 議고쉶
+//	readBoardRankingList (�넫�뿭釉� �뒄 獄쏆룇   �땾  �삻 沅� /  �쟿 �뵠 �뱜  猷� �젎  �삻 沅�)
+//	*  �삂 萸�( �쁽 �삂野껊슣�뻻 �솇) 筌�癒��쑎   肉�  踰� 鈺곌퀬�돳
+//	* �빊遺우퓝 �삢 �꺖(�빊遺우퓝野껊슣�뻻 �솇) 筌�癒��쑎   肉�  踰� 鈺곌퀬�돳
 }
    

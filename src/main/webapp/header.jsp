@@ -46,39 +46,38 @@
 	<nav class="site-nav">
 		<div class="container">
 			<div class="site-navigation">
-				<a href="/main/main.do" class="logo m-0">Tour <span class="text-primary">.</span></a>
-				<div>
+				<div class="sh-index-nav">
+					<a href="/main/main.do" class="logo m-0">
+					<img src="/images/img_logo.jpg" style="height:90px";> <!-- Tour <span class="text-primary" ></span>-->
+					</a>
+					<a><h1>Our Turntable</h1> </a>
 					<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
-						<li><a href="/user/login.do" class="">login</a></li>
-						<li><a href="/user/join.do" class="">join</a></li>
+						<li class="active"><a href="/main/main.do">Home</a></li>
+						<li class="has-children">
+							<a href="#">게시판</a>
+							<ul class="dropdown">
+								<!-- WEB-INF 폴더 안에 jsp 파일은 직접 접근이 불가능하여
+								     컨트롤러의 메소드를 만들어서 viewResolver를 통해 해당 화면으로 이동 -->
+								<li><a href="/board/readBoardList.do">자유 게시판</a></li>
+								<li><a href="#">자랑 게시판</a></li>
+								<li><a href="#">추천 게시판</a></li>
+							</ul>
+						</li>
+<!----------------------<li><a href="/main/services.do">Services</a></li>	 -->
+						<li><a href="/main/about.do">팔로우</a></li>
+						<li><a href="/main/contact.do">문의</a></li>
+						<!-- 로그인/회원가입/마이페이지 드롭다운 -->
+						<li class="has-children">
+							<a href="#">로그인</a>
+							<ul class="dropdown">
+								<li><a href="/user/login.do">로그인</a></li>
+								<li><a href="/user/join.do">회원가입</a></li>
+								
+								<li><a href="#">마이페이지</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
-				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
-					<li class="active"><a href="#">Home</a></li>
-					<li class="has-children">
-						<a href="#">Dropdown</a>
-						<ul class="dropdown">
-							<!-- WEB-INF 폴더 안에 jsp 파일은 직접 접근이 불가능하여
-							     컨트롤러의 메소드를 만들어서 viewResolver를 통해 해당 화면으로 이동 -->
-							<li><a href="#">Elements</a></li>
-							<li><a href="#">Menu One</a></li>
-							<li class="has-children">
-								<a href="#">Menu Two</a>
-								<ul class="dropdown">
-									<li><a href="#">Sub Menu One</a></li>
-									<li><a href="#">Sub Menu Two</a></li>
-									<li><a href="#">Sub Menu Three</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Menu Three</a></li>
-						</ul>
-					</li>
-					<li><a href="/main/about.do">Services</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact Us</a></li>
-					
-				</ul>
-
 				<a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
 					<span></span>
 				</a>

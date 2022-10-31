@@ -16,7 +16,7 @@
         <div class="col-lg-4">
           <div class="custom-block" data-aos="fade-up" data-aos-delay="100">
             <h2 class="section-title">회원가입</h2>
-            <form class="contact-form bg-white">
+            <form class="contact-form bg-brown2">
             
               <div class="form-group-join" >
                 <button type="button" class="text-black" for="img">
