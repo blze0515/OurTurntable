@@ -10,9 +10,9 @@
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
 	
 	<div class="untree_co-section">
-	    <div>
+	    <div style="width:1600px;">
 	    	<div class="wrapper grid" style="display:grid; gap:26px;
-	    									 grid-template-columns: repeat(3, 1fr);
+	    									 grid-template-columns: repeat(3,1fr);
 											 margin-top: 6%;
 										     margin-bottom: 50px;">
 		        <div class="item">
