@@ -12,11 +12,13 @@
 	<!-- VO객체의 별칭 지정 -->
 	<typeAliases>
 		<!-- <typeAlias type="com.spring.boardweb.UserVO" alias="user"></typeAlias> -->
+		<typeAlias type="com.spring.ott.common.CamelHashMap" alias="camelHashMap"></typeAlias>
 	</typeAliases>
 	
 	<!-- 쿼리문 작성할 매퍼 설정 -->
 	<mappers>
 		<mapper resource="mappings/user-mapping.xml"></mapper>
 		<mapper resource="mappings/mypage-mapping.xml"></mapper>
+		<mapper resource="mappings/chat-mapping.xml"></mapper>
 	</mappers>
 </configuration>

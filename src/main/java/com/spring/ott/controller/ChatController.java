@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.spring.ott.VO.UserVO;
+import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.chat.ChatService;
 
 @Controller
@@ -25,22 +25,36 @@ public class ChatController {
 //    - readChatList (채팅메세지 목록 조회)
 	
 //	readChatList (채팅메시지 목록 조회)
+	@RequestMapping("/readChatList.do")
+	public String readChatList(HttpSession session, Model model) {
+		
+		String userId = "gogo"; //로그인한 사용자 아이디
+		List<CamelHashMap> chatroomList = chatService.readChatroomList(userId);
+		
+		for(int i=0; i < chatroomList.size(); i++) {
+			System.out.println(chatroomList.get(i).toString());
+		}
+		
+		model.addAttribute("chatroomList", chatroomList);
+		
+		return "/WEB-INF/views/readChatroomList";
+	}
 
 	
 //	readChatroomList (참여중인 채팅방 목록 조회)
 	@RequestMapping("/readChatroomList.do")
 	public String readFollowList(HttpSession session, Model model) {
 		
-//		String userId = "gogo";
-//		List<UserVO> followingList = mypageService.readFollowingList(userId);
-//		
-//		for(int i=0; i < followingList.size(); i++) {
-//			System.out.println(followingList.get(i).toString());
-//		}
-//		
-//		model.addAttribute("relationUserList", followingList);
+		String userId = "gogo"; //로그인한 사용자 아이디
+		List<CamelHashMap> chatroomList = chatService.readChatroomList(userId);
 		
-		return "/WEB-INF/views/readChatroomList";		
+		for(int i=0; i < chatroomList.size(); i++) {
+			System.out.println(chatroomList.get(i).toString());
+		}
+		
+		model.addAttribute("chatroomList", chatroomList);
+		
+		return "/WEB-INF/views/readChatroomList";
 	}
 
 	

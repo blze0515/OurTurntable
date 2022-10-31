@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +19,17 @@
 			<div class="chat-space-left" style="width: 30%; background: green;">
 				<h1>채팅방목록</h1>
 				<ul class="list-group">
-				  <li class="list-group-item">
-					  <p>상대방 아이디</p>
-					  <p>최근 메세지 내용</p>
-				  </li>
+					<c:forEach var="chatRoom" items="${chatroomList }">					
+						<a href="/chat/readChatList.do?chatroomSeq=${chatRoom.chatroomSeq }">
+							<li class="list-group-item" >
+							  <div>${chatRoom.chatroomSeq}</div>
+							  <div><img src="/upload/${chatRoom.userProfileImg }" width="150px"></div>
+							  <div>${chatRoom.chatroomMember}</div>
+							  <div>${chatRoom.chatContent}</div>
+							  <div>${chatRoom.cntReadn}</div>
+						  	</li>
+					  	</a>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="chat-space-right" style="width: 70%; background: blue;">				
