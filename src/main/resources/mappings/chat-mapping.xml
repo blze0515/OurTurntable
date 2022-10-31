@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- doctype mapper로 설정 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- mapper namespace 지정 -->
+<!-- 기존 JDBC 프로그래밍에서 DAO 클래스에 쿼리를 작성함 -->
+<!-- DAO에서 쿼리가 분리되었기 때문에 DAO클래스 이름을 따라감 -->
+<mapper namespace="ChatDAO">
+	<!-- 쿼리 작성 영역 -->
+	<select id="readChatroomList" parameterType="String" resultType="camelHashMap">
+		SELECT AA.*
+	 , BB.CHAT_SEQ
+	 , BB.CHAT_CONTENT
+	 , CC.CNT_READN
+FROM 
+		(
+		SELECT 
+			A.USER_PROFILE_IMG,
+			B.CHATROOM_MEMBER,
+			B.CHATROOM_SEQ
+			FROM T_OTT_USER A
+			,  (
+				SELECT CHATROOM_SEQ 
+					,  CHATROOM_MEMBER2 AS CHATROOM_MEMBER
+					FROM T_OTT_CHATROOM
+					WHERE CHATROOM_MEMBER1 = #{userId}
+					  AND CHATROOM_MEMBER2 != #{userId}
+				UNION ALL	 
+				SELECT CHATROOM_SEQ 
+					,  CHATROOM_MEMBER1 AS CHATROOM_MEMBER
+					FROM T_OTT_CHATROOM
+					WHERE CHATROOM_MEMBER2 = #{userId}
+					  AND CHATROOM_MEMBER1 != #{userId}
+				) B
+			WHERE A.USER_ID = B.CHATROOM_MEMBER
+			) AA
+	, (
+		SELECT C.CHATROOM_SEQ 
+			,  C.CHAT_SEQ 
+			,  C.CHAT_CONTENT
+		FROM T_OTT_CHAT C
+			, (
+				SELECT MAX(D.CHAT_SEQ) AS CHAT_SEQ
+					,  CHATROOM_SEQ
+					FROM T_OTT_CHAT D
+					GROUP BY D.CHATROOM_SEQ
+			) E
+		WHERE C.CHATROOM_SEQ = E.CHATROOM_SEQ 
+		  AND C.CHAT_SEQ = E.CHAT_SEQ
+		) BB
+	 , (
+	 		SELECT CHATROOM_SEQ
+	 			,  COUNT(CHAT_READYN) AS CNT_READN
+	 			FROM T_OTT_CHAT
+	 			WHERE CHAT_READYN = 'N'
+	 			GROUP BY CHATROOM_SEQ
+	 	) CC
+	 WHERE AA.CHATROOM_SEQ = BB.CHATROOM_SEQ
+	   AND AA.CHATROOM_SEQ = CC.CHATROOM_SEQ
+	</select>
+	
+</mapper>
