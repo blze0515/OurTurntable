@@ -16,7 +16,7 @@
         <div class="col-lg-4">
           <div class="custom-block" data-aos="fade-up" data-aos-delay="100">
             <h2 class="section-title">로그인</h2>
-            <form class="contact-form bg-white">
+            <form class="contact-form bg-brown2">
             
               <div class="form-group">
                 <input type="text" class="form-control" id="userId" placeholder="아이디 입력" autofocus>
