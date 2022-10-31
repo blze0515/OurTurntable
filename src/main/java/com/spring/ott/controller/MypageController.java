@@ -24,35 +24,47 @@ public class MypageController {
 //	updateUser (회원정보 수정)
 	
 	
-//	readFollowList (팔로우 목록 조회)
+//	readFollowingList (팔로잉 목록 조회)
 	@RequestMapping("/readFollowList.do")
 	public String readFollowList(HttpSession session, Model model) {
 		
 		String userId = "gogo";
-		List<UserVO> followList = mypageService.readFollowList(userId);
+		List<UserVO> followingList = mypageService.readFollowingList(userId);
 		
-		for(int i=0; i < followList.size(); i++) {
-			System.out.println(followList.get(i).toString());
+		for(int i=0; i < followingList.size(); i++) {
+			System.out.println(followingList.get(i).toString());
 		}
 		
-		model.addAttribute("relationUserList", followList);
+		model.addAttribute("relationUserList", followingList);
 		
 		return "/WEB-INF/views/readRelationList";		
 	}
 	
+	
 //	readBlockList (차단 목록 조회)
 	@RequestMapping("/readBlockList.do")
-	public String readBlockList() {
-		return "/WEB-INF/views/readRelationList";
+	public String readBlockList(HttpSession session, Model model) {
+		
+		String userId = "gogo";
+		List<UserVO> readBlockList = mypageService.readBlockList(userId);
+		
+		for(int i=0; i < readBlockList.size(); i++) {
+			System.out.println(readBlockList.get(i).toString());
+		}
+		
+		model.addAttribute("relationUserList", readBlockList);
+		
+		return "/WEB-INF/views/readRelationList";	
 	}
 	
-//	readMystarList (내가 후원한사람 조회)
+	
+//	readMystarList (내가 후원한사람 목록 조회)
 	@RequestMapping("/readMystarList.do")
 	public String readMystarList() {
 		return "/WEB-INF/views/readRelationList";
 	}
 	
-//	readMyfanList (나를 후원한사람 조회)
+//	readMyfanList (나를 후원한사람 목록 조회)
 	@RequestMapping("/readMyfanList.do")
 	public String readMyfanList() {
 		return "/WEB-INF/views/readRelationList";

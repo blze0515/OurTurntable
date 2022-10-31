@@ -10,7 +10,7 @@
 <!-- DAO에서 쿼리가 분리되었기 때문에 DAO클래스 이름을 따라감 -->
 <mapper namespace="MypageDAO">
 	<!-- 쿼리 작성 영역 -->
-	<select id="readFollowList" parameterType="string" resultType="com.spring.ott.VO.UserVO">
+	<select id="readFollowingList" parameterType="String" resultType="com.spring.ott.VO.UserVO">
 		SELECT 
 		   A.RELATION_PARTNER ,
 		   A.RELATION_DATE ,
@@ -20,12 +20,12 @@
 		T_OTT_USER B,
 		T_OTT_USER C
 		WHERE A.RELATION_PARTNER = B.USER_ID 
-		and C.USER_ID = #{userId}
+		AND C.USER_ID = #{userId}
 		AND A.USER_ID = C.USER_ID
-		and A.RELATION_CONDITION = 1
+		AND A.RELATION_CONDITION = 1
 	</select>
 	
-	<select id="getBlockList" parameterType="string" resultType="com.spring.ott.VO.UserVO">
+	<select id="readBlockList" parameterType="string" resultType="com.spring.ott.VO.UserVO">
 		SELECT 
 		   A.RELATION_PARTNER ,
 		   A.RELATION_DATE ,
@@ -35,8 +35,9 @@
 		T_OTT_USER B,
 		T_OTT_USER C
 		WHERE A.RELATION_PARTNER = B.USER_ID 
-		and C.USER_ID = #{userId}
-		and A.RELATION_CONDITION = 2;
+		AND C.USER_ID = #{userId}
+		AND A.USER_ID = C.USER_ID
+		AND A.RELATION_CONDITION = 2
 	</select>
 	
 	
