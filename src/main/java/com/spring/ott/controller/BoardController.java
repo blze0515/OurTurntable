@@ -14,7 +14,7 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping("/readBoardList.do")
-	public String about() {
+	public String readBoardList() {
 		return "/WEB-INF/views/readBoardList";
 	}
 	

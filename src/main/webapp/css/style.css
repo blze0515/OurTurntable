@@ -556,7 +556,7 @@ padding: 7rem 0 15rem 0;*/
 	background: rgb(128, 90, 70);
 	height:130px;
 	opacity:0.9;
- 	margin-bottom:50px; }
+ 	margin-bottom:30px; }
   .hero.hero-inner {
     padding: 9rem 0 7rem 0;
     margin-bottom: auto;
@@ -683,8 +683,10 @@ padding: 7rem 0 15rem 0;*/
 
 .section-title {
   position: relative;
-  padding-bottom: 50px;
-  display: inline-block; }
+  padding-bottom: 30px;
+  display: inline-block;
+  width:100%; }
+  
   .section-title:before {
     content: "";
     position: absolute;
@@ -1487,17 +1489,10 @@ padding: 7rem 0 15rem 0;*/
 	display:table-column;
 	}
 	
-	/*메인화면 게시글 목록*/
-
+	/*메인화면 게시글 목록******************************************/
 	.sh-container{
 	max-width:90%;
 	}
-	
-	.mtr-head{
-	font-weight:600;
-	font-size:upper;
-	}
-	
 	.mtr-content{
 	font-weight:400;
 	}
@@ -1505,28 +1500,75 @@ padding: 7rem 0 15rem 0;*/
 	border-bottom: 2px solid white;
 	border-top: 2px solid white;
 	padding: 12px 0 12px 0;
-	text-align:center;
 	}
-	.mboard-seq{
+	.tr-seq{
 	width:120px;
-	
 	}
-	.mboard-title{
+	.tr-title{
 	width:750px;
+	padding-left:20px;
 	}
-	.mboard-nick{
+	.tr-nick{
 	width:200px;
 	}
-	.mboard-date{
+	.tr-date{
 	width:120px;
 	}
-	.mboard-view{
+	.tr-view{
 	width:100px;
 	}
-	.mboard-like{
+	.tr-like{
 	width:100px;
 	}
-	.mboard-donation{
+	.tr-donation{
 	width:120px;
+	}
+	.mtr-head{
+	font-weight:600;
+	font-size:larger;
+	text-align:center!important;
 	}
 	
+	
+	
+	.mtr-center{
+	text-align:center;
+	}
+	.mtr-left{
+	text-align:center;
+	}
+	
+	
+	/*자랑게시판 style****************************************/
+	.board-table{
+	border-bottom: 2px solid white;
+	border-top: 2px solid white;
+	padding: 9px 5px 9px 5px;
+	font-size:13px;
+	}
+	.flex-right{
+	display:flex;
+	justify-content:right;
+	}
+	
+	/*자유게시판 적용 전 테스트*************테 스 트*************************/
+	
+	.tr-table-border{
+	border-bottom: 2px solid white;
+	border-top: 2px solid white;
+	}
+	.tr-head{
+		font-weight: 600;
+		font-size: lager;}
+	.tr-content{
+		font-weight: 400;}
+	.tr-left{
+		text-align: left;}
+	.tr-center{
+		text-align: center;}
+	.tr-right{
+		text-align: right;}
+	.th-padding{
+		padding: 11px 5px 11px 5px;}
+	.td-padding{
+		padding: 9px 5px 9px 5px;}

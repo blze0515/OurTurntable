@@ -23,140 +23,35 @@
 			<div class="row text-center justify-content-center mb-5" style="margin-bottom:0rem!important;">
 				<div class="col-lg-7"><h2 class="section-title text-center">인기글 Top5</h2></div>
 			</div>
-			<div class="sh-flex">
-			<table class="mboard-table sh-container">
-
-				<tbody class="">
-						<tr class="mtr-head">
-							<td class="mboard-seq mboard-table">글번호</td>
-							<td class="mboard-title mboard-table">제  목</td>
-							<td class="mboard-nick mboard-table">작성자</td>
-							<td class="mboard-date mboard-table">작성일</td>
-							<td class="mboard-view mboard-table">조회수</td>
-							<td class="mboard-like mboard-table">좋아요</td>
-							<td class="mboard-donation mboard-table">후원금액</td>
-						</tr>
-						<tr class="mtr-content">
-							<td class="mboard-seq mboard-table">100</td>
-							<td class="mboard-title mboard-table">
-								<div>
-									<a href="#">노래자랑 100번째 자랑글</a>
-								</div>
-							</td>
-							<td class="mboard-nick mboard-table">
-								<div>
-									<a href="#">콘서트7080</a>
-								</div>
-							</td>
-							<td class="mboard-date mboard-table">2022-10-31</td>
-							<td class="mboard-view mboard-table">100</td>
-							<td class="mboard-like mboard-table">90</td>
-							<td class="mboard-donation mboard-table">100,000</td>
-						</tr>
-						<tr class="mtr-content">
-							<td class="mboard-seq mboard-table">99</td>
-							<td class="mboard-title mboard-table">
-								<div>
-									<a href="#">노래자랑 99번째 자랑글</a>
-								</div>
-							</td>
-							<td class="mboard-nick mboard-table">
-								<div>
-									<a href="#">콘서트7080</a>
-								</div>
-							</td>
-							<td class="mboard-date mboard-table">2022-10-31</td>
-							<td class="mboard-view mboard-table">5</td>
-							<td class="mboard-like mboard-table">5</td>
-							<td class="mboard-donation mboard-table">5,000</td>
-						</tr>
-						<tr class="mtr-content">
-							<td class="mboard-seq mboard-table">98</td>
-							<td class="mboard-title mboard-table">
-								<div>
-									<a href="#">노래자랑 98번째 자랑글</a>
-								</div>
-							</td>
-							<td class="mboard-nick mboard-table">
-								<div>
-									<a href="#">콘서트7080</a>
-								</div>
-							</td>
-							<td class="mboard-date mboard-table">2022-10-31</td>
-							<td class="mboard-view mboard-table">5</td>
-							<td class="mboard-like mboard-table">5</td>
-							<td class="mboard-donation mboard-table">5,000</td>
-						</tr>
-						<tr class="mtr-content">
-							<td class="mboard-seq mboard-table">97</td>
-							<td class="mboard-title mboard-table">
-								<div>
-									<a href="#">노래자랑 97번째 자랑글</a>
-								</div>
-							</td>
-							<td class="mboard-nick mboard-table">
-								<div>
-									<a href="#">콘서트7080</a>
-								</div>
-							</td>
-							<td class="mboard-date mboard-table">2022-10-31</td>
-							<td class="mboard-view mboard-table">5</td>
-							<td class="mboard-like mboard-table">5</td>
-							<td class="mboard-donation mboard-table">5,000</td>
-						</tr>
-						<tr class="mtr-content">
-							<td class="mboard-seq mboard-table">97</td>
-							<td class="mboard-title mboard-table">
-								<div>
-									<a href="#">노래자랑 97번째 자랑글</a>
-								</div>
-							</td>
-							<td class="mboard-nick mboard-table">
-								<div>
-									<a href="#">콘서트7080</a>
-								</div>
-							</td>
-							<td class="mboard-date mboard-table">2022-10-31</td>
-							<td class="mboard-view mboard-table">5</td>
-							<td class="mboard-like mboard-table">5</td>
-							<td class="mboard-donation mboard-table">5,000</td>
-						</tr>
-						<tr class="mtr-content">
-							<td class="mboard-seq mboard-table">97</td>
-							<td class="mboard-title mboard-table">
-								<div>
-									<a href="#">노래자랑 97번째 자랑글</a>
-								</div>
-							</td>
-							<td class="mboard-nick mboard-table">
-								<div>
-									<a href="#">콘서트7080</a>
-								</div>
-							</td>
-							<td class="mboard-date mboard-table">2022-10-31</td>
-							<td class="mboard-view mboard-table">5</td>
-							<td class="mboard-like mboard-table">5</td>
-							<td class="mboard-donation mboard-table">5,000</td>
-						</tr>
-						<tr class="mtr-content">
-							<td class="mboard-seq mboard-table">97</td>
-							<td class="mboard-title mboard-table">
-								<div>
-									<a href="#">노래자랑 97번째 자랑글</a>
-								</div>
-							</td>
-							<td class="mboard-nick mboard-table">
-								<div>
-									<a href="#">콘서트7080</a>
-								</div>
-							</td>
-							<td class="mboard-date mboard-table">2022-10-31</td>
-							<td class="mboard-view mboard-table">5</td>
-							<td class="mboard-like mboard-table">5</td>
-							<td class="mboard-donation mboard-table">5,000</td>
-						</tr>
-			
-				</tbody>
+			<div class="" style="border:solid gray 2px;">
+			<table class="mboard-table">
+					<tr class="mtr-head">
+						<td class="tr-seq tr-padding">글번호</td>
+						<td class="tr-title tr-padding" style="text-align:center;">제 목</td>
+						<td class="tr-nick tr-padding">작성자</td>
+						<td class="tr-date tr-padding">작성일</td>
+						<td class="tr-view tr-padding">조회수</td>
+						<td class="tr-like tr-padding">좋아요</td> 
+						<td class="tr-donation tr-padding">후원금액</td>
+					</tr>
+					<tr class="mtr-content">
+						<td class="mboard-seq mboard-table">100</td>
+						<td class="mboard-title mboard-table">
+							<div>
+								<a href="#">노래자랑 100번째 자랑글</a>
+							</div>
+						</td>
+						<td class="mboard-nick mboard-table">
+							<div>
+								<a href="#">콘서트7080</a>
+							</div>
+						</td>
+						<td class="mboard-date mboard-table">2022-10-31</td>
+						<td class="mboard-view mboard-table">100</td>
+						<td class="mboard-like mboard-table">90</td>
+						<td class="mboard-donation mboard-table">100,000</td>
+					</tr>
+				
 			</table>
 			</div>
 
