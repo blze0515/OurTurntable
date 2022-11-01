@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.ott.VO.ChatVO;
 import com.spring.ott.common.CamelHashMap;
 
 @Repository
@@ -17,4 +18,14 @@ public class ChatDAO {
 	public List<CamelHashMap> readChatroomList(String userId) {
 		return mybatis.selectList("ChatDAO.readChatroomList", userId);
 	}
+
+	public List<ChatVO> readChatList(int chatroomSeq) {
+		return mybatis.selectList("ChatDAO.readChatList", chatroomSeq);
+	}
+
+	public void createChat(ChatVO chatVO) {
+		mybatis.insert("ChatDAO.createChat", chatVO);
+	}
+	
+	
 }
