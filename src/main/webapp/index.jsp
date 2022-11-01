@@ -31,7 +31,7 @@
 						<td class="tr-nick tr-padding">작성자</td>
 						<td class="tr-date tr-padding">작성일</td>
 						<td class="tr-view tr-padding">조회수</td>
-						<td class="tr-like tr-padding">좋아요</td>
+						<td class="tr-like tr-padding">좋아요</td> 
 						<td class="tr-donation tr-padding">후원금액</td>
 					</tr>
 					<tr class="mtr-content">
