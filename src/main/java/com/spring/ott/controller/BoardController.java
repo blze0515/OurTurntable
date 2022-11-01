@@ -14,10 +14,14 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping("/readBoardList.do")
-	public String about() {
+	public String readBoardList() {
 		return "/WEB-INF/views/readBoardList";
 	}
 	
+	@RequestMapping("/readRecBoardList.do")
+	public String readRecBoardList() {
+		return "/WEB-INF/views/readRecBoardList";
+	}
 //	createBoard (寃뚯떆湲� �벑濡�)
 //		* 寃뚯떆�뙋 �쑀�삎(1,2,3)�뿉 �뵲瑜� �룞�쟻 荑쇰━
 
