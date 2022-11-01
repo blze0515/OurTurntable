@@ -60,7 +60,7 @@
 								     컨트롤러의 메소드를 만들어서 viewResolver를 통해 해당 화면으로 이동 -->
 								<li><a href="/board/readBoardList.do">자유 게시판</a></li>
 								<li><a href="#">자랑 게시판</a></li>
-								<li><a href="#">추천 게시판</a></li>
+								<li><a href="/board/readRecBoardList.do">추천 게시판</a></li>
 							</ul>
 						</li>
 <!----------------------<li><a href="/main/services.do">Services</a></li>	 -->
