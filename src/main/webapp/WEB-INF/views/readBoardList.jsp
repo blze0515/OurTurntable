@@ -8,183 +8,114 @@
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
-	
+
 	<div class="untree_co-section">
-    <div class="container">
-      <div class="row">
-        
-        <div class="">
-          <h2 class="section-title mb-4">자유 게시판</h2>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-          <ul class="list-unstyled two-col clearfix">
-            <li>Outdoor recreation activities</li>
-            <li>Airlines</li>
-            <li>Car Rentals</li>
-            <li>Cruise Lines</li>
-            <li>Hotels</li>
-            <li>Railways</li>
-            <li>Travel Insurance</li>
-            <li>Package Tours</li>
-            <li>Insurance</li>
-            <li>Guide Books</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="untree_co-section">
-    <div class="container">
-      <div class="row justify-content-center mb-5">
-        <div class="col-md-6 text-center">
-          <h2 class="section-title mb-3 text-center">여기맞음?</h2>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-3 mb-4">
-          <div class="team">
-            <img src="${pageContext.request.contextPath }/images/person_1.jpg" alt="Image" class="img-fluid mb-4 rounded-20">
-            <div class="px-3">
-              <h3 class="mb-0">James Watson</h3>
-              <p>Co-Founder &amp; CEO</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 mb-4">
-          <div class="team">
-            <img src="${pageContext.request.contextPath }/images/person_2.jpg" alt="Image" class="img-fluid mb-4 rounded-20">
-            <div class="px-3">
-              <h3 class="mb-0">Carl Anderson</h3>
-              <p>Co-Founder &amp; CEO</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 mb-4">
-          <div class="team">
-            <img src="${pageContext.request.contextPath }/images/person_4.jpg" alt="Image" class="img-fluid mb-4 rounded-20">
-            <div class="px-3">
-              <h3 class="mb-0">Michelle Allison</h3>
-              <p>Co-Founder &amp; CEO</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 mb-4">
-          <div class="team">
-            <img src="${pageContext.request.contextPath }/images/person_3.jpg" alt="Image" class="img-fluid mb-4 rounded-20">
-            <div class="px-3">
-              <h3 class="mb-0">Drew Wood</h3>
-              <p>Co-Founder &amp; CEO</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-
-  
-
-  <div class="untree_co-section testimonial-section mt-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-7 text-center">
-          <h2 class="section-title text-center mb-5">Testimonials</h2>
-
-          <div class="owl-single owl-carousel no-nav">
-            <div class="testimonial mx-auto">
-              <figure class="img-wrap">
-                <img src="${pageContext.request.contextPath }/images/person_2.jpg" alt="Image" class="img-fluid">
-              </figure>
-              <h3 class="name">Adam Aderson</h3>
-              <blockquote>
-                <p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-              </blockquote>
-            </div>
-
-            <div class="testimonial mx-auto">
-              <figure class="img-wrap">
-                <img src="${pageContext.request.contextPath }/images/person_3.jpg" alt="Image" class="img-fluid">
-              </figure>
-              <h3 class="name">Lukas Devlin</h3>
-              <blockquote>
-                <p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-              </blockquote>
-            </div>
-
-            <div class="testimonial mx-auto">
-              <figure class="img-wrap">
-                <img src="${pageContext.request.contextPath }/images/person_4.jpg" alt="Image" class="img-fluid">
-              </figure>
-              <h3 class="name">Kayla Bryant</h3>
-              <blockquote>
-                <p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-              </blockquote>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="untree_co-section">
-    <div class="container">
-      <div class="row justify-content-between align-items-center">
-
-        <div class="col-lg-6">
-          <figure class="img-play-video">
-            <a id="play-video" class="video-play-button" href="https://www.youtube.com/watch?v=mwtbEGNABWU" data-fancybox>
-              <span></span>
-            </a>
-            <img src="${pageContext.request.contextPath }/images/hero-slider-2.jpg" alt="Image" class="img-fluid rounded-20">
-          </figure>
-        </div>
-
-        <div class="col-lg-5">
-          <h2 class="section-title text-left mb-4">Take a look at Tour Video</h2>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-
-          <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-
-          <ul class="list-unstyled two-col clearfix">
-            <li>Outdoor recreation activities</li>
-            <li>Airlines</li>
-            <li>Car Rentals</li>
-            <li>Cruise Lines</li>
-            <li>Hotels</li>
-            <li>Railways</li>
-            <li>Travel Insurance</li>
-            <li>Package Tours</li>
-            <li>Insurance</li>
-            <li>Guide Books</li>
-          </ul>
-
-          <p><a href="#" class="btn btn-primary">Get Started</a></p>
-
-          
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="py-5 cta-section">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h2 class="mb-2 text-white">Lets you Explore the Best. Contact Us Now</h2>
-          <p class="mb-4 lead text-white text-white-opacity">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, fugit?</p>
-          <p class="mb-0"><a href="#" class="btn btn-outline-white text-white btn-md font-weight-bold">Get in touch</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
+		<div class="container" style="width:75%;">
+			<div class="row text-left justify-content-center mb-5" style="margin-bottom: -1rem!important;">
+				<div class="col-lg-12"><h3 class="section-title text-left" style="text-align-last:center;">자랑 게시판</h3></div>
+			</div>
+			<div class="flex-right" style="height:20px; margin-top:20px; text-align:end!important;">
+				<a href="#">
+					더 보기<img src="/images/img_logo.jpg" style="height:20px;">
+				</a>
+			</div>
+			
+			
+			<!-- 
+			<table class="board-table">
+					<tr class="mtr-head">
+						<td class="mboard-seq board-table">글번호</td>
+						<td class="mboard-title board-table" style="text-align:center;">제 목</td>
+						<td class="mboard-nick board-table">작성자</td>
+						<td class="mboard-date board-table">작성일</td>
+						<td class="mboard-view board-table">조회수</td>
+						<td class="mboard-like board-table">좋아요</td>
+						<td class="mboard-donation board-table">후원금액</td>
+					</tr>
+					<tr class="mtr-content">
+						<td class="mboard-seq board-table">100</td>
+						<td class="mboard-title board-table">
+							<div>
+								<a href="#">노래자랑 100번째 자랑글</a>
+							</div>
+						</td>
+						<td class="mboard-nick board-table">
+							<div>
+								<a href="#">콘서트7080</a>
+							</div>
+						</td>
+						<td class="mboard-date board-table">2022-10-31</td>
+						<td class="mboard-view board-table">100</td>
+						<td class="mboard-like board-table">90</td>
+						<td class="mboard-donation board-table">100,000</td>
+					</tr>
+					<tr class="mtr-content">
+						<td class="mboard-seq board-table">99</td>
+						<td class="mboard-title board-table">
+							<div>
+								<a href="#">노래자랑 99번째 자랑글</a>
+							</div>
+						</td>
+						<td class="mboard-nick board-table">
+							<div>
+								<a href="#">콘서트7080</a>
+							</div>
+						</td>
+						<td class="mboard-date board-table">2022-10-31</td>
+						<td class="mboard-view board-table">5</td>
+						<td class="mboard-like board-table">5</td>
+						<td class="mboard-donation board-table">5,000</td>
+					</tr>
+				
+			</table>
+			 -->
+			
+			
+			
+			
+			<table class="tr-table-border">
+					<tr class="tr-head tr-center">
+						<td class="tr-seq th-padding">글번호</td>
+						<td class="tr-title th-padding">제 목</td>
+						<td class="tr-nick th-padding tr-left">작성자</td>
+						<td class="tr-date th-padding">작성일</td>
+						<td class="tr-view th-padding">조회수</td>
+						<td class="tr-like th-padding">좋아요</td>
+						<td class="tr-donation">후원금액</td>
+					</tr>
+					
+					<tr class="tr-content tr-center">
+						<td class="tr-seq td-padding">100</td>
+						<td class="tr-title td-padding tr-left">
+							<div>
+								<a href="#">노래자랑 100번째 자랑글</a>
+							</div>
+						</td>
+						<td class="tr-nick td-padding tr-left">
+							<div>
+								<a href="#">콘서트7080</a>
+							</div>
+						</td>
+						<td class="tr-date td-padding">2022-10-31</td>
+						<td class="tr-view td-padding">100</td>
+						<td class="tr-like td-padding">90</td>
+						<td class="tr-donation">100,000</td>
+					</tr>
+				
+			</table>
+			
+			
+			<div class="flex-right" style="margin-bottom:50px;">
+				<button type="submit" action="#">
+					글쓰기
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<jsp:include page="${pageContext.request.contextPath }/footer.jsp"></jsp:include>
   
   <div id="overlayer"></div>
   <div class="loader">
@@ -192,7 +123,5 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-	
-	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
 </body>
 </html>
