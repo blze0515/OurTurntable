@@ -15,24 +15,22 @@
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
 	
 	<div class="content-wrap">
-		<h1>채팅</h1>
 		<div class="chat-space" style="width: 100%; display: flex;">
-			<div class="chat-space-left" style="width: 30%; background: green;">
+			<div class="chat-space-left" style="width: 30%;">
 				<h1>채팅방목록</h1>
 				<ul class="list-group">
-					<c:forEach var="chatRoom" items="${chatroomList }">					
-						
+					<c:forEach var="chatRoom" items="${chatroomList }">
 							<li class="list-group-item" style="cursor: pointer;">
 							  <span class="d-block">${chatRoom.chatroomSeq}</span>
-							  <span><img src="/upload/${chatRoom.userProfileImg }" width="150px"></span>
-							  <span>${chatRoom.chatroomMember}</span>
-							  <span>${chatRoom.chatContent}</span>
-							  <span>${chatRoom.cntReadn}</span>
+							  <span class="d-block"><img src="/upload/${chatRoom.userProfileImg }" width="150px"></span>
+							  <span class="d-block">${chatRoom.chatroomMember}</span>
+							  <span class="d-block">${chatRoom.chatContent}</span>
+							  <span class="d-block">${chatRoom.cntReadn}</span>
 						  	</li>
 					</c:forEach>
 				</ul>
 			</div>
-			<div class="chat-space-right" style="width: 70%; background: blue;">				
+			<div class="chat-space-right" style="width: 70%;">				
 				<div class="chat-message-space">
 					<h1>채팅방 이름</h1>
 					
@@ -53,13 +51,16 @@
 					
 				</div>
 				<div class="chat-input-space" style="width: 70%" >
-					<form action="/chat/createChat.do" method="post">
+					<%-- <form action="/chat/createChat.do" method="post">
 						<input type="hidden" name="chatroomSeq" value="${chat.chatroomSeq }">
 						<input type="hidden" name="userId" value="gogo">
 						<input type="hidden" name="chatReceiveId" value="dkjdkj">
 						<textarea name="chatContent" required></textarea>
 						<button type="submit" id="createChatMessageBtn">ENTER</button>
-					</form>
+					</form> --%>
+					
+					<textarea name="chatContent" required></textarea>
+					<button id="create-chat-message-btn">ENTER</button>
 				</div>
 			</div>
 		</div>
@@ -76,31 +77,46 @@
   
   <script>
 	let chatroomMember;
-	
+	let chatroomSeq;
+
   	$(function() {
   		$(".list-group-item").on('click', function(e) {
-  			const chatroomSeq = parseInt($(e.target).first().text());
-  			console.log(chatroomSeq);
+  			chatroomSeq = parseInt($(e.target).first().text());
   			readChatList(chatroomSeq);
+  			//console.log(chatroomSeq);
+  			//console.log(chatroomMember); //이거 readChatList(chatroomSeq)이후에 콘솔 찍는건데 왜 하나씩 밀리지?
+  			
   		});
   		
-  		//엔터 클릭시 이벤트생성
-  		/*
+/* 	  	 ${"#create-chat-message-btn"}.on('click', function(e) {
+	  		console.log("hi");
+  			console.log(chatroomSeq);
+  			console.log(chatroomMember);
+  			
   			$.ajax({
   				type:'post',
-  				url: '',
+  				url: '/chat/createChat.do',
   				data: {
   					chatroomSeq: chatroomSeq,
   					chatReceiveId: chatroomMemeber,
   					chatContent: $("textarea[name="chatContent"]").val()
-  				}
-  			})
+  				},
+  				success: function(obj) {
+					const data = JSON.parse(obj);
+					if(data.message == 'ok') {
+						console.log('chat message ok');
+					} else if(data.message !== 'ok') {
+						console.log('chat message fail');
+					}
+  				},
+  				error: function(e) {}
+  			}); 
+  		});  */
   		
-  		*/
   	});
   	
   	function readChatList(chatroomSeq) {
-  		console.log(chatroomSeq);
+  		//console.log(chatroomSeq);
   		$.ajax({
 				type: 'get',
 				url: '/chat/readChatList.do?chatroomSeq='+chatroomSeq,
@@ -108,7 +124,7 @@
 					const strData = JSON.parse(data);
 					const chatList = strData.chatList;
 					
-					console.log(chatList[0].userId);
+					//console.log(chatList[0].userId);
 					
 					if(chatList[0].userId === 'gogo')
 						chatroomMember = chatList[0].chatReceiveId;
