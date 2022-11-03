@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link rel="shortcut icon" href="${pageContext.request.contextPath }/favicon.png">
+	<link rel="shortcut icon" href="/resources/favicon.ico">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Source+Serif+Pro:wght@400;700&display=swap" rel="stylesheet">
