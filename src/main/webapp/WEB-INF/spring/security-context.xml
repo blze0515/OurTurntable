@@ -8,8 +8,10 @@
 	<security:http pattern="/" security="none" />
 	<security:http pattern="/main/main.do" security="none" />
     <security:http pattern="/user/login.do" security="none" />
+    <security:http pattern="/admin/admin.do" security="none" />
     <security:http auto-config="true" use-expressions="true">
-    	<security:intercept-url pattern="/admin/*" access="hasRole('ADMIN')"/>
+    <security:intercept-url pattern="/favicon.ico" access="isAnonymous()"/>
+    	<!-- <security:intercept-url pattern="/admin/*" access="isAnonymous()"/>-->
     	<security:intercept-url pattern="/*" access="isAnonymous()"/>
 		<security:form-login 
 			login-page="/user/login.do"

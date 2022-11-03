@@ -16,7 +16,11 @@ public class AdminController {
 	@Autowired BoardService boardService;
 	@Autowired UserService userService;
 
-
+	@RequestMapping("/admin.do")
+	public String admin() {
+		return "/WEB-INF/views/admin";
+	}
+	
 //	readUserList (회원 목록 조회)
 	
 	
