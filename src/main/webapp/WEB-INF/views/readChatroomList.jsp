@@ -20,7 +20,7 @@
 				<h1>채팅방목록</h1>
 				<ul class="list-group">
 					<c:forEach var="chatRoom" items="${chatroomList }">
-							<li class="list-group-item" style="cursor: pointer;">
+							<li class="list-group-item" style="cursor: pointer;" onclick="onClickLi(this)">
 							  <span class="d-block">${chatRoom.chatroomSeq}</span>
 							  <span class="d-block"><img src="/upload/${chatRoom.userProfileImg }" width="150px"></span>
 							  <span class="d-block">${chatRoom.chatroomMember}</span>
@@ -51,15 +51,14 @@
 					
 				</div>
 				<div class="chat-input-space" style="width: 70%" >
-					<%-- <form action="/chat/createChat.do" method="post">
-						<input type="hidden" name="chatroomSeq" value="${chat.chatroomSeq }">
-						<input type="hidden" name="userId" value="gogo">
-						<input type="hidden" name="chatReceiveId" value="dkjdkj">
-						<textarea name="chatContent" required></textarea>
-						<button type="submit" id="createChatMessageBtn">ENTER</button>
-					</form> --%>
+					<form id="createChatForm" action="/chat/createChat.do" method="post">
+						<input type="hidden" name="chatroomSeq" id="chatroomSeq">
+						<input type="hidden" name="userId" id="userId">
+						<input type="hidden" name="chatReceiveId" id="chatReceiveId">
+						<textarea name="chatContent" id="formChatContent" required style="display: none;"></textarea>
+					</form>
 					
-					<textarea name="chatContent" required></textarea>
+					<textarea name="chatContent" id="chatContent" required></textarea>
 					<button id="create-chat-message-btn">ENTER</button>
 				</div>
 			</div>
@@ -80,27 +79,27 @@
 	let chatroomSeq;
 
   	$(function() {
-  		$(".list-group-item").on('click', function(e) {
-  			chatroomSeq = parseInt($(e.target).first().text());
-  			readChatList(chatroomSeq);
-  			//console.log(chatroomSeq);
-  			//console.log(chatroomMember); //이거 readChatList(chatroomSeq)이후에 콘솔 찍는건데 왜 하나씩 밀리지?
-  			
-  		});
-  		
-/* 	  	 ${"#create-chat-message-btn"}.on('click', function(e) {
+	  		/* $(".list-group-item").on('click', function(e) {
+	  			console.log($(e.target).first());
+	  			
+	  			//console.log(chatroomSeq);
+	  			//console.log(chatroomMember); //이거 readChatList(chatroomSeq)이후에 콘솔 찍는건데 왜 하나씩 밀리지?
+	  			
+	  		}); */
+	  		
+ 	  	 $("#create-chat-message-btn").on('click', function(e) {
 	  		console.log("hi");
   			console.log(chatroomSeq);
   			console.log(chatroomMember);
   			
+  			$("#chatroomSeq").val(chatroomSeq);
+  			$("#chatReceiveId").val(chatroomMember);
+  			$("#formChatContent").val($("#chatContent").val());
+  			
   			$.ajax({
   				type:'post',
   				url: '/chat/createChat.do',
-  				data: {
-  					chatroomSeq: chatroomSeq,
-  					chatReceiveId: chatroomMemeber,
-  					chatContent: $("textarea[name="chatContent"]").val()
-  				},
+  				data: $("#createChatForm").serialize(),
   				success: function(obj) {
 					const data = JSON.parse(obj);
 					if(data.message == 'ok') {
@@ -109,11 +108,19 @@
 						console.log('chat message fail');
 					}
   				},
-  				error: function(e) {}
+  				error: function(e) {
+  					console.log(e);
+  				}
   			}); 
-  		});  */
+  		});  
   		
   	});
+  	
+  	function onClickLi(obj) {
+  		console.log(obj);
+  		chatroomSeq = parseInt($(obj).first().text());
+		readChatList(chatroomSeq);
+  	}
   	
   	function readChatList(chatroomSeq) {
   		//console.log(chatroomSeq);
