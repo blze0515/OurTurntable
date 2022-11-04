@@ -29,4 +29,9 @@ public class ChatServiceImpl implements ChatService{
 	public void createChat(ChatVO chatVO) {
 		chatDAO.createChat(chatVO);
 	}
+
+	@Override
+	public void updateChatStatus(int chatroomSeq, String userId) {
+		chatDAO.updateChatStatus(chatroomSeq, userId);
+	}
 }
