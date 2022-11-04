@@ -56,10 +56,7 @@
 						<input type="hidden" name="userId" id="userId">
 						<input type="hidden" name="chatReceiveId" id="chatReceiveId">
 						<textarea name="chatContent" id="formChatContent" required style="display: none;"></textarea>
-					</form>
-					
-					<textarea name="chatContent" id="chatContent" required></textarea>
-					<button id="create-chat-message-btn">ENTER</button>
+					</form>		
 				</div>
 			</div>
 		</div>
@@ -79,42 +76,42 @@
 	let chatroomSeq;
 
   	$(function() {
-	  		/* $(".list-group-item").on('click', function(e) {
-	  			console.log($(e.target).first());
-	  			
-	  			//console.log(chatroomSeq);
-	  			//console.log(chatroomMember); //이거 readChatList(chatroomSeq)이후에 콘솔 찍는건데 왜 하나씩 밀리지?
-	  			
-	  		}); */
-	  		
- 	  	 $("#create-chat-message-btn").on('click', function(e) {
-	  		console.log("hi");
-  			console.log(chatroomSeq);
-  			console.log(chatroomMember);
+  		/* $(".list-group-item").on('click', function(e) {
+  			console.log($(e.target).first());
   			
-  			$("#chatroomSeq").val(chatroomSeq);
-  			$("#chatReceiveId").val(chatroomMember);
-  			$("#formChatContent").val($("#chatContent").val());
+  			//console.log(chatroomSeq);
+  			//console.log(chatroomMember); //이거 readChatList(chatroomSeq)이후에 콘솔 찍는건데 왜 하나씩 밀리지?
   			
-  			$.ajax({
-  				type:'post',
-  				url: '/chat/createChat.do',
-  				data: $("#createChatForm").serialize(),
-  				success: function(obj) {
-					const data = JSON.parse(obj);
-					if(data.message == 'ok') {
-						console.log('chat message ok');
-					} else if(data.message !== 'ok') {
-						console.log('chat message fail');
-					}
-  				},
-  				error: function(e) {
-  					console.log(e);
-  				}
-  			}); 
-  		});  
-  		
+  		}); */  		
   	});
+  	
+  	function onClickEnterBtn() {
+  		console.log("hi");
+		console.log(chatroomSeq);
+		console.log(chatroomMember);
+		
+		$("#chatroomSeq").val(chatroomSeq);
+		$("#chatReceiveId").val(chatroomMember);
+		$("#formChatContent").val($("#chatContent").val());
+		
+		$.ajax({
+			type:'post',
+			url: '/chat/createChat.do',
+			data: $("#createChatForm").serialize(),
+			success: function(obj) {
+				const data = JSON.parse(obj);
+				if(data.message == 'ok') {
+					readChatList(chatroomSeq);
+				} else if(data.message !== 'ok') {
+					console.log('chat message fail');
+				}
+			}
+			,
+			error: function(e) {
+				console.log(e);
+			}
+		}); 
+  	}
   	
   	function onClickLi(obj) {
   		console.log(obj);
@@ -152,6 +149,9 @@
 							chatListTag += "</p>";
 						}
 					}
+					
+					chatListTag += "<textarea name='chatContent' id='chatContent' required></textarea>";
+					chatListTag += "<button id='create-chat-message-btn' onclick='onClickEnterBtn()'>ENTER</button>";
 					
 					$(".chat-message-space").html("");
 					$(".chat-message-space").html(chatListTag);

@@ -32,6 +32,7 @@ public class ChatController {
 	@ResponseBody
 	@PostMapping("/createChat.do")
 	public String createChat(HttpSession session, ChatVO chatVO) throws JsonProcessingException { 
+		
 		String userId = "gogo"; //로그인한 사용자 아이디
 		chatVO.setUserId(userId);
 		
