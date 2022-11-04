@@ -52,7 +52,10 @@ public class ChatController {
 	@GetMapping(value = "/readChatList.do", produces = "application/text; charset=UTF-8")
 	public String readChatList(HttpSession session, @RequestParam int chatroomSeq) throws JsonProcessingException {
 		
-		List<ChatVO> chatList = chatService.readChatList(chatroomSeq);
+		String userId = "gogo"; //로그인한 사용자 아이디
+		
+		chatService.updateChatStatus(chatroomSeq, userId); //채팅메시지의 읽음 상태 수정
+		List<ChatVO> chatList = chatService.readChatList(chatroomSeq); //채팅메시지 목록 조회
 		
 		Map<String, Object> listMap = new HashMap<String, Object>();
 		listMap.put("chatList", chatList);
@@ -81,9 +84,7 @@ public class ChatController {
 	}
 	
 //	deleteChatroom (채팅방 삭제)
-	
-	
-//	updateChatStatus() (채팅메시지의 읽음상태 수정)
+
 
 	
 }

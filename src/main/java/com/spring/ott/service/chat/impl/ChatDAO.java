@@ -1,6 +1,8 @@
 package com.spring.ott.service.chat.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,14 @@ public class ChatDAO {
 
 	public void createChat(ChatVO chatVO) {
 		mybatis.insert("ChatDAO.createChat", chatVO);
+	}
+
+	public void updateChatStatus(int chatroomSeq, String userId) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("chatroomSeq", chatroomSeq);
+		paramMap.put("userId", userId);
+		
+		mybatis.update("ChatDAO.updateChatStatus", paramMap);
 	}
 	
 	

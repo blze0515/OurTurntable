@@ -13,4 +13,6 @@ public interface ChatService {
 
 	void createChat(ChatVO chatVO);
 
+	void updateChatStatus(int chatroomSeq, String userId);
+
 }
