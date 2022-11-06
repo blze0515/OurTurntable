@@ -10,6 +10,7 @@
 	<meta name="author" content="Untree.co">
 	<meta name="description" content="" />
 	<meta name="keywords" content="bootstrap, bootstrap4" />
+	<link rel="shortcut icon" href="${pageContext.request.contextPath }/favicon.ico">
 </head>
 <body class="bodycolor">
 	<jsp:include page="header.jsp"></jsp:include>
@@ -282,7 +283,7 @@
 				$(this).attr('data-id', i + 1);
 			})
 
-			var typed = new Typed('.typed-words', {
+			/* var typed = new Typed('.typed-words', {
 				strings: ["San Francisco."," Paris."," New Zealand.", " Maui.", " London."],
 				typeSpeed: 80,
 				backSpeed: 80,
@@ -297,7 +298,7 @@
 					$('.slides img[data-id="'+arrayPos+'"]').addClass('active');
 				}
 
-			});
+			}); */
 		})
 	</script>
 </body>

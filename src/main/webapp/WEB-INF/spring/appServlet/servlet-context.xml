@@ -14,7 +14,6 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources location="/favicon.ico" mapping="favicon.ico"/>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,6 +29,7 @@
 	<resources mapping="images/**" location="images/" />
 	<resources mapping="upload/**" location="upload/" />
 	<resources mapping="fonts/**" location="fonts/" />
+	<resources location="favicon.ico" mapping="favicon.ico"/>
 	
 	<!-- 파일업로드 관련 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
