@@ -34,4 +34,19 @@ public class ChatServiceImpl implements ChatService{
 	public void updateChatStatus(int chatroomSeq, String userId) {
 		chatDAO.updateChatStatus(chatroomSeq, userId);
 	}
+
+	@Override
+	public void updateChatroomMemberYn(int chatroomSeq, String userId) {
+		chatDAO.updateChatroomMemberYn(chatroomSeq, userId);		
+	}
+
+	@Override
+	public void createChatroom(String userId, String chatroomMember) {
+		int cntChatroom = chatDAO.checkChatroom(userId, chatroomMember); //채팅방 중복조회
+		if (cntChatroom > 0) {
+			System.out.println("이미 채팅방이 있음.");
+		} else {
+			chatDAO.createChatroom(userId, chatroomMember);
+		}
+	}
 }

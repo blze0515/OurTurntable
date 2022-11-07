@@ -25,13 +25,20 @@
 				B.CHATROOM_SEQ
 				FROM T_OTT_USER A
 				,  (
-					SELECT CHATROOM_SEQ 
-					,  CASE WHEN CHATROOM_MEMBER1 = #{userId} THEN CHATROOM_MEMBER2 
-					  		WHEN CHATROOM_MEMBER2 = #{userId} THEN CHATROOM_MEMBER1
-					  		END CHATROOM_MEMBER
-					FROM T_OTT_CHATROOM
-					WHERE CHATROOM_MEMBER1 = #{userId}
-					   OR CHATROOM_MEMBER2 = #{userId}
+						SELECT D.*
+							FROM (
+									SELECT CHATROOM_SEQ 
+										,  CASE WHEN CHATROOM_MEMBER1 = #{userId} THEN CHATROOM_MEMBER2 
+										  		WHEN CHATROOM_MEMBER2 = #{userId} THEN CHATROOM_MEMBER1
+										  		END CHATROOM_MEMBER
+										,  CASE WHEN CHATROOM_MEMBER1 = #{userId} THEN CHATROOM_MEMBER1_YN 
+												WHEN CHATROOM_MEMBER2 = #{userId} THEN CHATROOM_MEMBER2_YN
+												END CHATROOM_MEMBER_YN  
+										FROM T_OTT_CHATROOM
+										WHERE CHATROOM_MEMBER1 = #{userId}
+										   OR CHATROOM_MEMBER2 = #{userId}
+								  ) D
+							  WHERE  D.CHATROOM_MEMBER_YN = 'Y'		
 					) B
 				WHERE A.USER_ID = B.CHATROOM_MEMBER
 				) AA
@@ -58,7 +65,7 @@
 		 			WHERE CHAT_READYN = 'N'
 		 			GROUP BY CHATROOM_SEQ
 		 	) BBB
-		 ON AAA.CHATROOM_SEQ = BBB.CHATROOM_SEQ
+		 ON AAA.CHATROOM_SEQ = BBB.CHATROOM_SEQ;
 	</select>
 	
 	<select id="readChatList" parameterType="int" resultType="com.spring.ott.VO.ChatVO">
@@ -81,4 +88,28 @@
 			AND CHAT_RECEIVE_ID = #{userId}
 			AND CHAT_READYN = 'N'
 	</update>
+	
+	<update id="updateChatroomMemberYn" parameterType="map">
+		UPDATE  T_OTT_CHATROOM
+			SET
+				CHATROOM_MEMBER1_YN = CASE WHEN CHATROOM_MEMBER1 = #{userId} THEN 'N' ELSE 'Y' END,
+			    CHATROOM_MEMBER2_YN = CASE WHEN CHATROOM_MEMBER2 = #{userId} THEN 'N' ELSE 'Y' END
+			WHERE
+				CHATROOM_SEQ = #{chatroomSeq}
+	</update>
+	
+	<insert id="createChatroom" parameterType="map">
+		INSERT INTO T_OTT_CHATROOM
+			(CHATROOM_SEQ, CHATROOM_MEMBER1, CHATROOM_MEMBER2, CHATROOM_CREATE, CHATROOM_MEMBER1_YN, CHATROOM_MEMBER2_YN)
+			VALUES(
+				(SELECT IFNULL(MAX(A.CHATROOM_SEQ), 0) + 1 FROM T_OTT_CHATROOM A), 
+				#{userId}, #{chatroomMember}, NOW(), 'Y', 'Y')
+	</insert>
+	
+	<select id="checkChatroom" parameterType="map">
+		SELECT COUNT(CHATROOM_SEQ)
+			FROM T_OTT_CHATROOM
+			WHERE CHATROOM_MEMBER1 = #{userId} and CHATROOM_MEMBER2 = #{chatroomMember}
+			   OR CHATROOM_MEMBER1 = #{chatroomMember} and CHATROOM_MEMBER2 = #{userId}
+	</select>
 </mapper>
