@@ -74,7 +74,7 @@
 			
 			
 			<table class="tr-table-border">
-					<tr class="tr-head tr-center">
+					<tr class="tr-head tr-center tr-table-border">
 						<td class="tr-seq th-padding">글번호</td>
 						<td class="tr-title th-padding">제 목</td>
 						<td class="tr-nick th-padding tr-left">작성자</td>
@@ -84,7 +84,7 @@
 						<td class="tr-donation">후원금액</td>
 					</tr>
 					
-					<tr class="tr-content tr-center">
+					<tr class="tr-content tr-center tr-table-border">
 						<td class="tr-seq td-padding">100</td>
 						<td class="tr-title td-padding tr-left">
 							<div>
@@ -110,6 +110,24 @@
 					글쓰기
 				</button>
 			</div>
+			
+			
+			
+			<div style="text-align: center;">
+				<ul class="pagination">
+					<li class="pagination_button">
+						<a href="#">1</a>
+					</li>
+					<li class="pagination_button">
+						<a href="#">2</a>
+					</li>
+					<li class="pagination_button">
+						<a href="#">Next</a>
+					</li>
+				</ul>
+			</div>
+			
+			
 		</div>
 	</div>
 	

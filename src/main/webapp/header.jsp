@@ -75,7 +75,7 @@
 							<a href="#">로그인</a>
 							<ul class="dropdown">
 								<li><a href="/user/login.do">로그인</a></li>
-								<li><a href="/user/join.do">회원가입</a></li>
+								<li><a href="/user/createUser.do">회원가입</a></li>
 								
 								<li><a href="#">마이페이지</a></li>
 							</ul>
