@@ -28,7 +28,7 @@ public class ChatController {
 	@Autowired
 	ChatService chatService;
 
-//	createChat - (채팅메시지 등록)
+//	createChat (채팅메시지 등록)
 	@ResponseBody
 	@PostMapping("/createChat.do")
 	public String createChat(HttpSession session, ChatVO chatVO) throws JsonProcessingException { 
@@ -56,7 +56,7 @@ public class ChatController {
 		
 		chatService.updateChatStatus(chatroomSeq, userId); //채팅메시지의 읽음 상태 수정
 		List<ChatVO> chatList = chatService.readChatList(chatroomSeq); //채팅메시지 목록 조회
-		
+				
 		Map<String, Object> listMap = new HashMap<String, Object>();
 		listMap.put("chatList", chatList);
 		
@@ -74,17 +74,43 @@ public class ChatController {
 		String userId = "gogo"; //로그인한 사용자 아이디
 		List<CamelHashMap> chatroomList = chatService.readChatroomList(userId);
 		
-		for(int i=0; i < chatroomList.size(); i++) {
-			System.out.println(chatroomList.get(i).toString());
-		}
+//		for(int i=0; i < chatroomList.size(); i++) {
+//			System.out.println("챗룸목록: " + chatroomList.get(i).toString());
+//		}
 		
 		model.addAttribute("chatroomList", chatroomList);
 		
 		return "/WEB-INF/views/readChatroomList";
 	}
 	
-//	deleteChatroom (채팅방 삭제)
-
-
+//	deleteChatroom (채팅방 삭제 - 챗방 활성화 상태를 'N'으로 수정함)
+	@ResponseBody
+	@GetMapping(value = "/deleteChatroom.do", produces = "application/text; charset=UTF-8")
+	public String deleteChatroom(HttpSession session, @RequestParam int chatroomSeq) throws JsonProcessingException {
+		
+		String userId = "gogo"; //로그인한 사용자 아이디
+		
+		chatService.updateChatroomMemberYn(chatroomSeq, userId); //채팅방의 활성화 상태를 'N'으로 수정함
+				
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		jsonMap.put("message", "ok");
+		String jsonStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonMap);
+		
+		return jsonStr;
+	}
 	
+//	createChatroom (채팅방 생성)
+	@GetMapping("/createChatroom.do")
+	public String createChatroom(HttpSession session, @RequestParam String chatroomMember) {
+		
+		String userId = "gogo"; //로그인한 사용자 아이디
+		
+		chatService.createChatroom(userId, chatroomMember); //중복 조회, 챗룸 생성
+		
+		//중복체크 불필요. chatroomMember가 비어있는지 아닌지에 따라 분기, 화면에서 처리
+		return "/WEB-INF/views/readChatroomList";
+		
+	}
 }

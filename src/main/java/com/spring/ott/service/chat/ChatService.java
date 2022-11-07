@@ -15,4 +15,8 @@ public interface ChatService {
 
 	void updateChatStatus(int chatroomSeq, String userId);
 
+	void updateChatroomMemberYn(int chatroomSeq, String userId);
+
+	void createChatroom(String userId, String chatroomMember);
+
 }
