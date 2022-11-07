@@ -61,7 +61,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
   padding-bottom: 12px;
   padding-left: 30px;
   padding-right: 30px;
-  /*sh_¿øº»_border-radius: 30px;*/
+  /*sh_å ì™ì˜™å ì™ì˜™_border-radius: 30px;*/
   border-radius: 4px;
   font-size: 14px; }
   .btn:active, .btn:focus {
@@ -549,10 +549,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
   outline: none; }
 
 .hero {
-/* sh_¿øº»_
+/* sh_å ì™ì˜™å ì™ì˜™_
 padding: 7rem 0 15rem 0;*/
 	padding:7rem 0 1rem 0;
-	/*sh_¿øº»_  background: #6998AB;*/
+	/*sh_å ì™ì˜™å ì™ì˜™_  background: #6998AB;*/
 	background: rgb(128, 90, 70);
 	height:130px;
 	opacity:0.9;
@@ -607,7 +607,7 @@ padding: 7rem 0 15rem 0;*/
         z-index: 1; }
 
 .untree_co-section {
-  /*sh_¿øº»_padding: 70px 0;*/ 
+  /*sh_å ì™ì˜™å ì™ì˜™_padding: 70px 0;*/ 
   padding: 0; }
 
 .media-thumb {
@@ -694,7 +694,7 @@ padding: 7rem 0 15rem 0;*/
     bottom: 0;
     width: 30px;
     height: 2px;
-    /*sh_¿øº»_background: #1A374D;*/ }
+    /*sh_å ì™ì˜™å ì™ì˜™_background: #1A374D;*/ }
   .section-title.text-center:before {
     left: 50%;
     -webkit-transform: translateX(-50%);
@@ -1012,7 +1012,7 @@ padding: 7rem 0 15rem 0;*/
 
 .testimonial-section {
  
-  /*sh_¿øº»_index testimonial ºÎºĞ
+  /*sh_å ì™ì˜™å ì™ì˜™_index testimonial å ì‹¸ë¸ì˜™
   background: #f8f9fa;
   padding-top: 5rem !important;
   padding-bottom: 7rem !important; 
@@ -1336,13 +1336,13 @@ padding: 7rem 0 15rem 0;*/
   line-height: 1.6; }
   .site-footer .inner {
     padding-top: 0px;
-    /*sh_¿øº»_ padding-bottom: 70px;*/
+    /*sh_å ì™ì˜™å ì™ì˜™_ padding-bottom: 70px;*/
     padding-bottom: 10px;
-    /*sh_¿øº»_ background: #f8f9fa; */
+    /*sh_å ì™ì˜™å ì™ì˜™_ background: #f8f9fa; */
     background: rgb(243, 235, 232);
     }
     .site-footer .inner.first {
-      padding-top: 50px; /*±âÁ¸ 80*/}
+      padding-top: 50px; /*å ì™ì˜™å ì™ì˜™ 80*/}
   @media (max-width: 991.98px) {
     .site-footer {
       padding-top: 30px; } }
@@ -1354,7 +1354,7 @@ padding: 7rem 0 15rem 0;*/
   .site-footer .widget {
     margin-bottom: 30px; }
     .site-footer .widget h3 {
-      /*sh_Ãß°¡*/font-weight:600;
+      /*sh_å ìŒ©ê³¤ì˜™*/font-weight:600;
       font-size: 14px;
       margin-bottom: 20px;
       color: #000000;
@@ -1412,20 +1412,28 @@ padding: 7rem 0 15rem 0;*/
     border-radius:50%;
 }
 
-	.sh_1{
-	display:flex;
+	.sh_flex{
+		display:flex;
+		
 	}
 	.sh_ratio_3{
+		box-sizing: border-box;
 		width:30%;
 	}
 	.sh_ratio_3 img{
-	width:100%;
-	height:50px;
+		width:100%;
+		height:50px;
 	}
 	.sh_ratio_7{
+		box-sizing: border-box;
 		width:70%;
 	}
+	.sh_ratio_6{
+		box-sizing: border-box;
+		width:60%;
+	}
 	.sh_ratio_100{
+		box-sizing: border-box;
 		width:100%;
 	}
 	.naver-login{
@@ -1489,7 +1497,7 @@ padding: 7rem 0 15rem 0;*/
 	display:table-column;
 	}
 	
-	/*¸ŞÀÎÈ­¸é °Ô½Ã±Û ¸ñ·Ï******************************************/
+	/*å ì™ì˜™å ì™ì˜™í™”å ì™ì˜™ å ìŒ‰ì‹œê¹ì˜™ å ì™ì˜™å ï¿½******************************************/
 	.sh-container{
 	max-width:90%;
 	}
@@ -1539,7 +1547,7 @@ padding: 7rem 0 15rem 0;*/
 	}
 	
 	
-	/*ÀÚ¶û°Ô½ÃÆÇ style****************************************/
+	/*å ìŒ˜ë°ì˜™å ìŒ‰ì™ì˜™å ì™ì˜™ style****************************************/
 	.board-table{
 	border-bottom: 2px solid white;
 	border-top: 2px solid white;
@@ -1551,7 +1559,7 @@ padding: 7rem 0 15rem 0;*/
 	justify-content:right;
 	}
 	
-	/*ÀÚÀ¯°Ô½ÃÆÇ Àû¿ë Àü Å×½ºÆ®*************Å× ½º Æ®*************************/
+	/*å ì™ì˜™å ì™ì˜™å ìŒ‰ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™ å ìŒ“ì™ì˜™íŠ¸*************å ì™ì˜™ å ì™ì˜™ íŠ¸*************************/
 	
 	.tr-table-border{
 	border-bottom: 2px solid white;
@@ -1559,7 +1567,8 @@ padding: 7rem 0 15rem 0;*/
 	}
 	.tr-head{
 		font-weight: 600;
-		font-size: lager;}
+		font-size: larger;}
+		
 	.tr-content{
 		font-weight: 400;}
 	.tr-left{
@@ -1572,3 +1581,25 @@ padding: 7rem 0 15rem 0;*/
 		padding: 11px 5px 11px 5px;}
 	.td-padding{
 		padding: 9px 5px 9px 5px;}
+		
+	.pagination{
+	list-style: none;
+    width: 100%;
+    display: inline-block;}
+    
+    .pagination-button{
+    float: left;
+    margin-left: 5px;}
+    
+    ul li {
+    list-style:none;}
+    
+    .box{
+    width:100%;
+    height:100px;
+    background-color:gray;
+    }
+    
+    .form-group-73{
+    display:flex;
+    }

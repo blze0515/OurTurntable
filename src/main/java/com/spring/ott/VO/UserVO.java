@@ -11,9 +11,9 @@ public class UserVO {
 	private String userNickname;
 	private String userEmail;
 	private String userTel;
-	private String userADDRESS;
+	private String userAddress;
 	private String userZipcode;
-	private Date userRgsdate;
+	private Date userRgstdate;
 	private Date userMdfdate;
 	private String userActiveyn;
 	private String userRole;

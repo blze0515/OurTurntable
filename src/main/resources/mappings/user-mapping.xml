@@ -10,22 +10,18 @@
 <!-- DAO에서 쿼리가 분리되었기 때문에 DAO클래스 이름을 따라감 -->
 <mapper namespace="UserDAO">
 	<!-- 쿼리 작성 영역 -->
-	<select id="test">
-		SELECT * FROM DUAL
-		<!-- 
-		INSERT INTO T_USER (
-			USER_ID,
-			USER_PW,
-			USER_NM,
-			USER_MAIL,
-			USER_TEL
-		) VALUES (
-			#{userId},
-			#{userPw},
-			#{userNm},
-			#{userMail},
-			#{userTel}
-		)
-		 -->
-	</select>
+	<insert id="createUser" parameterType="com.spring.ott.VO.UserVO"> 
+		INSERT INTO T_OTT_USER (
+			USER_ID , USER_NAME , USER_NICKNAME , USER_EMAIL , USER_TEL ,
+			USER_ADRESS , USER_ZIPCODE , USER_PW , USER_RGSTDATE , USER_MDFDATE ,
+			USER_ROLE, USER_ACTIVEYN, USER_PROFILE_IMG 
+			) VALUES ( 
+			#{userId}, #{userName}, #{userNickname}, #{userEmail}, 'test', 
+			#{userAddress}, 'test', #{userPw}, NOW(), NOW(), 
+			'ROLE_USER', 'Y', null
+			)
+	</insert>
+
+
+
 </mapper>

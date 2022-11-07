@@ -31,7 +31,7 @@
           </div>
           
           <div>
-          	<div class="sh_1">
+          	<div class="sh_flex">
           		<div class="sh_ratio_100">
           			<button type="submit" class="btn btn-primary naver-login" style="width:100%">네이버 로그인</button>
           		</div>
