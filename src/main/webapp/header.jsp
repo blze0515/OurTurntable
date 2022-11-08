@@ -73,7 +73,14 @@
 						<li><a href="/main/contact.do">문의</a></li>
 						<!-- 로그인/회원가입/마이페이지 드롭다운 -->
 						<li class="has-children">
-							<a href="#">가입/로그인</a>
+						  <c:choose>
+						  	<c:when test="${loginUser eq null }">
+								<a href="#">가입/로그인</a>
+							</c:when>
+							<c:otherwise>
+							    <a>${loginUser.userId }</a>
+							</c:otherwise>
+						  </c:choose>
 							<ul class="dropdown">
 								<c:choose>
 									<c:when test="${loginUser eq null }">
