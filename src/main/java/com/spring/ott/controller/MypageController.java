@@ -21,6 +21,12 @@ public class MypageController {
 	@Autowired
 	MypageService mypageService;
 	
+//  readMypage
+	@RequestMapping("/myMain.do")
+	public String readMypage() {
+		return "/WEB-INF/views/mypage/readMypage";
+	}
+	
 //	updateUser (회원정보 수정)
 	
 	

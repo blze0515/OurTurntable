@@ -53,10 +53,7 @@
 	max-width: 16px;
      
 }
-.pagination{
-	display:flex;
-	justify-content: center;
-}
+
 .page-item a{
 	color: black;
 }

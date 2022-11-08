@@ -20,7 +20,7 @@
 		<security:intercept-url pattern="/user/join.do" access="isAnonymous()" />
 
 		<!-- 관리자페이지는 관리자만 접근 허용 -->
-		<security:intercept-url pattern="/admin/**" access="hasRole('admin')" />
+		<!-- <security:intercept-url pattern="/admin/**" access="hasRole('admin')" />  -->
     	
     	<!-- 로그인한 유저만 접근 허용(밑에다 계속 추가) -->
     	<!-- <security:intercept-url pattern="/chat/**" access="isAuthenticated()" />  -->
@@ -41,7 +41,7 @@
 		<security:logout
 			logout-success-url="/user/login.do"
 		/>
-		<security:csrf disabled="false"/>    	
+		<security:csrf disabled="true"/>    	
     </security:http>
 	
 	<security:authentication-manager>
