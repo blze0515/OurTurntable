@@ -16,21 +16,27 @@ public class AdminController {
 	@Autowired BoardService boardService;
 	@Autowired UserService userService;
 
-	@RequestMapping("/admin.do")
-	public String admin() {
-		return "/WEB-INF/views/admin";
+//	readUserList (회원 목록 조회)
+	@RequestMapping("/adminUser.do")
+	public String readUserList() {
+		return "/WEB-INF/views/admin/readUserList";
 	}
 	
-//	readUserList (회원 목록 조회)
-	
+//	updateBoardState (게시글 승인여부 수정)
+	@RequestMapping("/adminBoard.do")
+	public String readBoardList() {
+		return "/WEB-INF/views/admin/updateBoardList";
+	}
+
+//	updateUserGrade (회원 등급 수정)
+	@RequestMapping("/adminGrade.do")
+	public String updateUserGrade() {
+		return "/WEB-INF/views/admin/updateUserGrade";
+	}
 	
 //	updateUserState (회원 활동상태 수정)
 	
 	
-//	updateUserGrade (회원 등급 수정)
-	
-	
-//	updateBoardState (게시글 승인여부 수정)
-	
+
 	
 }

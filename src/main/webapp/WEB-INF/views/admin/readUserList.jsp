@@ -20,9 +20,9 @@
 	                </dt>
 	                <dd>
 	                    <ul class="menu">
-	                        <li class="menuli"><a href="#">회원 관리</a></li>
-	                        <li class="menuli"><a href="#">등급 관리</a></li>
-	                        <li class="endli"><a href="#">게시물 관리</a></li>
+	                        <li class="menuli"><a href="/admin/adminUser.do">회원 관리</a></li>
+	                        <li class="menuli"><a href="/admin/adminGrade.do">등급 관리</a></li>
+	                        <li class="endli"><a href="/admin/adminBoard.do">게시물 관리</a></li>
 	                    </ul>
 	                </dd>
 	            </dl>
@@ -210,7 +210,7 @@
                     </tbody>
                 </table>
                 <div>
-                    <ul class="pagination">
+                    <ul class="pagination" style="display: flex; justify-content: center;">
 	                      <li class="page-item">
 	                        <a class="page-link" href="#" aria-label="Previous">
 	                          <span aria-hidden="true">&laquo;</span>
