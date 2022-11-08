@@ -17,7 +17,7 @@
 
 		<!-- 로그인된 상태에서는 로그인이나 회원가입 화면에 접근 못하도록 함 -->
 		<security:intercept-url pattern="/user/login.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/user/join.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/user/createUser.do" access="isAnonymous()" />
 
 		<!-- 관리자페이지는 관리자만 접근 허용 -->
 		<security:intercept-url pattern="/admin/**" access="hasRole('admin')" />
@@ -41,7 +41,7 @@
 		<security:logout
 			logout-success-url="/user/login.do"
 		/>
-		<security:csrf disabled="false"/>    	
+		<security:csrf disabled="true"/>    	
     </security:http>
 	
 	<security:authentication-manager>

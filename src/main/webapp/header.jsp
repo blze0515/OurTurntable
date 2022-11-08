@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,12 +73,18 @@
 						<li><a href="/main/contact.do">문의</a></li>
 						<!-- 로그인/회원가입/마이페이지 드롭다운 -->
 						<li class="has-children">
-							<a href="#">로그인</a>
+							<a href="#">가입/로그인</a>
 							<ul class="dropdown">
-								<li><a href="/user/login.do">로그인</a></li>
-								<li><a href="/user/createUser.do">회원가입</a></li>
-								
-								<li><a href="#">마이페이지</a></li>
+								<c:choose>
+									<c:when test="${loginUser eq null }">
+										<li><a href="/user/login.do">로그인</a></li>
+										<li><a href="/user/createUser.do">회원가입</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="#">마이페이지</a></li>
+										<li><a href="/user/logout.do">로그아웃</a></li>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 						</li>
 					</ul>

@@ -16,7 +16,7 @@
 				<div class="col-lg-4">
 					<div class="custom-block" data-aos="fade-up" data-aos-delay="100">
 						<h2 class="section-title">회원가입</h2>
-						<form class="contact-form bg-brown2" action="/user/createUser.do" method="post">
+						<form action="/user/createUser.do" method="post" class="contact-form bg-brown2">
 
 							<div class="form-group-join">
 									<img src="/images/person_1.jpg" width="150px">
@@ -71,51 +71,8 @@
 							<button type="submit" class="btn btn-primary" style="width: 100%">가입하기</button>
 						</form>
 					</div>
-
-					<!--  
-          <div class="custom-block" data-aos="fade-up" data-aos-delay="100">
-            <div class="text-center">
-              <h2 class="section-title text-center">Slider</h2>
-            </div>
-            <div class="owl-single owl-carousel no-nav">
-              <div class="testimonial mx-auto">
-                <figure class="img-wrap">
-                  <img src="${pageContext.request.contextPath }/images/person_2.jpg" alt="Image" class="img-fluid">
-                </figure>
-                <h3 class="name">Adam Aderson</h3>
-                <blockquote>
-                  <p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-                </blockquote>
-              </div>
-
-              <div class="testimonial mx-auto">
-                <figure class="img-wrap">
-                  <img src="${pageContext.request.contextPath }/images/person_3.jpg" alt="Image" class="img-fluid">
-                </figure>
-                <h3 class="name">Lukas Devlin</h3>
-                <blockquote>
-                  <p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-                </blockquote>
-              </div>
-
-              <div class="testimonial mx-auto">
-                <figure class="img-wrap">
-                  <img src="${pageContext.request.contextPath }/images/person_4.jpg" alt="Image" class="img-fluid">
-                </figure>
-                <h3 class="name">Kayla Bryant</h3>
-                <blockquote>
-                  <p>&ldquo;There live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-                </blockquote>
-              </div>
-
-            </div>
-          </div>	-->
-
 				</div>
 			</div>
-
-
-
 		</div>
 	</div>
 

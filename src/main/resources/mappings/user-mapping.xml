@@ -10,17 +10,55 @@
 <!-- DAO에서 쿼리가 분리되었기 때문에 DAO클래스 이름을 따라감 -->
 <mapper namespace="UserDAO">
 	<!-- 쿼리 작성 영역 -->
-	<insert id="createUser" parameterType="com.spring.ott.VO.UserVO"> 
+	<insert id="createUser" parameterType="user"> 
+	<![CDATA[
 		INSERT INTO T_OTT_USER (
-			USER_ID , USER_NAME , USER_NICKNAME , USER_EMAIL , USER_TEL ,
-			USER_ADRESS , USER_ZIPCODE , USER_PW , USER_RGSTDATE , USER_MDFDATE ,
-			USER_ROLE, USER_ACTIVEYN, USER_PROFILE_IMG 
+			USER_ID , USER_NAME , 
+			USER_NICKNAME , USER_EMAIL , 
+			USER_TEL , USER_ADRESS , 
+			USER_ZIPCODE , USER_PW , 
+			USER_RGSTDATE , USER_MDFDATE ,
+			USER_ROLE, USER_ACTIVEYN, 
+			USER_PROFILE_IMG 
 			) VALUES ( 
-			#{userId}, #{userName}, #{userNickname}, #{userEmail}, 'test', 
-			#{userAddress}, 'test', #{userPw}, NOW(), NOW(), 
-			'ROLE_USER', 'Y', null
+			#{userId}, #{userName}, 
+			#{userNickname}, #{userEmail}, 
+			'11111', #{userAddress}, 
+			'11111', #{userPw}, 
+			NOW(), NOW(), 
+			'ROLE_USER', 'Y', 
+			null
 			)
+	]]>
 	</insert>
+	
+	
+	
+	<select id="idCheck" parameterType="string" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*)
+			FROM T_OTT_USER
+			WHERE USER_ID = #{userId}
+	]]>
+	</select>
+	
+	<select id="pwCheck" parameterType="user" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*)
+			FROM T_OTT_USER
+			WHERE USER_ID = #{userId}
+			  AND USER_PW = #{userPw}
+	]]>
+	</select>
+	
+	<select id="login" parameterType="user" resultType="user">
+	<![CDATA[
+		SELECT * 
+			FROM T_OTT_USER
+			WHERE USER_ID = #{userId}
+			  AND USER_PW = #{userPw}
+	]]>
+	</select>
 
 
 

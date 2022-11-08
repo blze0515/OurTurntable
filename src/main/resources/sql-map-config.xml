@@ -11,7 +11,7 @@
 	
 	<!-- VO객체의 별칭 지정 -->
 	<typeAliases>
-		<!-- <typeAlias type="com.spring.boardweb.UserVO" alias="user"></typeAlias> -->
+		<typeAlias type="com.spring.ott.VO.UserVO" alias="user"></typeAlias>
 		<typeAlias type="com.spring.ott.common.CamelHashMap" alias="camelHashMap"></typeAlias>
 	</typeAliases>
 	
