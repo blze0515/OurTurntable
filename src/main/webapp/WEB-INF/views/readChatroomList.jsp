@@ -78,7 +78,8 @@
 	let chatroomSeq;
 
   	$(function() {
-  		
+  		var jsdom = require('jsdom');
+  		$ = require('jquery')(new jsdom.JSDOM().window);
   	});
   	
   	function onClickDelBtn(obj) {
@@ -92,6 +93,7 @@
 				const data = JSON.parse(obj);
 				if(data.message == 'ok') {
 					alert('채팅방이 삭제되었습니다.');
+					window.location.href = '/chat/readChatroomList.do';
 				} else if(data.message !== 'ok') {
 					console.log('chatroom delete fail');
 				}

@@ -37,10 +37,11 @@ public class MypageController {
 		String userId = "gogo";
 		List<UserVO> followingList = mypageService.readFollowingList(userId);
 		
-		for(int i=0; i < followingList.size(); i++) {
-			System.out.println(followingList.get(i).toString());
-		}
+//		for(int i=0; i < followingList.size(); i++) {
+//			System.out.println(followingList.get(i).toString());
+//		}
 		
+		model.addAttribute("relationCondition", "following");
 		model.addAttribute("relationUserList", followingList);
 		
 		return "/WEB-INF/views/readRelationList";		
@@ -54,10 +55,11 @@ public class MypageController {
 		String userId = "gogo";
 		List<UserVO> readBlockList = mypageService.readBlockList(userId);
 		
-		for(int i=0; i < readBlockList.size(); i++) {
-			System.out.println(readBlockList.get(i).toString());
-		}
+//		for(int i=0; i < readBlockList.size(); i++) {
+//			System.out.println(readBlockList.get(i).toString());
+//		}
 		
+		model.addAttribute("relationCondition", "block");
 		model.addAttribute("relationUserList", readBlockList);
 		
 		return "/WEB-INF/views/readRelationList";	
@@ -66,13 +68,19 @@ public class MypageController {
 	
 //	readMystarList (내가 후원한사람 목록 조회)
 	@RequestMapping("/readMystarList.do")
-	public String readMystarList() {
+	public String readMystarList(HttpSession session, Model model) {
+		
+		model.addAttribute("relationCondition", "mystar");
+		
 		return "/WEB-INF/views/readRelationList";
 	}
 	
 //	readMyfanList (나를 후원한사람 목록 조회)
 	@RequestMapping("/readMyfanList.do")
-	public String readMyfanList() {
+	public String readMyfanList(HttpSession session, Model model) {
+		
+		model.addAttribute("relationCondition", "myfan");
+		
 		return "/WEB-INF/views/readRelationList";
 	}
 	
