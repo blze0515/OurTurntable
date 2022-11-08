@@ -11,11 +11,24 @@
 <body>
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
 	
-	<h1>내가 팔로우한 회원 리스트</h1>
-	<h1>나를 팔로우한 회원 리스트</h1>
-	<h1>내가 후원한 아티스트 리스트</h1>
-	<h1>나를 후원한 팬 리스트</h1>
-	<h1>내가 블락한 회원 리스트</h1>
+	<c:choose>
+		<c:when test="${relationCondition eq 'following'}">
+			<h1>내가 팔로우한 회원 리스트</h1>
+		</c:when>
+		<c:when test="${relationCondition eq 'block'}">
+			<h1>내가 블락한 회원 리스트</h1>
+		</c:when>
+		<c:when test="${relationCondition eq 'mystar'}">
+			<h1>내가 후원한 회원 리스트(My Star)</h1>
+		</c:when>
+		<c:when test="${relationCondition eq 'myfan'}">
+			<h1>나에게 후원한 회원 리스트(My Fan)</h1>
+		</c:when>
+       	<c:otherwise>
+       		<h1>${relationCondition } </h1>
+        	<h1>리스트</h1>
+        </c:otherwise>
+	</c:choose>
 
 	<table class="table table-striped">
 	  <thead>

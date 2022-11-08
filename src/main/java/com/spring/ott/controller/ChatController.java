@@ -33,6 +33,7 @@ public class ChatController {
 	@PostMapping("/createChat.do")
 	public String createChat(HttpSession session, ChatVO chatVO) throws JsonProcessingException { 
 		
+		System.out.println("dfdfdfdfdfdfdfdfdfdfdfdfdfdfdfd");
 		String userId = "gogo"; //로그인한 사용자 아이디
 		chatVO.setUserId(userId);
 		
@@ -91,7 +92,7 @@ public class ChatController {
 		String userId = "gogo"; //로그인한 사용자 아이디
 		
 		chatService.updateChatroomMemberYn(chatroomSeq, userId); //채팅방의 활성화 상태를 'N'으로 수정함
-				
+		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
@@ -111,6 +112,5 @@ public class ChatController {
 		
 		//중복체크 불필요. chatroomMember가 비어있는지 아닌지에 따라 분기, 화면에서 처리
 		return "/WEB-INF/views/readChatroomList";
-		
 	}
 }
