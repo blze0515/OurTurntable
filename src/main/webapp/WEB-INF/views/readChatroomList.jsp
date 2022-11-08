@@ -78,9 +78,8 @@
 	let chatroomSeq;
 
   	$(function() {
-  		var jsdom = require('jsdom');
-  		$ = require('jquery')(new jsdom.JSDOM().window);
-  	});
+  		
+  	}); 
   	
   	function onClickDelBtn(obj) {
   		console.log($(obj).prev()[0].firstElementChild.innerHTML); //이거 어떻게 선택해야할지 모르겠다.
