@@ -1585,7 +1585,7 @@ padding: 7rem 0 15rem 0;*/
 	.pagination{
 	list-style: none;
     width: 100%;
-    display: inline-block;}
+    display: flex;}
     
     .pagination-button{
     float: left;

@@ -41,7 +41,7 @@
 		<security:logout
 			logout-success-url="/user/login.do"
 		/>
-		<security:csrf disabled="true"/>    	
+		<security:csrf disabled="true"/>
     </security:http>
 	
 	<security:authentication-manager>
