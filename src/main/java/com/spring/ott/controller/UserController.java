@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,18 +38,32 @@ public class UserController {
 	
 	/*221102 한글 깨지는지 테스트 utf-8 저장*/ 
 	
-//	createUser ( 쉶 썝媛  엯)
-	@RequestMapping("/createUser.do")
-	public String createUser(UserVO userVO) {
+	@GetMapping("/createUser.do")
+	public String createUserView() {
 		//회원가입 정보가 넘어오지 않았을 때는 회원가입 화면으로
-		if(userVO.getUserId() == null || userVO.getUserId().equals("")) {
-			return "/WEB-INF/views/user/createUser";
-		} else {
+		//if(userVO.getUserId() == null || userVO.getUserId().equals("")) {
+			//return "/WEB-INF/views/user/createUser";
+		//} else {
+			//회원가입 정보가 넘어왔을 때는 회원가입 처리 후 로그인 화면으로
+		return "/WEB-INF/views/user/createUser";
+			
+		//}
+	}
+	
+//	createUser ( 쉶 썝媛  엯)
+	@PostMapping("/createUser.do")
+	public String createUser(UserVO userVO) {
+		System.out.println("11111111111");
+		System.out.println(userVO.toString());
+		//회원가입 정보가 넘어오지 않았을 때는 회원가입 화면으로
+		//if(userVO.getUserId() == null || userVO.getUserId().equals("")) {
+			//return "/WEB-INF/views/user/createUser";
+		//} else {
 			//회원가입 정보가 넘어왔을 때는 회원가입 처리 후 로그인 화면으로
 			userService.createUser(userVO);
 			
 			return "/WEB-INF/views/user/login";
-		}
+		//}
 	}
 	
 	
