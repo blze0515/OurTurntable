@@ -2,12 +2,12 @@ package com.spring.ott.service.mypage;
 
 import java.util.List;
 
-import com.spring.ott.VO.UserVO;
+import com.spring.ott.common.CamelHashMap;
 
 public interface MypageService {
 
-	List<UserVO> readFollowingList(String userId);
+	List<CamelHashMap> readFollowingList(String userId);
 
-	List<UserVO> readBlockList(String userId);
+	List<CamelHashMap> readBlockList(String userId);
 
 }

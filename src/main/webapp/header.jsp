@@ -89,7 +89,7 @@
 									</c:when>
 									<c:otherwise>
 										<li><a href="#">마이페이지</a></li>
-										<li><a href="/user/logout.do">로그아웃</a></li>
+										<li><a href="javascript:void(0)" onClick="javascript:logout()">로그아웃</a></li>
 									</c:otherwise>
 								</c:choose>
 							</ul>
@@ -108,5 +108,17 @@
 	<div class="hero">
 
 	</div>
+	
+	<script>
+		/* 로그아웃 요청을 POST로 보내기 */
+		function logout(){
+		    let f = document.createElement('form');
+		    f.setAttribute('method', 'post');
+		    f.setAttribute('action', '/user/logout.do');
+		    document.body.appendChild(f);
+		    f.submit();
+		}
+
+	</script>
 </body>
 </html>
