@@ -19,7 +19,5 @@ public class UserVO {
 	private String userRole;
 	private String userPw;
 	private String userProfileImg;
-	
-	private String relationPartner;
-	private Date relationDate;
+
 }

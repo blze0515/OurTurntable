@@ -10,7 +10,7 @@
 <!-- DAO에서 쿼리가 분리되었기 때문에 DAO클래스 이름을 따라감 -->
 <mapper namespace="MypageDAO">
 	<!-- 쿼리 작성 영역 -->
-	<select id="readFollowingList" parameterType="String" resultType="com.spring.ott.VO.UserVO">
+	<select id="readFollowingList" parameterType="String" resultType="camelHashMap">
 		SELECT 
 		   A.RELATION_PARTNER ,
 		   A.RELATION_DATE ,
@@ -25,7 +25,7 @@
 		AND A.RELATION_CONDITION = 1
 	</select>
 	
-	<select id="readBlockList" parameterType="string" resultType="com.spring.ott.VO.UserVO">
+	<select id="readBlockList" parameterType="string" resultType="camelHashMap">
 		SELECT 
 		   A.RELATION_PARTNER ,
 		   A.RELATION_DATE ,

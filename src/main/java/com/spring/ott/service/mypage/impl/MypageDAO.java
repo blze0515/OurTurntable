@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.ott.VO.UserVO;
+import com.spring.ott.common.CamelHashMap;
 
 @Repository
 public class MypageDAO {
@@ -14,11 +15,11 @@ public class MypageDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 
-	public List<UserVO> readFollowingList(String userId) {
+	public List<CamelHashMap> readFollowingList(String userId) {
 		return mybatis.selectList("MypageDAO.readFollowingList", userId);
 	}
 	
-	public List<UserVO> readBlockList(String userId) {
+	public List<CamelHashMap> readBlockList(String userId) {
 		return mybatis.selectList("MypageDAO.readBlockList", userId);
 	}
 }

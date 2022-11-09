@@ -1,7 +1,6 @@
 package com.spring.ott.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.ott.VO.UserVO;
+import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.mypage.MypageService;
 
 @Controller
@@ -35,7 +34,7 @@ public class MypageController {
 	public String readFollowList(HttpSession session, Model model) {
 		
 		String userId = "gogo";
-		List<UserVO> followingList = mypageService.readFollowingList(userId);
+		List<CamelHashMap> followingList = mypageService.readFollowingList(userId);
 		
 //		for(int i=0; i < followingList.size(); i++) {
 //			System.out.println(followingList.get(i).toString());
@@ -53,7 +52,7 @@ public class MypageController {
 	public String readBlockList(HttpSession session, Model model) {
 		
 		String userId = "gogo";
-		List<UserVO> readBlockList = mypageService.readBlockList(userId);
+		List<CamelHashMap> readBlockList = mypageService.readBlockList(userId);
 		
 //		for(int i=0; i < readBlockList.size(); i++) {
 //			System.out.println(readBlockList.get(i).toString());
