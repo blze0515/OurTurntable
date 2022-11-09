@@ -42,7 +42,7 @@
 			logout-success-url="/user/login.do"
 		/>
 
-		<security:csrf disabled="false"/>    	
+		<security:csrf disabled="true"/>    	
 
     </security:http>
 	

@@ -127,7 +127,7 @@ public class UserController {
 		return json;
 	}
 	
-	@RequestMapping("/logout.do")
+	@PostMapping("/logout.do")
 	public String logout(HttpSession session) {
 		//세션내에 저장되어 있는 내용들을 초기화
 		session.invalidate();
