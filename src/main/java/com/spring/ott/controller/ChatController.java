@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.ott.VO.ChatVO;
+import com.spring.ott.VO.UserVO;
 import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.chat.ChatService;
 
@@ -32,9 +33,10 @@ public class ChatController {
 	@ResponseBody
 	@PostMapping("/createChat.do")
 	public String createChat(HttpSession session, ChatVO chatVO) throws JsonProcessingException { 
+		UserVO loginUser = new UserVO();
+		loginUser =  (UserVO)session.getAttribute("loginUser");
 		
-		String userId = "gogo"; //로그인한 사용자 아이디
-		chatVO.setUserId(userId);
+		chatVO.setUserId(loginUser.getUserId());
 		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
@@ -51,10 +53,10 @@ public class ChatController {
 	@ResponseBody
 	@GetMapping(value = "/readChatList.do", produces = "application/text; charset=UTF-8")
 	public String readChatList(HttpSession session, @RequestParam int chatroomSeq) throws JsonProcessingException {
+		UserVO loginUser = new UserVO();
+		loginUser =  (UserVO)session.getAttribute("loginUser");
 		
-		String userId = "gogo"; //로그인한 사용자 아이디
-		
-		chatService.updateChatStatus(chatroomSeq, userId); //채팅메시지의 읽음 상태 수정
+		chatService.updateChatStatus(chatroomSeq, loginUser.getUserId()); //채팅메시지의 읽음 상태 수정
 		List<ChatVO> chatList = chatService.readChatList(chatroomSeq); //채팅메시지 목록 조회
 				
 		Map<String, Object> listMap = new HashMap<String, Object>();
@@ -70,9 +72,10 @@ public class ChatController {
 //	readChatroomList (참여중인 채팅방 목록 조회)
 	@GetMapping("/readChatroomList.do")
 	public String readFollowList(HttpSession session, Model model) {
+		UserVO loginUser = new UserVO();
+		loginUser =  (UserVO)session.getAttribute("loginUser");
 		
-		String userId = "gogo"; //로그인한 사용자 아이디
-		List<CamelHashMap> chatroomList = chatService.readChatroomList(userId);
+		List<CamelHashMap> chatroomList = chatService.readChatroomList(loginUser.getUserId());
 		
 //		for(int i=0; i < chatroomList.size(); i++) {
 //			System.out.println("챗룸목록: " + chatroomList.get(i).toString());
@@ -87,10 +90,10 @@ public class ChatController {
 	@ResponseBody
 	@GetMapping(value = "/deleteChatroom.do", produces = "application/text; charset=UTF-8")
 	public String deleteChatroom(HttpSession session, @RequestParam int chatroomSeq) throws JsonProcessingException {
+		UserVO loginUser = new UserVO();
+		loginUser =  (UserVO)session.getAttribute("loginUser");
 		
-		String userId = "gogo"; //로그인한 사용자 아이디
-		
-		chatService.updateChatroomMemberYn(chatroomSeq, userId); //채팅방의 활성화 상태를 'N'으로 수정함
+		chatService.updateChatroomMemberYn(chatroomSeq, loginUser.getUserId()); //채팅방의 활성화 상태를 'N'으로 수정함
 		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
@@ -104,10 +107,10 @@ public class ChatController {
 //	createChatroom (채팅방 생성)
 	@GetMapping("/createChatroom.do")
 	public String createChatroom(HttpSession session, @RequestParam String chatroomMember) {
+		UserVO loginUser = new UserVO();
+		loginUser =  (UserVO)session.getAttribute("loginUser");
 		
-		String userId = "gogo"; //로그인한 사용자 아이디
-		
-		chatService.createChatroom(userId, chatroomMember); //중복 조회, 챗룸 생성
+		chatService.createChatroom(loginUser.getUserId(), chatroomMember); //중복 조회, 챗룸 생성
 		
 		//중복체크 불필요. chatroomMember가 비어있는지 아닌지에 따라 분기, 화면에서 처리
 		return "/WEB-INF/views/readChatroomList";
