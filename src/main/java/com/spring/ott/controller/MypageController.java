@@ -32,9 +32,10 @@ public class MypageController {
 //	readFollowingList (팔로잉 목록 조회)
 	@RequestMapping("/readFollowList.do")
 	public String readFollowList(HttpSession session, Model model) {
+		UserVO loginUser = new UserVO();
+		loginUser =  (UserVO)session.getAttribute("loginUser");
 		
-		String userId = "gogo";
-		List<CamelHashMap> followingList = mypageService.readFollowingList(userId);
+		List<CamelHashMap> followingList = mypageService.readFollowingList(loginUser.getUserId());
 		
 //		for(int i=0; i < followingList.size(); i++) {
 //			System.out.println(followingList.get(i).toString());
@@ -50,9 +51,10 @@ public class MypageController {
 //	readBlockList (차단 목록 조회)
 	@RequestMapping("/readBlockList.do")
 	public String readBlockList(HttpSession session, Model model) {
+		UserVO loginUser = new UserVO();
+		loginUser =  (UserVO)session.getAttribute("loginUser");
 		
-		String userId = "gogo";
-		List<CamelHashMap> readBlockList = mypageService.readBlockList(userId);
+		List<CamelHashMap> readBlockList = mypageService.readBlockList(loginUser.getUserId());
 		
 //		for(int i=0; i < readBlockList.size(); i++) {
 //			System.out.println(readBlockList.get(i).toString());
