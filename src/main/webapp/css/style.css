@@ -1603,3 +1603,15 @@ padding: 7rem 0 15rem 0;*/
     .form-group-73{
     display:flex;
     }
+    
+    
+    /* insert board style*/
+    
+    .board-form{
+    display:block;
+    text-align: -webkit-center;
+    width:100%;
+    }
+    .board-form tr{
+    text-align: center;
+    }
