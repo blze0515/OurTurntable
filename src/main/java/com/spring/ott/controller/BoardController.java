@@ -1,10 +1,29 @@
 package com.spring.ott.controller;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.spring.ott.Criteria;
+import com.spring.ott.VO.BoardFileVO;
+import com.spring.ott.VO.BoardVO;
+import com.spring.ott.VO.PageVO;
+import com.spring.ott.VO.UserVO;
 import com.spring.ott.service.board.BoardService;
+import com.spring.ott.utils.FileUtils;
+
 
 @Controller
 @RequestMapping("/board")
@@ -12,48 +31,105 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardService;
+
 	
+//	readBoardList (자유게시판 목록 조회)
 	@RequestMapping("/readBoardList.do")
-	public String readBoardList() {
-		return "/WEB-INF/views/readBoardList";
+	public String readBoardList(HttpSession session, Model model,
+		@RequestParam Map<String, String> paramMap, Criteria cri) {
+			UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			return "/WEB-INF/view/user/login";
+		}
+		
+		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
+		
+		
+		int total = boardService.getBoardCnt(paramMap);
+		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + total);
+		
+		for(int i=0; i < boardList.size(); i++) {
+			System.out.println(boardList.get(i).toString());
+		}
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pageMaker", new PageVO(cri, total));
+		
+		if(paramMap.get("searchCondition") != null && !paramMap.get("searchCondition").equals("")) {
+			System.out.println("searchCondition================" + paramMap.get("searchCondition"));
+			model.addAttribute("searchCondition", paramMap.get("searchCondition"));
+		}
+		
+		if(paramMap.get("searchKeyword") != null && !paramMap.get("searchKeyword").equals("")) {
+			model.addAttribute("searchKeyword", paramMap.get("searchKeyword"));
+		}
+		
+		return "/WEB-INF/views/board/readBoardList";
 	}
 	
+//	readRecBoadList (추천게시판 목록 조회)
 	@RequestMapping("/readRecBoardList.do")
 	public String readRecBoardList() {
 		return "/WEB-INF/views/readRecBoardList";
 	}
-//	createBoard (寃뚯떆湲� �벑濡�)
-//		* 寃뚯떆�뙋 �쑀�삎(1,2,3)�뿉 �뵲瑜� �룞�쟻 荑쇰━
+	
+//	readBoard (게시글 상세 조회)
+//		* 서비스에서 구현할 내용: 
+//			* 댓글 목록 조회
+//			* 좋아요 카운트 조회
+	
+	
+//	createBoard (게시글 등록)
+//		* 게시판 유형(1,2,3)에 따른 동적 쿼리
+//	@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
+//	public String insertBoard(HttpSession session, BoardVO boardVO, HttpServletRequest request,
+//			MultipartHttpServletRequest multipartServletRequest) throws IOException {
+//		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+//		
+//		if(loginUser == null) {
+//			return "/WEB-INF/views/user/login";
+//		}
+//		
+//		int boardSeq = boardService.getNextBoardSeq();
+//		
+//		FileUtils fileUtils = new FileUtils();
+//		
+//		//파일업로드 처리 및 속성 값들이 세팅된 BoardFileVO의 목록 리턴
+//		List<BoardFileVO> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
+//		
+//		boardService.insertBoard(boardVO);
+//		
+//		if(!CollectionUtils.isEmpty(fileList)) {
+//			boardService.insertBoardFile(fileList);
+//		}
+//		
+//		return "redirect:readBoardList.do";
+//	}
+	
+//	updateBoard (게시글 수정)
 
 	
-//	updateBoard (寃뚯떆湲� �닔�젙)
+//	deleteBoard (게시글 삭제)
 
 	
-//	deleteBoard (寃뚯떆湲� �궘�젣)
+
 
 	
-//	readBoardList (寃뚯떆湲� 紐⑸줉 議고쉶)
+//	createReply (댓글등록)
 
 	
-//	readBoard (寃뚯떆湲� �긽�꽭 議고쉶)
-//		* �꽌鍮꾩뒪�뿉�꽌 援ы쁽�븷 �궡�슜: 
-//			* �뙎湲� 紐⑸줉 議고쉶 
-//			* 醫뗭븘�슂 移댁슫�듃 議고쉶
+//	updateReply (댓글수정)
 
 	
-//	createReply (�뙎湲��벑濡�)
+//	deleteReply (댓글삭제)
 
 	
-//	updateReply (�뙎湲��닔�젙)
+//	createBoardLike (좋아요 등록)
 
 	
-//	deleteReply (�뙎湲��궘�젣)
-
-	
-//	createBoardLike (醫뗭븘�슂 �벑濡�)
-
-	
-//	deleteBoardLike (醫뗭븘�슂 �궘�젣)
+//	deleteBoardLike (좋아요 삭제)
 
 	
 }

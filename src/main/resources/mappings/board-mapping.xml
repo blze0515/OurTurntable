@@ -10,22 +10,52 @@
 <!-- DAO에서 쿼리가 분리되었기 때문에 DAO클래스 이름을 따라감 -->
 <mapper namespace="BoardDAO">
 	<!-- 쿼리 작성 영역 -->
-	<select id="test">
-		SELECT * FROM DUAL
-		<!-- 
-		INSERT INTO T_USER (
-			USER_ID,
-			USER_PW,
-			USER_NM,
-			USER_MAIL,
-			USER_TEL
-		) VALUES (
-			#{userId},
-			#{userPw},
-			#{userNm},
-			#{userMail},
-			#{userTel}
-		)
-		 -->
-	</select>
+		<select id="getBoardList" parameterType="java.util.Map" resultType="board">
+		<![CDATA[
+		SELECT *
+			FROM T_OTT_BOARD
+			WHERE 1=1
+			]]>
+			<if test="boardSearch.searchKeyword != null and boardSearch.searchKeyword != ''">
+				<if test="boardSearch.searchCondition == 'all'">
+					AND BOARD_TITLE LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					 OR BOARD_CONTENT LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					 OR USER_ID LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+				</if>
+				<if test="boardSearch.searchCondition == 'title'">
+					AND BOARD_TITLE LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+				</if>
+				<if test="boardSearch.searchCondition == 'content'">
+					AND BOARD_CONTENT LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+				</if>
+				<if test="boardSearch.searchCondition == 'writer'">
+					AND USER_ID LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+				</if>
+			</if>
+			LIMIT #{cri.amount} OFFSET #{cri.startNum}
+		</select>
+		<select id="getBoardCnt" parameterType="java.util.Map" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+			FROM T_OTT_BOARD
+			WHERE 1=1
+		]]>
+			<if test="searchKeyword != null and searchKeyword != ''">
+				<if test="searchCondition == 'all'">
+					AND BOARD_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+					 OR BOARD_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+					 OR USER_ID LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+				<if test="searchCondition == 'title'">
+					AND BOARD_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+				<if test="searchCondition == 'content'">
+					AND BOARD_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+				<if test="searchCondition == 'writer'">
+					AND USER_ID LIKE CONCAT('%', #{searchKeyword}, '%')
+				</if>
+			</if>
+		
+		</select>
 </mapper>
