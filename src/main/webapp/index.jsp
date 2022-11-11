@@ -24,7 +24,13 @@
 			<div class="row text-center justify-content-center mb-5" style="margin-bottom:0rem!important;">
 				<div class="col-lg-7"><h2 class="section-title text-center">인기글 Top5</h2></div>
 			</div>
+			
 			<div class="" style="border:solid gray 2px;">
+			<div class="flex-right" style="height:20px; margin:15px 15px 10px 0; text-align:end!important;">
+				<a href="/board/readFBoardList.do">
+					더 보기 <img src="/images/img_logo.jpg" style="height:20px;">
+				</a>
+			</div>
 			<table class="mboard-table">
 					<tr class="mtr-head">
 						<td class="tr-seq tr-padding">글번호</td>
@@ -139,7 +145,13 @@
 					<h2 class="section-title text-center mb-3">인기추천 장소</h2>
 				</div>
 			</div>
-			<div class="row">
+			
+			<div class="flex-right" style="height:20px; margin:15px 15px 10px 0; text-align:end!important;">
+				<a href="/board/readRecBoardList.do">
+					더 보기 <img src="/images/img_logo.jpg" style="height:20px;">
+				</a>
+			</div>
+			<div class="row" style="border:gray solid 2px;">
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
 					<div class="media-1">
 						<a href="#" class="d-block mb-3"><img src="${pageContext.request.contextPath }/images/hero-slider-1.jpg" alt="Image" class="img-fluid"></a>

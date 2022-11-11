@@ -36,8 +36,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardVO getBoard(int boardSeq) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDAO.getBoard(boardSeq);
 	}
 
 	@Override
@@ -54,7 +53,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void deleteBoard(int boardSeq) {
-		// TODO Auto-generated method stub
+		boardDAO.deleteBoard(boardSeq);
 		
 	}
 

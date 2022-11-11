@@ -34,7 +34,7 @@ public class BoardController {
 
 	
 //	readBoardList (자유게시판 목록 조회)
-	@RequestMapping("/readBoardList.do")
+	@RequestMapping("/readFBoardList.do")
 	public String readBoardList(HttpSession session, Model model,
 		@RequestParam Map<String, String> paramMap, Criteria cri) {
 			UserVO loginUser = (UserVO)session.getAttribute("loginUser");
@@ -66,7 +66,7 @@ public class BoardController {
 			model.addAttribute("searchKeyword", paramMap.get("searchKeyword"));
 		}
 		
-		return "/WEB-INF/views/board/readBoardList";
+		return "/WEB-INF/views/board/readFBoardList";
 	}
 	
 //	readRecBoadList (추천게시판 목록 조회)
@@ -80,9 +80,42 @@ public class BoardController {
 //			* 댓글 목록 조회
 //			* 좋아요 카운트 조회
 	
+//	@RequestMapping("/readFBoard.do")
+//	public String readFBoardView() {
+//		return "/WEB-INF/views/board/readFBoard";
+//	}
+	
+	
+	//여기부터 getboard.do
+	@RequestMapping("/readFBoard.do")
+	public String getBoard(HttpSession session, @RequestParam int boardSeq, Model model) {
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			return "user/login";
+		}
+		
+		//게시물 클릭하면 조회수+1
+		boardService.updateBoardCnt(boardSeq);
+		
+		BoardVO board = boardService.getBoard(boardSeq);
+//		List<BoardFileVO> fileList = boardService.getBoardFile(boardSeq);
+		
+		model.addAttribute("board", board);
+		//model.addAttribute("fileList", fileList);
+		
+		return "/WEB-INF/views/board/readFBoard";
+	}
+	
+	
+	
+	
 	
 //	createBoard (게시글 등록)
-//		* 게시판 유형(1,2,3)에 따른 동적 쿼리
+//		* 게시판 유형(1,2,3)에 따른 동적 쿼리'
+	
+	
+	
 //	@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
 //	public String insertBoard(HttpSession session, BoardVO boardVO, HttpServletRequest request,
 //			MultipartHttpServletRequest multipartServletRequest) throws IOException {
@@ -113,7 +146,12 @@ public class BoardController {
 	
 //	deleteBoard (게시글 삭제)
 
-	
+	@RequestMapping(value="/deleteBoard.do")
+	public String deleteBoard(@RequestParam int boardSeq) {
+		boardService.deleteBoard(boardSeq);
+		
+		return "redirect:/board/readFBoardList.do";
+	}
 
 
 	
