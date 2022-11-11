@@ -23,12 +23,12 @@
 		                <span class="userGrade">
 		                  <a>등급 : </a>
 		                  <!-- value 넣을곳 -->
-		                  <a>1단계</a>
+		                  <a href="#" style="font-style: italic; color: skyblue;">1단계</a>
 		                </span>
 		                <span class="userPoint">
 		                  <a>보유 포인트 : </a>
 		                  <!-- value 넣을곳 -->
-		                  <a>10,000</a>
+		                  <a href="#" style="font-style: italic; color: skyblue;">10,000</a>
 		                </span>
 	                </div>
 	                <dt>

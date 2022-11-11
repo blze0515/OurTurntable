@@ -1,0 +1,35 @@
+.monthInfo{
+	width: 100%;
+	display:flex;
+	justify-content:space-between;
+	margin-bottom: 5%;
+}
+.monthInfo img{
+	width:150px;
+	height:150px;
+}
+.monthInfo a{
+	font-size: 50px;
+}
+.myInfo{
+	display: grid;
+	gap:15px;
+	grid-template-columns:repeat(auto-fit, minmax(48%, auto));
+	margin-bottom: 50px;
+	width: 100%;
+}
+.semiInfo{
+	border:1px solid blue;
+	min-height:500px;
+}
+.myInfo h1{
+	margin-bottom:5%;
+}
+.mytable tr{
+	font-size: 20px;
+	min-height:80px;
+}
+.myBtn{
+	display:flex;
+	justify-content: center;
+}
