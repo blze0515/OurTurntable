@@ -22,5 +22,6 @@
 		<mapper resource="mappings/mypage-mapping.xml"></mapper>
 		<mapper resource="mappings/chat-mapping.xml"></mapper>
 		<mapper resource="mappings/board-mapping.xml"></mapper>
+		<mapper resource="mappings/point-mapping.xml"></mapper>
 	</mappers>
 </configuration>

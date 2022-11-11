@@ -24,10 +24,8 @@
     	
     	<!-- 로그인한 유저만 접근 허용(밑에다 계속 추가) -->
     	<!-- <security:intercept-url pattern="/chat/**" access="isAuthenticated()" /> -->
-    	<!-- <security:intercept-url pattern="/chat/**" access="isAuthenticated()" /> -->
-    	<!-- <security:intercept-url pattern="/chat/**" access="isAuthenticated()" /> -->
-    	<!-- <security:intercept-url pattern="/chat/**" access="isAuthenticated()" /> -->
-    	<!-- <security:intercept-url pattern="/chat/**" access="isAuthenticated()" /> -->
+    	<!-- <security:intercept-url pattern="/mypage/**" access="isAuthenticated()" /> -->
+    	<!-- <security:intercept-url pattern="/point/**" access="isAuthenticated()" /> -->
     	
     	<!-- 
     		//////////////////////////////////////////////////////////////

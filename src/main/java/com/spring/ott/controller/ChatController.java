@@ -107,12 +107,21 @@ public class ChatController {
 //	createChatroom (채팅방 생성)
 	@GetMapping("/createChatroom.do")
 	public String createChatroom(HttpSession session, @RequestParam String chatroomMember) {
+		
+		//게시판 화면에서 사용자 아이디 우클릭시 드롭다운되는 리스트 중에 '대화하기'가 있고
+		//이를 클릭할 경우 메세지를 보낼 수 있는 작은 팝업이 뜨고 그 팝업창에서 메세지 입력 및 전송이 가능하게 해야 함...
+		
+		//이 때, 기존 채팅방이 존재하면 기존 채팅방으로 링크를 태워주고
+		//기존 채팅방이 존재하지 않으면 채팅방 생성되면서 동시에 챗메세지 등록한 뒤 링크를 태움
+		//즉, 화면쪽에서 chatroomMember가 비어있는지 아닌지에 따라 분기해야 함.
+		
+		
+		//아래의 코드는 챗메세지 등록 없이도 챗룸을 생성하는 로직임...
 		UserVO loginUser = new UserVO();
 		loginUser =  (UserVO)session.getAttribute("loginUser");
 		
 		chatService.createChatroom(loginUser.getUserId(), chatroomMember); //중복 조회, 챗룸 생성
 		
-		//중복체크 불필요. chatroomMember가 비어있는지 아닌지에 따라 분기, 화면에서 처리
 		return "/WEB-INF/views/readChatroomList";
 	}
 }

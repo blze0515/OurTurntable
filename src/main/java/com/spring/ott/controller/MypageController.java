@@ -29,8 +29,8 @@ public class MypageController {
 //	updateUser (회원정보 수정)
 	
 	
-//	readFollowingList (팔로잉 목록 조회)
-	@RequestMapping("/readFollowList.do")
+//	readFollowingList (팔로잉 목록 조회 - 내가 팔로우한 회원 목록)
+	@RequestMapping("/readFollowingList.do")
 	public String readFollowList(HttpSession session, Model model) {
 		UserVO loginUser = new UserVO();
 		loginUser =  (UserVO)session.getAttribute("loginUser");
@@ -47,6 +47,23 @@ public class MypageController {
 		return "/WEB-INF/views/readRelationList";		
 	}
 	
+//	readFollowingList (팔로워 목록 조회 - 나를 팔로우한 회원 목록)
+	@RequestMapping("/readFollowerList.do")
+	public String readFollowerList(HttpSession session, Model model) {
+		UserVO loginUser = new UserVO();
+		loginUser =  (UserVO)session.getAttribute("loginUser");
+		
+		List<CamelHashMap> followerList = mypageService.readFollowerList(loginUser.getUserId());
+		
+//		for(int i=0; i < followerList.size(); i++) {
+//			System.out.println(followerList.get(i).toString());
+//		}
+		
+		model.addAttribute("relationCondition", "follower");
+		model.addAttribute("relationUserList", followerList);
+		
+		return "/WEB-INF/views/readRelationList";		
+	}	
 	
 //	readBlockList (차단 목록 조회)
 	@RequestMapping("/readBlockList.do")

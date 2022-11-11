@@ -37,11 +37,11 @@
 	                <dd>
 	                    <ul class="menu">
 	                        <!-- 포인트 결제 관련하여 모든 내역조회(포인트 사용내역, 포인트 충전내역) -->
-	                        <li class="menuli"><a href="#">결제내역</a></li>
+	                        <li class="menuli"><a href="/point/readPointHistoryList.do">포인트 충전 및 사용내역</a></li>
 	                        <!-- 나를 후원해주는 사람들 리스트로 생성 클릭시 언제 얼마나 후원했는지 -->
-	                        <li class="menuli"><a href="#">내가 받은 후원</a></li>
+	                        <li class="menuli"><a href="/mypage/readMyfanList.do">내가 받은 후원</a></li>
 	                        <!-- 내가 후원하는 사람들 리스트로 생성 클릭시 언제 얼마나 후원했는지 -->
-	                        <li class="endli"><a href="#">내가 한 후원</a></li>
+	                        <li class="endli"><a href="/mypage/readMystarList.do">내가 한 후원</a></li>
 	                    </ul>
 	                </dd>
 	                
@@ -51,11 +51,11 @@
 	                <dd>
 	                    <ul class="menu">
 	                    	<!-- 내가 팔로우한 사람들 리스트(클릭시 상세정보/ 프로필) -->
-	                        <li class="menuli"><a href="#">내가 팔로우한 사람들</a></li>
+	                        <li class="menuli"><a href="/mypage/readFollowingList.do">내가 팔로우한 사람들</a></li>
 	                        <!-- 나를 팔로우한 사람들 리스트(클릭시 상세정보/ 프로필)) -->
-	                        <li class="menuli"><a href="#">나를 팔로우한 사람들</a></li>
-	                        <li class="menuli"><a href="#">채팅방 목록</a></li>
-	                        <li class="endli"><a href="#">차단 목록관리</a></li>
+	                        <li class="menuli"><a href="/mypage/readFollowerList.do">나를 팔로우한 사람들</a></li>
+	                        <li class="menuli"><a href="/chat/readChatroomList.do">채팅방 목록</a></li>
+	                        <li class="endli"><a href="/mypage/readBlockList.do">차단 목록관리</a></li>
 	                    </ul>
 	                </dd>
 	                
