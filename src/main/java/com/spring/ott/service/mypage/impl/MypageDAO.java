@@ -22,4 +22,8 @@ public class MypageDAO {
 	public List<CamelHashMap> readBlockList(String userId) {
 		return mybatis.selectList("MypageDAO.readBlockList", userId);
 	}
+
+	public List<CamelHashMap> readFollowerList(String userId) {
+		return mybatis.selectList("MypageDAO.readFollowerList", userId);
+	}
 }

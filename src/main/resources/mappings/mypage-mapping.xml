@@ -40,5 +40,17 @@
 		AND A.RELATION_CONDITION = 2
 	</select>
 	
+	<select id="readFollowerList" parameterType="string" resultType="camelHashMap">
+		SELECT 
+			A.USER_ID AS RELATION_PARTNER, 
+			A.RELATION_DATE, 
+			B.USER_PROFILE_IMG 
+		from T_OTT_RELATION A,
+			 T_OTT_USER B
+		WHERE A.USER_ID = B.USER_ID 
+		and RELATION_PARTNER = #{userId}
+		and RELATION_CONDITION = 1
+	</select>
+	
 	
 </mapper>

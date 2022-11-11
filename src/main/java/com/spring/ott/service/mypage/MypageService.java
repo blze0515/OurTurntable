@@ -10,4 +10,6 @@ public interface MypageService {
 
 	List<CamelHashMap> readBlockList(String userId);
 
+	List<CamelHashMap> readFollowerList(String userId);
+
 }

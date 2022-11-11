@@ -41,9 +41,11 @@ public class FileUtils {
 				}
 			}
 			
-			//이 부분은 각 컨트롤러의 파일업로드하는 메소드에서 처리 
+			//이 부분은 각 컨트롤러의 파일업로드하는 메소드에서 처리
 			/*for(MultipartFile multipartFile : multipartFileList) {
 				if(!multipartFile.isEmpty()) {
+				//파일이 없을 때도 객체에 담겨오기 때문에 하나의 파일을 전송할 경우 isEmpty()로 파일이 넘어왔는지 확인 후 작업을 해야 한다.
+
 					BoardFileVO boardFile = new BoardFileVO();
 					
 					boardFile.setBoardSeq(boardSeq);
@@ -77,9 +79,11 @@ public class FileUtils {
 		}
 		
 		String fileName = UUID.randomUUID().toString() + multipartFile.getOriginalFilename();
-		
 		File file = new File(attachPath + fileName);
+//		 리네임과 동시에 파일객체 생성
+//		 파일객체는 실제 경로로 지정해야 하기 때문에 realPath로 디렉토리를 설정하고, 두 번째 인자로 파일의 리네임을 정한다.
+//		 단, 해당 디렉터리 경로가 없을 경우 자동적으로 생성하지 않기 때문에 없으면 mkdir()로 디렉터리부터 생성해야 한다.
 		
-		multipartFile.transferTo(file);
+		multipartFile.transferTo(file); //업로드 처리
 	}
 }

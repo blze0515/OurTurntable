@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- doctype mapper로 설정 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- mapper namespace 지정 -->
+<!-- 기존 JDBC 프로그래밍에서 DAO 클래스에 쿼리를 작성함 -->
+<!-- DAO에서 쿼리가 분리되었기 때문에 DAO클래스 이름을 따라감 -->
+<mapper namespace="PointDAO">
+	<!-- 쿼리 작성 영역 -->
+	<select id="readPointHistoryList" parameterType="String" resultType="camelHashMap">
+		SELECT * FROM T_OTT_POINT
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	
+	<select id="readPointBalance" parameterType="String" resultType="int">
+		SELECT AA.AAA - BB.BBB
+		FROM (
+				SELECT SUM(DISTINCT B.POINT_MONEY) AAA
+				FROM (
+					 SELECT * from T_OTT_POINT
+						WHERE USER_ID = #{userId}
+					 ) A,
+					 (
+					 SELECT * from T_OTT_POINT top 
+						WHERE POINT_COMMON_CODE = 1
+						OR POINT_COMMON_CODE = 4
+						OR POINT_COMMON_CODE = 7
+					 ) B 
+				WHERE A.USER_ID = B.USER_ID
+			) AA,
+			(
+				SELECT SUM(DISTINCT B.POINT_MONEY) BBB
+				FROM (
+					 SELECT * from T_OTT_POINT
+						WHERE USER_ID = #{userId}
+					 ) A,
+					 (
+					 SELECT * from T_OTT_POINT top 
+						WHERE POINT_COMMON_CODE = 2
+						OR POINT_COMMON_CODE = 3
+						OR POINT_COMMON_CODE = 5
+						OR POINT_COMMON_CODE = 6
+					 ) B 
+				WHERE A.USER_ID = B.USER_ID
+			) BB
+	</select>	
+</mapper>

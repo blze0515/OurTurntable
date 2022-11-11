@@ -14,55 +14,64 @@
 <body>
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
 	
-	<div class="content-wrap">
-		<div class="chat-space" style="width: 100%; display: flex;">
-			<div class="chat-space-left" style="width: 30%;">
-				<h1>대화방 목록</h1>
-				<ul class="list-group">
-					<c:forEach var="chatRoom" items="${chatroomList }">
-						<li class="list-group-item" style="cursor: pointer;" onclick="onClickLi(this)">
-						  <span class="d-block">${chatRoom.chatroomSeq}</span>
-						  <span class="d-block"><img src="/upload/${chatRoom.userProfileImg }" width="150px"></span>
-						  <span class="d-block">${chatRoom.chatroomMember}</span>
-						  <span class="d-block">${chatRoom.chatContent}</span>
-						  <span class="d-block">${chatRoom.cntReadn}</span>
-					  	</li>
-					  	<button onclick="onClickDelBtn(this)">대화방 삭제</button>
-					  	<input type="hidden">
-					</c:forEach>
-				</ul>
-			</div>
-			<div class="chat-space-right" style="width: 70%;">				
-				<div class="chat-message-space">
-					<h1>대화방 이름</h1>
-					
-					<c:forEach var="chat" items="${chatList }">
-					    <c:choose>
-					        <c:when test="${chat.userId == 'gogo'}">
-					            <p style="text-align: right;">
-									<span style="background: gray;">${chat.chatContent} </span>
-								</p>
-					        </c:when>         
-					        <c:otherwise>
-					        	<p style="text-align: left;">
-									<span style="background: gray;">${chat.chatContent }</span>
-								</p>
-					        </c:otherwise>
-					    </c:choose>
-					</c:forEach>
-					
+	<div class="untree_co-section" style="margin-top:5%;">
+	    <div class="container" style="max-width:1200px; padding:0; display:flex;">
+	    	<jsp:include page="${pageContext.request.contextPath }/mySide.jsp"></jsp:include>   
+	       
+			<div class="content-wrap" style="width: 900px;">
+				<div class="chat-space" style="width: 100%; display: flex;">
+					<div class="chat-space-left" style="width: 30%;">
+						<h1>대화방 목록</h1>
+						<ul class="list-group">
+							<c:forEach var="chatRoom" items="${chatroomList }">
+								<li class="list-group-item" style="cursor: pointer;" onclick="onClickLi(this)">
+								  <span class="d-block">${chatRoom.chatroomSeq}</span>
+								  <span class="d-block"><img src="/upload/${chatRoom.userProfileImg }" width="150px"></span>
+								  <span class="d-block">${chatRoom.chatroomMember}</span>
+								  <span class="d-block">${chatRoom.chatContent}</span>
+								  <span class="d-block">${chatRoom.cntReadn}</span>
+							  	</li>
+							  	<button onclick="onClickDelBtn(this)">대화방 삭제</button>
+							  	<input type="hidden">
+							</c:forEach>
+						</ul>
+					</div>
+					<div class="chat-space-right" style="width: 70%;">				
+						<div class="chat-message-space">
+							<h1>대화방 이름</h1>
+							
+							<c:forEach var="chat" items="${chatList }">
+							    <c:choose>
+							        <c:when test="${chat.userId == 'gogo'}">
+							            <p style="text-align: right;">
+											<span style="background: gray;">${chat.chatContent} </span>
+										</p>
+							        </c:when>         
+							        <c:otherwise>
+							        	<p style="text-align: left;">
+											<span style="background: gray;">${chat.chatContent }</span>
+										</p>
+							        </c:otherwise>
+							    </c:choose>
+							</c:forEach>
+							
+						</div>
+						<div class="chat-input-space" style="width: 70%" >
+							<form id="createChatForm" action="/chat/createChat.do" method="post">
+								<input type="hidden" name="chatroomSeq" id="chatroomSeq">
+								<input type="hidden" name="userId" id="userId">
+								<input type="hidden" name="chatReceiveId" id="chatReceiveId">
+								<textarea name="chatContent" id="formChatContent" required style="display: none;"></textarea>
+							</form>		
+						</div>
+					</div>
 				</div>
-				<div class="chat-input-space" style="width: 70%" >
-					<form id="createChatForm" action="/chat/createChat.do" method="post">
-						<input type="hidden" name="chatroomSeq" id="chatroomSeq">
-						<input type="hidden" name="userId" id="userId">
-						<input type="hidden" name="chatReceiveId" id="chatReceiveId">
-						<textarea name="chatContent" id="formChatContent" required style="display: none;"></textarea>
-					</form>		
-				</div>
-			</div>
-		</div>
-	</div>
+			</div>	           
+	    </div>
+    </div>
+	
+	
+	
 
 	<jsp:include page="${pageContext.request.contextPath }/footer.jsp"></jsp:include>
 

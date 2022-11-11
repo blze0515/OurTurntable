@@ -15,10 +15,13 @@
 	<div class="untree_co-section" style="margin-top:5%;">
 	    <div class="container" style="max-width:1200px; padding:0; display:flex;">
 	    	<jsp:include page="${pageContext.request.contextPath }/mySide.jsp"></jsp:include>        
-       		<div class="container-content">
+       		<div class="container-content" style="width: 950px; margin-left: 5%">
 		        <c:choose>
 					<c:when test="${relationCondition eq 'following'}">
-						<h1>내가 팔로우한 회원 리스트</h1>
+						<h1>팔로잉 리스트(내가 팔로우한 회원)</h1>
+					</c:when>
+					<c:when test="${relationCondition eq 'follower'}">
+						<h1>팔로워 리스트(나를 팔로우한 회원)</h1>
 					</c:when>
 					<c:when test="${relationCondition eq 'block'}">
 						<h1>내가 블락한 회원 리스트</h1>
