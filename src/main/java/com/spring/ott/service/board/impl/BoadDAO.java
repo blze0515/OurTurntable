@@ -32,12 +32,14 @@ public class BoadDAO {
 	}
 
 	public int getBoardCnt(Map<String, String> paramMap) {
+								//BoardDAO=mapper의 namespace
 		return mybatis.selectOne("BoardDAO.getBoardCnt", paramMap);
+											//getBoardCnt=mapper - select 태그의 id
 	}
 	
-//	public BoardVO getBoard(int boardSeq) {
-//		return mybatis.selectOne("BoardDAO.getBoard", boardSeq);
-//	}
+	public BoardVO getBoard(int boardSeq) {
+		return mybatis.selectOne("BoardDAO.getBoard", boardSeq);
+	}
 //	
 //	public void updateBoardCnt(int boardSeq) {
 //		mybatis.update("BoardDAO.updateBoardCnt", boardSeq);
@@ -47,19 +49,21 @@ public class BoadDAO {
 //		mybatis.update("BoardVO.updateBoard", boardVO);
 //	}
 //	
-//	public void deleteBoard(int boardSeq) {
+	public void deleteBoard(int boardSeq) {
 //		BoardFileVO boardFileVO = new BoardFileVO();
 //		boardFileVO.setBoardSeq(boardSeq);
-//		
+		
 //		mybatis.delete("BoardDAO.deleteBoardFile", boardFileVO);
-//		
-//		mybatis.delete("BoardDAO.deleteBoard", boardSeq);
-//		
-//		mybatis.update("BoardDAO.updateBoardSeq", boardSeq);
-//	}
+		
+		mybatis.delete("BoardDAO.deleteBoard", boardSeq);
+		
+		mybatis.update("BoardDAO.updateBoardSeq", boardSeq);
+	}
 //	
 //	public int getBoardCnt(Map<String, String> paramMap) {
 //		return mybatis.selectOne("BoardDAO.getBoardCnt", paramMap);
 //	}
+
+
 	
 }

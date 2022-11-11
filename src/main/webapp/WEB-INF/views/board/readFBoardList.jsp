@@ -27,34 +27,33 @@
 			<div class="row text-left justify-content-center mb-5" style="margin-bottom: -1rem!important;">
 				<div class="col-lg-12"><h3 class="section-title text-left" style="text-align-last:center;">자랑 게시판</h3></div>
 			</div>
-			<div class="flex-right" style="height:20px; margin-top:20px; text-align:end!important;">
-				<a href="#">
-					더 보기<img src="/images/img_logo.jpg" style="height:20px;">
-				</a>
-			</div>
-			
-			<table border="1" style="width: 700px; border-collapse: collapse;">
-				<tr>
-					<td align="right">
-						<select name="searchCondition">
-							<option value="all"
-							<c:if test="${searchCondition eq 'all' }">selected="selected"</c:if>
-							>전체</option>
-							<option value="title"
-							<c:if test="${searchCondition eq 'title' }">selected="selected"</c:if>
-							>제목</option>
-							<option value="content"
-							<c:if test="${searchCondition eq 'content' }">selected="selected"</c:if>
-							>내용</option>
-							<option value="writer"
-							<c:if test="${searchCondition eq 'writer' }">selected="selected"</c:if>
-							>작성자</option>
-						</select>
-						<input type="text" name="searchKeyword" value="${searchKeyword }">
-						<button type="button" id="btnSearch">검색</button>
-					</td>
-				</tr>
-			</table>
+
+			<form id="searchForm" action="/board/readFBoardList.do" method="post">
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+				<table border="1" style="width: 700px; border-collapse: collapse;">
+					<tr>
+						<td align="right">
+							<select name="searchCondition">
+								<option value="all"
+								<c:if test="${searchCondition eq 'all' }">selected="selected"</c:if>
+								>전체</option>
+								<option value="title"
+								<c:if test="${searchCondition eq 'title' }">selected="selected"</c:if>
+								>제목</option>
+								<option value="content"
+								<c:if test="${searchCondition eq 'content' }">selected="selected"</c:if>
+								>내용</option>
+								<option value="writer"
+								<c:if test="${searchCondition eq 'writer' }">selected="selected"</c:if>
+								>작성자</option>
+							</select>
+							<input type="text" name="searchKeyword" value="${searchKeyword }">
+							<button type="button" id="btnSearch">검색</button>
+						</td>
+					</tr>
+				</table>
+			</form>
 			<table class="tr-table-border">
 					<tr class="tr-head tr-center tr-table-border">
 						<td class="tr-seq th-padding">글번호</td>
@@ -85,12 +84,29 @@
 						<td class="tr-donation">100,000</td>
 					</tr>
 					 -->
+					 <tr class="tr-content tr-center tr-table-border">
+							<td class="tr-seq td-padding">test-hard</td>
+							<td class="tr-title td-padding tr-left">
+								<div>
+									<a href="/board/readFBoard.do">test-title</a>
+								</div>
+							</td>
+							<td class="tr-nick td-padding tr-left">
+								<div>
+									<a href="#">test-writer</a>
+								</div>
+							</td>
+							<td class="tr-date td-padding">test-hard</td>
+							<td class="tr-view td-padding">좋아요</td>
+							<td class="tr-like td-padding">후원금액</td>
+							<td class="tr-donation"></td>
+							</tr>
 			 	    <c:forEach var="board" items="${boardList }">
 						<tr class="tr-content tr-center tr-table-border">
 							<td class="tr-seq td-padding">${board.boardSeq }</td>
 							<td class="tr-title td-padding tr-left">
 								<div>
-									<a href="#">${board.boardTitle }</a>
+									<a href="/board/readFBoard.do?boardSeq=${board.boardSeq }">${board.boardTitle }</a>
 								</div>
 							</td>
 							<td class="tr-nick td-padding tr-left">
@@ -118,29 +134,27 @@
 				</div>
 			
 
-			
-			<div style="text-align: center;">
-				<ul class="pagination">
-					<c:if test="${pageMaker.prev }">
-						<li class="pagination_button">
-							<a href="${pageMaker.startPage - 1 }">Previous</a>
-						</li>
-					</c:if>
-					
-					<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-						<li class="pagination_button">
-							<a href="${num }">${num }</a>
-						</li>
-					</c:forEach>
-					
-					<c:if test="${pageMaker.next }">
-						<li class="pagination_button">
-							<a href="${pageMaker.endPage + 1 }">Next</a>
-						</li>
-					</c:if>
-				</ul>
-			</div>
-			
+				<div >
+					<ul class="pagination" style="display:flex; justify-content:center;">
+						<c:if test="${pageMaker.prev }">
+							<li class="pagination_button">
+								<a href="${pageMaker.startPage - 1 }">Previous</a>
+							</li>
+						</c:if>
+						
+						<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+							<li class="pagination_button">
+								<a href="${num }">${num }</a>
+							</li>
+						</c:forEach>
+						
+						<c:if test="${pageMaker.next }">
+							<li class="pagination_button">
+								<a href="${pageMaker.endPage + 1 }">Next</a>
+							</li>
+						</c:if>
+					</ul>
+				</div>
 		</div>
 	</div>
 	

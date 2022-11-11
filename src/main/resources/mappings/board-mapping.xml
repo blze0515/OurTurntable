@@ -34,6 +34,7 @@
 			</if>
 			LIMIT #{cri.amount} OFFSET #{cri.startNum}
 		</select>
+		
 		<select id="getBoardCnt" parameterType="java.util.Map" resultType="int">
 		<![CDATA[
 		SELECT COUNT(*)
@@ -58,4 +59,28 @@
 			</if>
 		
 		</select>
+		
+		
+	<select id="getBoard" parameterType="int" resultType="board">
+		<![CDATA[
+			SELECT *
+				FROM T_OTT_BOARD
+				WHERE BOARD_SEQ = #{boardSeq}
+		]]>
+	</select>
+	
+	<delete id="deleteBoard" parameterType="int">
+	<![CDATA[
+		DELETE FROM T_OTT_BOARD
+			WHERE BOARD_SEQ = #{boardSeq}
+	]]>
+	</delete>
+	
+	<update id="updateBoardSeq" parameterType="int">
+	<![CDATA[
+		UPDATE T_OTT_BOARD
+			SET BOARD_SEQ = BOARD_SEQ - 1
+			WHERE BOARD_SEQ > #{boardSeq}
+	]]>
+	</update>
 </mapper>
