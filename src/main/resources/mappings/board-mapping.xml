@@ -83,4 +83,11 @@
 			WHERE BOARD_SEQ > #{boardSeq}
 	]]>
 	</update>
+	
+		<select id="createNextBoardSeq" resultType="int">
+	<![CDATA[
+		SELECT IFNULL(MAX(BOARD_SEQ), 0) + 1
+			FROM T_OTT_BOARD
+	]]>
+	</select>
 </mapper>

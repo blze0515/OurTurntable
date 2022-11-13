@@ -94,12 +94,12 @@
 				
 				<hr/>
 				<h5 style="margin-top:30px;">
-					<a href="/board/insertFBoardList.do">글 쓰기</a><br>
+					<a href="/board/createFBoard.do">글 쓰기</a><br>
 <!--********** ***************************************************
-	id="btnDelete"를 놔두면 버튼이 hide 됨(script에는 로그인유저가 열면 삭제가 보여야 되는데 숨겨짐)
+	id="btnDelete"를 놔두면 버튼이 hide 됨(script에는 로그인유저가 열면 삭제가 보여야 되는데 숨겨짐) -->
 					<a id="btnDelete" href="/board/deleteBoard.do?boardSeq=${board.boardSeq }">글 삭제</a>
- -->					
-					<a href="/board/deleteBoard.do?boardSeq=${board.boardSeq }">글 삭제</a>
+					
+					<!-- <a href="/board/deleteBoard.do?boardSeq=${board.boardSeq }">글 삭제</a> -->
 					<a href="/board/readFBoardList.do">글 목록 보기</a><br>
 				</h5>
 					
@@ -140,7 +140,7 @@
 			const loginUserId = '${loginUser.userId}';
 			const boardWriter = '${board.userId}';
 			
-			if(loginUserId !== userId) {
+			if(loginUserId !== boardWriter) {
 				$("#btnWrap").hide();
 				$("#btnDelete").hide();
 				$("#boardTitle").attr("readonly", true);

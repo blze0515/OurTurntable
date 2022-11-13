@@ -59,9 +59,8 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	@Override
-	public int getNextBoardSeq() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int createNextBoardSeq() {
+		return boardDAO.createNextBoardSeq();
 	}
 
 	@Override
