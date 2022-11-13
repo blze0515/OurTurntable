@@ -38,7 +38,7 @@ public class BoardController {
 	public String readBoardList(HttpSession session, Model model,
 		@RequestParam Map<String, String> paramMap, Criteria cri) {
 			UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-		
+			
 		if(loginUser == null) {
 			return "/WEB-INF/view/user/login";
 		}
@@ -92,7 +92,7 @@ public class BoardController {
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
 		
 		if(loginUser == null) {
-			return "user/login";
+			return "/WEB-INF/views/user/login";
 		}
 		
 		//게시물 클릭하면 조회수+1
@@ -114,32 +114,38 @@ public class BoardController {
 //	createBoard (게시글 등록)
 //		* 게시판 유형(1,2,3)에 따른 동적 쿼리'
 	
+	@RequestMapping(value="/createBoard.do", method=RequestMethod.GET)
+	public String createFBoardView() {
+		
+//		boardService.createBoard(boardVO)
+		
+		return "/WEB-INF/views/board/createBoard";
+	}
 	
-	
-//	@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
-//	public String insertBoard(HttpSession session, BoardVO boardVO, HttpServletRequest request,
-//			MultipartHttpServletRequest multipartServletRequest) throws IOException {
-//		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-//		
-//		if(loginUser == null) {
-//			return "/WEB-INF/views/user/login";
-//		}
-//		
-//		int boardSeq = boardService.getNextBoardSeq();
-//		
-//		FileUtils fileUtils = new FileUtils();
-//		
-//		//파일업로드 처리 및 속성 값들이 세팅된 BoardFileVO의 목록 리턴
+	@RequestMapping(value="/createBoard.do", method=RequestMethod.POST)
+	public String insertBoard(HttpSession session, BoardVO boardVO, HttpServletRequest request,
+			MultipartHttpServletRequest multipartServletRequest) throws IOException {
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			return "/WEB-INF/views/user/login";
+		}
+		
+		int boardSeq = boardService.createNextBoardSeq();
+		
+		FileUtils fileUtils = new FileUtils();
+		
+		//파일업로드 처리 및 속성 값들이 세팅된 BoardFileVO의 목록 리턴
 //		List<BoardFileVO> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
-//		
-//		boardService.insertBoard(boardVO);
-//		
+		
+		boardService.insertBoard(boardVO);
+		
 //		if(!CollectionUtils.isEmpty(fileList)) {
 //			boardService.insertBoardFile(fileList);
 //		}
-//		
-//		return "redirect:readBoardList.do";
-//	}
+		
+		return "redirect:readBoardList.do";
+	}
 	
 //	updateBoard (게시글 수정)
 

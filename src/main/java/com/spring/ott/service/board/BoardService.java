@@ -25,7 +25,7 @@ public interface BoardService {
 	
 	int getBoardCnt(Map<String, String> paramMap);
 	
-	int getNextBoardSeq();
+	int createNextBoardSeq();
 	
 	void insertBoardFile(List<BoardFileVO> fileList);
 	

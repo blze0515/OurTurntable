@@ -120,13 +120,11 @@
 							<td class="tr-donation"></td>
 							</tr>
 					</c:forEach>
-					 
-				
 			</table>
 			
 			
 				<div class="flex-right" style="margin-bottom:50px;">
-				<a href="/board/insertBoard.do">
+				<a href="/board/createBoard.do">
 					<button type="button">
 						글쓰기
 					</button>

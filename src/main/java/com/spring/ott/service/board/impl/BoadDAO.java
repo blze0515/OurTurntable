@@ -22,6 +22,10 @@ public class BoadDAO {
 		mybatis.insert("BoardDAO.insertBoard", boardVO);
 	}
 	
+	public int createNextBoardSeq() {
+		return mybatis.selectOne("BoardDAO.createNextBoardSeq");
+	}
+	
 	public List<BoardVO> getBoardList(Map<String, String> paramMap, Criteria cri) {
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		pMap.put("boardSearch", paramMap);

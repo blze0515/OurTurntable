@@ -14,7 +14,8 @@
 			<div class="row justify-content-center">
 	
 			<div class="board-form" >
-			<form action="/board/insertBoard.do" method="post" enctype="multipart/form-data">
+								<!-- 노션 메모에 enctype form-data 메모(form-data는 파일 등록할때 주로 쓴다고함) -->
+			<form action="/board/createFBoard.do" method="post" enctype="multipart/form-data">
 				<table border="1" style="border-collapse: collapse">
 					<tbody><tr>
 						<td style="background: orange; width: 70px;">
@@ -60,7 +61,7 @@
 			
 			
 			<h5 style="margin-top:30px;">
-				<a href="/board/readBoardList.do">글 목록 보기</a>
+				<a href="/board/readFBoardList.do">글 목록 보기</a>
 			</h5>
 		
 		
