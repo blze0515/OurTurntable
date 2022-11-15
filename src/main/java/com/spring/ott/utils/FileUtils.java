@@ -33,6 +33,7 @@ public class FileUtils {
 		
 		while(iterator.hasNext()) {
 			//파일 이름으로 파일 객체 꺼내기
+			//(첨부할 파일 이름 지정하는거라고 보면 맞나?)
 			List<MultipartFile> list = multipartHttpServletRequest.getFiles(iterator.next());
 			
 			for(MultipartFile multipartFile : list) {

@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.ott.Criteria;
@@ -45,7 +46,7 @@ public class BoardController {
 		
 		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
 		
-		
+		//total = 작성돼있는 총 게시물 수 가져오는 변수
 		int total = boardService.getBoardCnt(paramMap);
 		
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + total);
@@ -123,7 +124,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/createBoard.do", method=RequestMethod.POST)
-	public String insertBoard(HttpSession session, BoardVO boardVO, HttpServletRequest request,
+	public String createBoard(HttpSession session, BoardVO boardVO, HttpServletRequest request,
 			MultipartHttpServletRequest multipartServletRequest) throws IOException {
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
 		
@@ -131,20 +132,21 @@ public class BoardController {
 			return "/WEB-INF/views/user/login";
 		}
 		
-		int boardSeq = boardService.createNextBoardSeq();
+//		int boardSeq = boardService.createNextBoardSeq();
 		
-		FileUtils fileUtils = new FileUtils();
+		// **파일업로드는 CRUD 먼저 하고 그 다음에 하기로함 FileUtils fileUtils = new FileUtils();
 		
 		//파일업로드 처리 및 속성 값들이 세팅된 BoardFileVO의 목록 리턴
 //		List<BoardFileVO> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
+		// **파일업로드는 CRUD 먼저 하고 그 다음에 하기로함 List<MultipartFile> fileList = fileUtils.parseFileInfo(multipartServletRequest);
 		
-		boardService.insertBoard(boardVO);
+		boardService.createBoard(boardVO);
 		
 //		if(!CollectionUtils.isEmpty(fileList)) {
 //			boardService.insertBoardFile(fileList);
 //		}
 		
-		return "redirect:readBoardList.do";
+		return "redirect:/board/readFBoardList.do";
 	}
 	
 //	updateBoard (게시글 수정)

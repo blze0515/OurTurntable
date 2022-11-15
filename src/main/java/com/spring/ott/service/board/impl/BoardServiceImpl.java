@@ -17,8 +17,8 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoadDAO boardDAO;
 	
-	public void insertBoard(BoardVO boardVO) {
-		boardDAO.insertBoard(boardVO);
+	public void createBoard(BoardVO boardVO) {
+		boardDAO.createBoard(boardVO);
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void updateBoardCnt(int boardSeq) {
-		// TODO Auto-generated method stub
+		boardDAO.updateBoardCnt(boardSeq);
 		
 	}
 
@@ -58,16 +58,16 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	@Override
-	public int createNextBoardSeq() {
-		return boardDAO.createNextBoardSeq();
-	}
+//	@Override
+//	public int createNextBoardSeq() {
+//		return boardDAO.createNextBoardSeq();
+//	}
 
-	@Override
-	public void insertBoardFile(List<BoardFileVO> fileList) {
+//	@Override
+//	public void createBoardFile(List<BoardFileVO> fileList) {
 		// TODO Auto-generated method stub
 		
-	}
+//	}
 
 	@Override
 	public List<BoardFileVO> getBoardFile(int boardSeq) {
@@ -80,6 +80,8 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 
 	

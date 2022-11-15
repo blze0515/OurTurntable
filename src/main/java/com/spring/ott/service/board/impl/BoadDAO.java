@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.ott.Criteria;
-import com.spring.ott.VO.BoardFileVO;
 import com.spring.ott.VO.BoardVO;
 
 @Repository
@@ -18,13 +17,14 @@ public class BoadDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	public void insertBoard(BoardVO boardVO) {
-		mybatis.insert("BoardDAO.insertBoard", boardVO);
+	public void createBoard(BoardVO boardVO) {
+		System.out.println("---------------------------------------------userId = " + boardVO.getUserId());
+		mybatis.insert("BoardDAO.createBoard", boardVO);
 	}
 	
-	public int createNextBoardSeq() {
-		return mybatis.selectOne("BoardDAO.createNextBoardSeq");
-	}
+//	public int createNextBoardSeq() {
+//		return mybatis.selectOne("BoardDAO.createNextBoardSeq");
+//	}
 	
 	public List<BoardVO> getBoardList(Map<String, String> paramMap, Criteria cri) {
 		Map<String, Object> pMap = new HashMap<String, Object>();
@@ -44,10 +44,10 @@ public class BoadDAO {
 	public BoardVO getBoard(int boardSeq) {
 		return mybatis.selectOne("BoardDAO.getBoard", boardSeq);
 	}
-//	
-//	public void updateBoardCnt(int boardSeq) {
-//		mybatis.update("BoardDAO.updateBoardCnt", boardSeq);
-//	}
+	
+	public void updateBoardCnt(int boardSeq) {
+		mybatis.update("BoardDAO.updateBoardCnt", boardSeq);
+	}
 //	
 //	public void updateBoard(BoardVO boardVO) {
 //		mybatis.update("BoardVO.updateBoard", boardVO);
