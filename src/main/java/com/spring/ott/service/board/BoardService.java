@@ -9,7 +9,7 @@ import com.spring.ott.VO.BoardVO;
 
 public interface BoardService {
 	
-	void insertBoard(BoardVO boardVO);
+	void createBoard(BoardVO boardVO);
 
 	List<BoardVO> getBoardList(Map<String, String> paramMap, Criteria cri);
 	
@@ -25,9 +25,9 @@ public interface BoardService {
 	
 	int getBoardCnt(Map<String, String> paramMap);
 	
-	int createNextBoardSeq();
+//	int createNextBoardSeq();
 	
-	void insertBoardFile(List<BoardFileVO> fileList);
+//	void createBoardFile(List<BoardFileVO> fileList);
 	
 	List<BoardFileVO> getBoardFile(int boardSeq);
 	

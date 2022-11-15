@@ -35,6 +35,7 @@
 			LIMIT #{cri.amount} OFFSET #{cri.startNum}
 		</select>
 		
+		<!-- getBoardCnt는 전체 게시글이 몇개인지 불러오려고 쓰는거인듯 -->
 		<select id="getBoardCnt" parameterType="java.util.Map" resultType="int">
 		<![CDATA[
 		SELECT COUNT(*)
@@ -69,25 +70,62 @@
 		]]>
 	</select>
 	
+	<update id="updateBoardCnt" parameterType="int">
+		<![CDATA[
+			UPDATE T_OTT_BOARD
+				SET BOARD_VIEWCOUNT = BOARD_VIEWCOUNT + 1
+				WHERE BOARD_SEQ = #{boardSeq}
+		]]>
+	</update>
+	
 	<delete id="deleteBoard" parameterType="int">
-	<![CDATA[
-		DELETE FROM T_OTT_BOARD
-			WHERE BOARD_SEQ = #{boardSeq}
-	]]>
+		<![CDATA[
+			DELETE FROM T_OTT_BOARD
+				WHERE BOARD_SEQ = #{boardSeq}
+		]]>
 	</delete>
 	
 	<update id="updateBoardSeq" parameterType="int">
-	<![CDATA[
-		UPDATE T_OTT_BOARD
-			SET BOARD_SEQ = BOARD_SEQ - 1
-			WHERE BOARD_SEQ > #{boardSeq}
-	]]>
+		<![CDATA[
+			UPDATE T_OTT_BOARD
+				SET BOARD_SEQ = BOARD_SEQ - 1
+				WHERE BOARD_SEQ > #{boardSeq}
+		]]>
 	</update>
 	
-		<select id="createNextBoardSeq" resultType="int">
-	<![CDATA[
-		SELECT IFNULL(MAX(BOARD_SEQ), 0) + 1
-			FROM T_OTT_BOARD
-	]]>
+	<select id="createNextBoardSeq" resultType="int">
+		<![CDATA[
+			SELECT IFNULL(MAX(BOARD_SEQ), 0) + 1
+				FROM T_OTT_BOARD
+		]]>
 	</select>
+	
+	<select id="createBoard" resultType="board">
+		<![CDATA[
+		INSERT INTO T_OTT_BOARD (
+			BOARD_SEQ,
+			BOARD_CATEGORY,
+			USER_ID,
+			BOARD_TITLE,
+			BOARD_CONTENT,
+			BOARD_RGSTDATE,
+			BOARD_MDFDATE,
+			BOARD_VIEWCOUNT
+		) VALUES (
+			(
+				SELECT IFNULL(MAX(A.BOARD_SEQ), 0) + 1
+					FROM T_OTT_BOARD A
+			),
+			'F',
+			#{userId},
+			#{boardTitle},
+			#{boardContent},
+			NOW(),
+			NOW(),
+			#{boardViewcount}
+		)
+		
+		]]>
+	</select>
+	
 </mapper>

@@ -15,14 +15,14 @@
 	
 			<div class="board-form" >
 								<!-- 노션 메모에 enctype form-data 메모(form-data는 파일 등록할때 주로 쓴다고함) -->
-			<form action="/board/createFBoard.do" method="post" enctype="multipart/form-data">
+			<form action="/board/createBoard.do" method="post" enctype="multipart/form-data">
 				<table border="1" style="border-collapse: collapse">
 					<tbody><tr>
 						<td style="background: orange; width: 70px;">
 							제목
 						</td>
 						<td style="text-align: left;">
-							<input type="text" name="boardTitle" required="">
+							<input type="text" name="boardTitle" id="boardTitle" required="">
 						</td>
 					</tr>
 					<tr>
@@ -30,7 +30,7 @@
 							작성자
 						</td>
 						<td style="text-align: left;">
-							<input type="text" name="boardWriter" value="sh" readonly="">
+							<input type="text" name="userId" value="${loginUser.userId }" readonly="">
 						</td>
 					</tr>
 					<tr>
@@ -46,6 +46,7 @@
 							업로드
 						</td>
 						<td align="left">
+							<!-- 파일 선택 버튼 -->
 							<input type="file" name="uploadFiles" multiple="multiple">
 						</td>
 					</tr>
