@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.ott.Criteria;
 import com.spring.ott.VO.BoardVO;
@@ -22,9 +23,9 @@ public class BoadDAO {
 		mybatis.insert("BoardDAO.createBoard", boardVO);
 	}
 	
-//	public int createNextBoardSeq() {
-//		return mybatis.selectOne("BoardDAO.createNextBoardSeq");
-//	}
+	public int createNextBoardSeq() {
+		return mybatis.selectOne("BoardDAO.createNextBoardSeq");
+	}
 	
 	public List<BoardVO> getBoardList(Map<String, String> paramMap, Criteria cri) {
 		Map<String, Object> pMap = new HashMap<String, Object>();
@@ -48,11 +49,11 @@ public class BoadDAO {
 	public void updateBoardCnt(int boardSeq) {
 		mybatis.update("BoardDAO.updateBoardCnt", boardSeq);
 	}
-//	
-//	public void updateBoard(BoardVO boardVO) {
-//		mybatis.update("BoardVO.updateBoard", boardVO);
-//	}
-//	
+	
+	public void updateBoard(BoardVO boardVO) {
+		mybatis.update("BoardDAO.updateBoard", boardVO);
+	}
+	
 	public void deleteBoard(int boardSeq) {
 //		BoardFileVO boardFileVO = new BoardFileVO();
 //		boardFileVO.setBoardSeq(boardSeq);
@@ -68,6 +69,19 @@ public class BoadDAO {
 //		return mybatis.selectOne("BoardDAO.getBoardCnt", paramMap);
 //	}
 
+	
+	public void createBoardFile(List<BoardVO> fileList) {
+		//List를 insert하는 방법
+		//1. for문을 사용하여 list.size만큼 insert구문 호출
+		/*
+		 * for(BoardFileVO boardFile : fileList) {
+		 * mybatis.insert("BoardDAO.insertBoardFile", boardFile); }
+		 */
+		
+		//2. mybatis의 <foreach> 태그 사용
+		mybatis.insert("BoardDAO.createBoardFile", fileList);
+	}
+	
 
 	
 }
