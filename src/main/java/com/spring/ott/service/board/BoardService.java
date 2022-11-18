@@ -25,12 +25,14 @@ public interface BoardService {
 	
 	int getBoardCnt(Map<String, String> paramMap);
 	
-//	int createNextBoardSeq();
+	int createNextBoardSeq();
 	
-//	void createBoardFile(List<BoardFileVO> fileList);
+	void createBoardFile(List<BoardVO> fileList);
 	
 	List<BoardFileVO> getBoardFile(int boardSeq);
 	
 	void deleteBoardFile(BoardFileVO boardFileVO);
+
+
 	
 }

@@ -47,7 +47,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void updateBoard(BoardVO boardVO) {
-		// TODO Auto-generated method stub
+		boardDAO.updateBoard(boardVO);
 		
 	}
 
@@ -58,16 +58,16 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-//	@Override
-//	public int createNextBoardSeq() {
-//		return boardDAO.createNextBoardSeq();
-//	}
+	//@Override (@Override 있으니까 빨간줄 떠서 지움)  
+	public int createNextBoardSeq() {
+		return boardDAO.createNextBoardSeq();
+	}
 
-//	@Override
-//	public void createBoardFile(List<BoardFileVO> fileList) {
-		// TODO Auto-generated method stub
+	@Override
+	public void createBoardFile(List<BoardVO> fileList) {
+		return boardDAO.createBoardFile();
 		
-//	}
+	}
 
 	@Override
 	public List<BoardFileVO> getBoardFile(int boardSeq) {

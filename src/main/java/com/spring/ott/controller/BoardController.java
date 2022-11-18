@@ -132,25 +132,40 @@ public class BoardController {
 			return "/WEB-INF/views/user/login";
 		}
 		
-//		int boardSeq = boardService.createNextBoardSeq();
+		int boardSeq = boardService.createNextBoardSeq();
 		
-		// **파일업로드는 CRUD 먼저 하고 그 다음에 하기로함 FileUtils fileUtils = new FileUtils();
+		FileUtils fileUtils = new FileUtils();
 		
 		//파일업로드 처리 및 속성 값들이 세팅된 BoardFileVO의 목록 리턴
-//		List<BoardFileVO> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
 		// **파일업로드는 CRUD 먼저 하고 그 다음에 하기로함 List<MultipartFile> fileList = fileUtils.parseFileInfo(multipartServletRequest);
+		List<MultipartFile> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
 		
 		boardService.createBoard(boardVO);
 		
-//		if(!CollectionUtils.isEmpty(fileList)) {
-//			boardService.insertBoardFile(fileList);
-//		}
+		if(!CollectionUtils.isEmpty(fileList)) {
+			boardService.createBoardFile(fileList);
+		}
 		
 		return "redirect:/board/readFBoardList.do";
 	}
 	
 //	updateBoard (게시글 수정)
-
+	@RequestMapping("/updateBoard.do")
+	public String updateBoard(BoardVO boardVO, HttpServletRequest request,
+			MultipartHttpServletRequest multipartServletRequest) throws IOException {
+//		FileUtils fileUtils = new FileUtils();
+		int boardSeq = boardVO.getBoardSeq();
+		
+//		List<BoardFileVO> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
+		
+//		if(!CollectionUtils.isEmpty(fileList)) {
+//			boardService.insertBoardFile(fileList);
+//		}
+		
+		boardService.updateBoard(boardVO);
+		
+		return "redirect:/board/readFBoardList.do";
+	}
 	
 //	deleteBoard (게시글 삭제)
 

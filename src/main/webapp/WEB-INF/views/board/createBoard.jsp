@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style>
+/*form input::file-selector-button{
+display:none;
+}*/
+</style>
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
@@ -47,7 +52,8 @@
 						</td>
 						<td align="left">
 							<!-- 파일 선택 버튼 -->
-							<input type="file" name="uploadFiles" multiple="multiple">
+							<label for="input-img"></label>
+								<input type="file" name="uploadFiles" id="input-img" multiple="multiple">
 						</td>
 					</tr>
 					<tr>

@@ -14,21 +14,28 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public class FileUtils {
 	//서브밋된 폼에서 MultipartFile목록을 받아와서 List<MultipartFile>형태로 리턴하는 함수
-	public List<MultipartFile> parseFileInfo(MultipartHttpServletRequest multipartHttpServletRequest) throws IOException {
+	public List<MultipartFile> parseFileInfo(int boardSeq, HttpServletRequest request, MultipartHttpServletRequest multipartHttpServletRequest) throws IOException {
 		List<MultipartFile> multipartFileList = new ArrayList<MultipartFile>();
 		
 		//톰캣 서버 루트 경로 가져오기
-		//String rootPath = request.getSession().getServletContext().getRealPath("/");
+		//String rootPath = request.getSession().getServletContext().getRealPath("/");	
+	/*	SH			
+	 * 	여기서 찾음 : https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=gyjeon1&logNo=221423997336
+	 * JSP JAVA /  																	getRealPath는("/"); 는 webapp폴더까지를 의미한다*/
+		String rootPath = multipartHttpServletRequest.getSession().getServletContext().getRealPath("/");	
+
 		//파일업로드 폴더 만들기
-		//String attachPath = "/upload/";
+		String attachPath = "/upload/";
 		
-		//File directory = new File(rootPath + attachPath);
+		File directory = new File(rootPath + attachPath);
 		
-		//if(directory.exists() == false) {
-		//	directory.mkdirs();
-		//}
+		if(directory.exists() == false) {
 		
-		//파일 이름 꺼내기
+		//서버 루트 경로에 upload 폴더 만들기
+			directory.mkdirs();
+		}
+		
+		//파일 이름 꺼내기 (iterator = FileNames();)
 		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 		
 		while(iterator.hasNext()) {
