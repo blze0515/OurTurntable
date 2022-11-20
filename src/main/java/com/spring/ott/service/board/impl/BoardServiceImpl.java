@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.ott.Criteria;
 import com.spring.ott.VO.BoardFileVO;
@@ -64,9 +65,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void createBoardFile(List<BoardVO> fileList) {
-		return boardDAO.createBoardFile();
-		
+	public void createBoardFile(List<MultipartFile> fileList) {
+		boardDAO.createBoardFile(fileList);	
 	}
 
 	@Override

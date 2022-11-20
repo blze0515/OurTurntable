@@ -137,8 +137,8 @@ public class BoardController {
 		FileUtils fileUtils = new FileUtils();
 		
 		//파일업로드 처리 및 속성 값들이 세팅된 BoardFileVO의 목록 리턴
-		// **파일업로드는 CRUD 먼저 하고 그 다음에 하기로함 List<MultipartFile> fileList = fileUtils.parseFileInfo(multipartServletRequest);
-		List<MultipartFile> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
+		List<MultipartFile> fileList = fileUtils.parseFileInfo(boardSeq, request,multipartServletRequest);
+		//List<MultipartFile> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
 		
 		boardService.createBoard(boardVO);
 		
