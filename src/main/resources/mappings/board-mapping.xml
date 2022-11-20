@@ -141,27 +141,25 @@
 	
 	
 	<!-- 파일 첨부하는 쿼리 -->
-	<insert id="createBoardFile" parameterType="java.util.List">
+	<insert id="createBoardFile" parameterType="list">
 	<![CDATA[
-		INSERT INTO T_OTT_BOARD(
+		INSERT INTO T_OTT_IMG(
 			BOARD_SEQ,
-			FILE_SEQ,
-			ORIGINAL_FILE_NAME,
-			FILE_NAME,
-			FILE_PATH
+			IMG_SEQ,
+			BOARD_CATEGORY,
+			IMG_FILE
 		) VALUES
 	]]>
 	<foreach collection="list" item="boardFile" separator=",">
 		(
 			#{boardFile.boardSeq},
 			(
-				SELECT IFNULL(MAX(A.FILE_SEQ), 0) + 1
-					FROM T_BOARD_FILE A
+				SELECT IFNULL(MAX(A.IMG_SEQ), 0) + 1
+					FROM T_OTT_IMG A
 					WHERE A.BOARD_SEQ = #{boardFile.boardSeq}
 			),
-			#{boardFile.originalFileName},
-			#{boardFile.fileName},
-			#{boardFile.filePath}
+			#{boardFile.boardCategory},
+			#{boardFile.imgFile}
 		)
 	</foreach>
 	</insert>

@@ -25,10 +25,11 @@
 	<div class="untree_co-section">
 		<div class="container" style="width:75%;">
 			<div class="row text-left justify-content-center mb-5" style="margin-bottom: -1rem!important;">
-				<div class="col-lg-12"><h3 class="section-title text-left" style="text-align-last:center;">자랑 게시판</h3></div>
+				<div class="col-lg-12"><h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3></div>
 			</div>
 
 			<form id="searchForm" action="/board/readFBoardList.do" method="post">
+				<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 				<table border="1" style="width: 700px; border-collapse: collapse;">
@@ -124,7 +125,7 @@
 			
 			
 				<div class="flex-right" style="margin-bottom:50px;">
-				<a href="/board/createBoard.do">
+				<a href="/board/createBoard.do?boardCategory=${boardCategory }">
 					<button type="button">
 						글쓰기
 					</button>
@@ -168,7 +169,23 @@
   </div>
   
   	<script>
+
+  	
+  	
 		$(function() {
+			console.log($("#boardCategory").val());
+			
+		  	if($("#boardCategory").val() == "F") {
+		        $("#categoryName").text("자유 게시판");
+		        
+		        //$("#boardWriter").hide();
+		     } else if($("#boardCategory").val() == "S") {
+		        $("#categoryName").text("자랑 게시판");
+		     } else if($("#boardCategory").val() == "R") {
+		        $("#categoryName").text("추천 게시판");
+		     }
+			
+			
 			const searchForm = $("#searchForm");
 			
 			$(".pagination a").on("click", function(e) {
@@ -184,5 +201,7 @@
 			});
 		});
 	</script>
+	
+	
 </body>
 </html>

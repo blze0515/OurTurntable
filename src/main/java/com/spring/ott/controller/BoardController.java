@@ -1,6 +1,7 @@
 package com.spring.ott.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.ott.Criteria;
@@ -39,7 +39,7 @@ public class BoardController {
 	public String readBoardList(HttpSession session, Model model,
 		@RequestParam Map<String, String> paramMap, Criteria cri) {
 			UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-			
+			System.out.println(paramMap.get("boardCategory"));
 		if(loginUser == null) {
 			return "/WEB-INF/view/user/login";
 		}
@@ -66,6 +66,8 @@ public class BoardController {
 		if(paramMap.get("searchKeyword") != null && !paramMap.get("searchKeyword").equals("")) {
 			model.addAttribute("searchKeyword", paramMap.get("searchKeyword"));
 		}
+		
+		model.addAttribute("boardCategory", paramMap.get("boardCategory"));
 		
 		return "/WEB-INF/views/board/readFBoardList";
 	}
@@ -116,18 +118,19 @@ public class BoardController {
 //		* 게시판 유형(1,2,3)에 따른 동적 쿼리'
 	
 	@RequestMapping(value="/createBoard.do", method=RequestMethod.GET)
-	public String createFBoardView() {
+	public String createFBoardView(@RequestParam("boardCategory") String boardCategory, Model model) {
 		
 //		boardService.createBoard(boardVO)
+		model.addAttribute("boardCategory", boardCategory);
 		
 		return "/WEB-INF/views/board/createBoard";
 	}
 	
-	@RequestMapping(value="/createBoard.do", method=RequestMethod.POST)
+	@RequestMapping(value="/createBoard.do", method=RequestMethod.POST, produces="text/html; charset=UTF-8")
 	public String createBoard(HttpSession session, BoardVO boardVO, HttpServletRequest request,
 			MultipartHttpServletRequest multipartServletRequest) throws IOException {
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-		
+		System.out.println("boardVO============================" + boardVO.toString());
 		if(loginUser == null) {
 			return "/WEB-INF/views/user/login";
 		}
@@ -137,16 +140,45 @@ public class BoardController {
 		FileUtils fileUtils = new FileUtils();
 		
 		//파일업로드 처리 및 속성 값들이 세팅된 BoardFileVO의 목록 리턴
-		List<MultipartFile> fileList = fileUtils.parseFileInfo(boardSeq, request,multipartServletRequest);
+		List<Map<String, Object>> fileList = fileUtils.parseFileInfo(boardSeq, request,multipartServletRequest);
 		//List<MultipartFile> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
+		List<BoardFileVO> imgList = new ArrayList<BoardFileVO>();
 		
-		boardService.createBoard(boardVO);
+		boardVO.setBoardSeq(boardSeq);
 		
 		if(!CollectionUtils.isEmpty(fileList)) {
-			boardService.createBoardFile(fileList);
+//			boardService.createBoardFile(fileList);
+			if(boardVO.getBoardCategory().equals("S")) {
+				
+				boardVO.setBoardMfile(fileList.get(0).get("fileName").toString());
+				boardVO.setOriginalFileName(fileList.get(0).get("originalFileName").toString());
+				
+				boardService.createBoard(boardVO);
+			} else {
+				boardService.createBoard(boardVO);
+				
+				if(fileList.size() > 0) {
+					//1. List<Map>>
+					//boardService.createBoardFile(fileList);
+					
+					//2. VO
+					for(int i = 0; i < fileList.size(); i++) {
+						BoardFileVO boardFile = new BoardFileVO();
+						boardFile.setBoardSeq(boardSeq);
+						boardFile.setBoardCategory(boardVO.getBoardCategory());
+						boardFile.setImgFile(fileList.get(i).get("fileName").toString());
+						
+						imgList.add(boardFile);
+					}
+					
+					boardService.createBoardFile(imgList);
+				}
+			}
+		} else {
+			boardService.createBoard(boardVO);
 		}
 		
-		return "redirect:/board/readFBoardList.do";
+		return "redirect:/board/readFBoardList.do?boardCategory="+boardVO.getBoardCategory();
 	}
 	
 //	updateBoard (게시글 수정)

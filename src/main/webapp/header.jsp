@@ -63,9 +63,9 @@
 							<ul class="dropdown">
 								<!-- WEB-INF 폴더 안에 jsp 파일은 직접 접근이 불가능하여
 								     컨트롤러의 메소드를 만들어서 viewResolver를 통해 해당 화면으로 이동 -->
-								<li><a href="/board/readFBoardList.do">자유 게시판</a></li>
-								<li><a href="#">자랑 게시판</a></li>
-								<li><a href="/board/readRecBoardList.do">추천 게시판</a></li>
+								<li><a href="/board/readFBoardList.do?boardCategory=F">자유 게시판</a></li>
+								<li><a href="/board/readFBoardList.do?boardCategory=S">자랑 게시판</a></li>
+								<li><a href="/board/readFBoardList.do?boardCategory=R">추천 게시판</a></li>
 							</ul>
 						</li>
 <!----------------------<li><a href="/main/services.do">Services</a></li>	 -->

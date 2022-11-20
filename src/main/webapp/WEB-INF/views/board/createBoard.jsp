@@ -21,6 +21,7 @@ display:none;
 			<div class="board-form" >
 								<!-- 노션 메모에 enctype form-data 메모(form-data는 파일 등록할때 주로 쓴다고함) -->
 			<form action="/board/createBoard.do" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
 				<table border="1" style="border-collapse: collapse">
 					<tbody><tr>
 						<td style="background: orange; width: 70px;">
