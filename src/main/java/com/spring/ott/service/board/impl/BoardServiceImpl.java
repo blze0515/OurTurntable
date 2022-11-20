@@ -65,8 +65,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void createBoardFile(List<MultipartFile> fileList) {
-		boardDAO.createBoardFile(fileList);	
+	public void createBoardFile(List<BoardFileVO> imgList) {
+		boardDAO.createBoardFile(imgList);	
 	}
 
 	@Override

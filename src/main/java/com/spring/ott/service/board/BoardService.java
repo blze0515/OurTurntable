@@ -29,7 +29,7 @@ public interface BoardService {
 	
 	int createNextBoardSeq();
 	
-	void createBoardFile(List<MultipartFile> fileList);
+	void createBoardFile(List<BoardFileVO> imgList);
 	
 	List<BoardFileVO> getBoardFile(int boardSeq);
 	

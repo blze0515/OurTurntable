@@ -7,9 +7,9 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.ott.Criteria;
+import com.spring.ott.VO.BoardFileVO;
 import com.spring.ott.VO.BoardVO;
 
 @Repository
@@ -70,7 +70,7 @@ public class BoadDAO {
 //	}
 
 	
-	public void createBoardFile(List<MultipartFile> fileList) {
+	public void createBoardFile(List<BoardFileVO> imgList) {
 		//List를 insert하는 방법
 		//1. for문을 사용하여 list.size만큼 insert구문 호출
 		/*
@@ -79,7 +79,7 @@ public class BoadDAO {
 		 */
 		
 		//2. mybatis의 <foreach> 태그 사용
-		mybatis.insert("BoardDAO.createBoardFile", fileList);
+		mybatis.insert("BoardDAO.createBoardFile", imgList);
 	}
 
 	
