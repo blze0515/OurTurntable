@@ -70,7 +70,7 @@ public class BoadDAO {
 //	}
 
 	
-	public void createBoardFile(List<BoardVO> fileList) {
+	public void createBoardFile(List<MultipartFile> fileList) {
 		//List를 insert하는 방법
 		//1. for문을 사용하여 list.size만큼 insert구문 호출
 		/*
@@ -81,7 +81,6 @@ public class BoadDAO {
 		//2. mybatis의 <foreach> 태그 사용
 		mybatis.insert("BoardDAO.createBoardFile", fileList);
 	}
-	
 
 	
 }

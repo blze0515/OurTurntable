@@ -28,13 +28,13 @@ public class MainController {
 	}
 	
 	@RequestMapping("/about.do")
-	public String about(MultipartHttpServletRequest multipartHttpServletRequest,
+	public String about(int boardSeq,MultipartHttpServletRequest multipartHttpServletRequest,
 			HttpServletRequest request) throws IOException {
 		//FileUpload 예제
 		FileUtils fileUtils = new FileUtils();
 		
 		//실제 멀티파트 파일 리스트
-		List<MultipartFile> multipartFileList = fileUtils.parseFileInfo(multipartHttpServletRequest);
+		List<MultipartFile> multipartFileList = fileUtils.parseFileInfo(boardSeq, request, multipartHttpServletRequest);
 		
 		//DB에 저장될 파일정보 리스트
 //		List<BoardFileVO> boardFileList = new ArrayList<BoardFileVO>();

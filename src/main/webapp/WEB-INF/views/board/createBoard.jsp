@@ -53,7 +53,9 @@ display:none;
 						<td align="left">
 							<!-- 파일 선택 버튼 -->
 							<label for="input-img"></label>
-								<input type="file" name="uploadFiles" id="input-img" multiple="multiple">
+								<!--  multiple속성은 boolean 타입임. 속성을 명시하지 않으면 false값을 가지고, 명시하면 true 값을 가지게 된다. -->
+								<input type="file" name="uploadFiles" multiple="multiple">
+							
 						</td>
 					</tr>
 					<tr>
