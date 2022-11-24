@@ -11,11 +11,12 @@
 	
 	<div class="untree_co-section">
 		<div class="container my-5">
-	<h3 style="text-align:center;">게시글 상세</h3>
+	<h3 style="text-align:center;" id="categoryName"> 상세</h3>
 			<div style="display:block; justify-content: center; align-items: center;">
 				
 				<div style="display:flex; justify-content:center; width:100%;">
 					<form action="/board/updateBoard.do" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
 						<input type="hidden" name="boardSeq" value="${board.boardSeq }">
 						<table border="1" style="border-collapse: collapse;">
 							<tr>
@@ -100,7 +101,7 @@
 					<a id="btnDelete" href="/board/deleteBoard.do?boardSeq=${board.boardSeq }">글 삭제</a>
 					
 					<!-- <a href="/board/deleteBoard.do?boardSeq=${board.boardSeq }">글 삭제</a> -->
-					<a href="/board/readFBoardList.do">글 목록 보기</a><br>
+					<a href="/board/readBoardList.do">글 목록 보기</a><br>
 				</h5>
 					
 				</div>
@@ -137,6 +138,12 @@
 		}
 		
 		$(function() {
+			//상단 게시판 이름 표시
+			if($("#categoryName")=="F"){
+				$("#categoryName").text("자유게시판 ");
+			}
+			
+			
 			const loginUserId = '${loginUser.userId}';
 			const boardWriter = '${board.userId}';
 			

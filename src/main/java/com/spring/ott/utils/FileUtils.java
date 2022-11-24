@@ -45,7 +45,6 @@ public class FileUtils {
 					fileMap.put("boardSeq", boardSeq);
 					//화면에 표출할 때 사용
 					fileMap.put("originalFileName", multipartFile.getOriginalFilename());
-					
 					//고유한 파일명 생성
 					//실제 서버에 저장되는 파일명
 					String uuid = UUID.randomUUID().toString();

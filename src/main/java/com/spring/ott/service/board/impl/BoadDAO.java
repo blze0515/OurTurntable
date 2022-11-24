@@ -37,7 +37,7 @@ public class BoadDAO {
 	}
 
 	public int getBoardCnt(Map<String, String> paramMap) {
-								//BoardDAO=mapper의 namespace
+								//BoardDAO=mappings의 namespace
 		return mybatis.selectOne("BoardDAO.getBoardCnt", paramMap);
 											//getBoardCnt=mapper - select 태그의 id
 	}

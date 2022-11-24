@@ -59,7 +59,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	//@Override (@Override 있으니까 빨간줄 떠서 지움)  
+	@Override 
 	public int createNextBoardSeq() {
 		return boardDAO.createNextBoardSeq();
 	}

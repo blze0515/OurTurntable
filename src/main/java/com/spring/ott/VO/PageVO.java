@@ -7,7 +7,6 @@ public class PageVO {
 	private int endPage;
 	private boolean prev, next;
 	private int total;
-	
 	private Criteria cri;
 	
 	public PageVO(Criteria cri, int total) {

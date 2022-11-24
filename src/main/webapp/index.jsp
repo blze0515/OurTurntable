@@ -22,12 +22,12 @@
 	<div class="untree_co-section">
 		<div class="container">
 			<div class="row text-center justify-content-center mb-5" style="margin-bottom:0rem!important;">
-				<div class="col-lg-7"><h2 class="section-title text-center">인기글 Top5</h2></div>
+				<div class="col-lg-7"><h2 class="section-title text-center">SHOW Top5</h2></div>
 			</div>
 			
 			<div class="" style="border:solid gray 2px;">
 			<div class="flex-right" style="height:20px; margin:15px 15px 10px 0; text-align:end!important;">
-				<a href="/board/readFBoardList.do">
+				<a href="/board/readBoardList.do">
 					더 보기 <img src="/images/img_logo.jpg" style="height:20px;">
 				</a>
 			</div>
@@ -53,10 +53,10 @@
 								<a href="#">콘서트7080</a>
 							</div>
 						</td>
-						<td class="mboard-date mboard-table">2022-10-31</td>
-						<td class="mboard-view mboard-table">100</td>
-						<td class="mboard-like mboard-table">90</td>
-						<td class="mboard-donation mboard-table">100,000</td>
+						<td class="tr-date mboard-table">2022-10-31</td>
+						<td class="tr-view mboard-table">100</td>
+						<td class="tr-like mboard-table">90</td>
+						<td class="tr-donation mboard-table">100,000</td>
 					</tr>
 				
 			</table>
