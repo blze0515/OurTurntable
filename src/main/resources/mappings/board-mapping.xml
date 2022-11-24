@@ -10,11 +10,12 @@
 <!-- DAO에서 쿼리가 분리되었기 때문에 DAO클래스 이름을 따라감 -->
 <mapper namespace="BoardDAO">
 	<!-- 쿼리 작성 영역 -->
-		<select id="getBoardList" parameterType="java.util.Map" resultType="board">
+		<select id="getBoardList" parameterType="map" resultType="board">
 		<![CDATA[
 		SELECT *
 			FROM T_OTT_BOARD
 			WHERE 1=1
+			AND BOARD_CATEGORY = #{boardSearch.boardCategory}
 			]]>
 			<if test="boardSearch.searchKeyword != null and boardSearch.searchKeyword != ''">
 				<if test="boardSearch.searchCondition == 'all'">
@@ -35,12 +36,13 @@
 			LIMIT #{cri.amount} OFFSET #{cri.startNum}
 		</select>
 		
-		<!-- getBoardCnt는 전체 게시글이 몇개인지 불러오려고 쓰는거인듯 -->
-		<select id="getBoardCnt" parameterType="java.util.Map" resultType="int">
+		<!-- getBoardCnt는 전체 게시글이 몇개인지 불러오기 위한 쿼리 -->
+		<select id="getBoardCnt" parameterType="map" resultType="int">
 		<![CDATA[
 		SELECT COUNT(*)
 			FROM T_OTT_BOARD
 			WHERE 1=1
+			AND BOARD_CATEGORY = #{boardCategory}
 		]]>
 			<if test="searchKeyword != null and searchKeyword != ''">
 				<if test="searchCondition == 'all'">
@@ -84,7 +86,7 @@
 				WHERE BOARD_SEQ = #{boardSeq}
 		]]>
 	</delete>
-	
+	<!-- deleteboard 실행하고 목록 업데이트 하는 쿼리 -->
 	<update id="updateBoardSeq" parameterType="int">
 		<![CDATA[
 			UPDATE T_OTT_BOARD
@@ -94,6 +96,9 @@
 	</update>
 	
 	<select id="createNextBoardSeq" resultType="int">
+<!-- 	조건문 넣어서 카테고리마다 SEQ 별도로 적용되게 해야함	 -->
+<!-- SELECT IFNULL(MAX(BOARD_SEQ), 0) + 1 //IFNULL 함수 뜻 : IFNULL(조건1, 조건2) 
+														조건1이 NULL이면 조건2를 출력하고 조건1이 NULL이 아니면 조건1을 출력 -->
 		<![CDATA[
 			SELECT IFNULL(MAX(BOARD_SEQ), 0) + 1
 				FROM T_OTT_BOARD
@@ -101,6 +106,8 @@
 	</select>
 	
 	<select id="createBoard" resultType="board">
+		<!-- VALUES의 T_OTT_BOARD A는 T_OTT_BOARD AS A 와 같음(AS 생략 가능), 별칭 
+			테이블 명을 두 번 사용하면 에러가 나기 때문에 별칭을 준다.-->
 		<![CDATA[
 		INSERT INTO T_OTT_BOARD (
 			BOARD_SEQ,
@@ -150,16 +157,17 @@
 			IMG_FILE
 		) VALUES
 	]]>
-	<foreach collection="list" item="boardFile" separator=",">
+						<!-- item은 for문에서 i같은 것. foreach문에서 사용하기 위해 만든 것이다. -->
+	<foreach collection="list" item="aaa" separator=",">
 		(
-			#{boardFile.boardSeq},
+			#{aaa.boardSeq},
 			(
 				SELECT IFNULL(MAX(A.IMG_SEQ), 0) + 1
 					FROM T_OTT_IMG A
-					WHERE A.BOARD_SEQ = #{boardFile.boardSeq}
+					WHERE A.BOARD_SEQ = #{aaa.boardSeq}
 			),
-			#{boardFile.boardCategory},
-			#{boardFile.imgFile}
+			#{aaa.boardCategory},
+			#{aaa.imgFile}
 		)
 	</foreach>
 	</insert>

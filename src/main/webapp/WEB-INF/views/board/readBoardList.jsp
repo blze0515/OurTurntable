@@ -25,11 +25,15 @@
 	<div class="untree_co-section">
 		<div class="container" style="width:75%;">
 			<div class="row text-left justify-content-center mb-5" style="margin-bottom: -1rem!important;">
-				<div class="col-lg-12"><h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3></div>
+				<div class="col-lg-12">
+					<h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3></div>
 			</div>
 
-			<form id="searchForm" action="/board/readFBoardList.do" method="post">
+			<form id="searchForm" action="/board/readBoardList.do" method="post">
 				<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
+								<!-- 키 값으로 객체를 꺼낸 뒤, 객체의 값을 꺼내는데 항상 field 이름으로 꺼낸다. -->
+								<!-- boardController의 "sh 예시" 부분 확인 -->
+<%-- 				<input type="hidden" name="userId" id="userId" value="${user.userId }"> --%>
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 				<table border="1" style="width: 700px; border-collapse: collapse;">
@@ -66,30 +70,11 @@
 						<td class="tr-donation">후원금액</td>
 					</tr>
 					
-					<!-- 
-					<tr class="tr-content tr-center tr-table-border">
-						<td class="tr-seq td-padding">100</td>
-						<td class="tr-title td-padding tr-left">
-							<div>
-								<a href="#">노래자랑 100번째 자랑글</a>
-							</div>
-						</td>
-						<td class="tr-nick td-padding tr-left">
-							<div>
-								<a href="#">콘서트7080</a>
-							</div>
-						</td>
-						<td class="tr-date td-padding">2022-10-31</td>
-						<td class="tr-view td-padding">100</td>
-						<td class="tr-like td-padding">90</td>
-						<td class="tr-donation">100,000</td>
-					</tr>
-					 -->
 					 <tr class="tr-content tr-center tr-table-border">
 							<td class="tr-seq td-padding">test-hard</td>
 							<td class="tr-title td-padding tr-left">
 								<div>
-									<a href="/board/readFBoard.do">test-title</a>
+									<a href="/board/readBoard.do">test-title</a>
 								</div>
 							</td>
 							<td class="tr-nick td-padding tr-left">
@@ -107,7 +92,7 @@
 							<td class="tr-seq td-padding">${board.boardSeq }</td>
 							<td class="tr-title td-padding tr-left">
 								<div>
-									<a href="/board/readFBoard.do?boardSeq=${board.boardSeq }">${board.boardTitle }</a>
+									<a href="/board/readBoard.do?boardSeq=${board.boardSeq }">${board.boardTitle }</a>
 								</div>
 							</td>
 							<td class="tr-nick td-padding tr-left">
@@ -125,6 +110,8 @@
 			
 			
 				<div class="flex-right" style="margin-bottom:50px;">
+				<!-- 글쓰기 화면에서도 일단 전부 input 만들어놓고 카테고리별로 필요 없는건 input에 disabled 주고 hide까지 줘야 한다.
+					disabled만 주면 화면에는 보이기 때문에 -->
 				<a href="/board/createBoard.do?boardCategory=${boardCategory }">
 					<button type="button">
 						글쓰기
@@ -173,8 +160,14 @@
   	
   	
 		$(function() {
-			console.log($("#boardCategory").val());
+			//모든 컬럼 표시되도록 함수 하나 만들고 호출
+			//showAll();
 			
+			
+			
+			
+			
+			//카테고리 분류별로 숨길 항목들을 숨기기
 		  	if($("#boardCategory").val() == "F") {
 		        $("#categoryName").text("자유 게시판");
 		        

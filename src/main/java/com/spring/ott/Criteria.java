@@ -19,6 +19,7 @@ public class Criteria {
 	}
 	
 	@Override
+	//object가 최상위 객체이고 @~~~어쩌고로 출력되는데(object 클래스 가보면) 알아보기 쉽게 출력하기위해서 쓴것임.
 	public String toString() {
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", startNum=" + startNum + "]";
 	}

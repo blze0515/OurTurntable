@@ -19,8 +19,11 @@ display:none;
 			<div class="row justify-content-center">
 	
 			<div class="board-form" >
+			<h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3>
+			
 								<!-- 노션 메모에 enctype form-data 메모(form-data는 파일 등록할때 주로 쓴다고함) -->
 			<form action="/board/createBoard.do" method="post" enctype="multipart/form-data">
+			<!-- input hidden은 form 을 submit 하면 input들도 같이 넘어가는데 boardCategory 값을 넘겨주기 위해서 추가한 것임. -->
 				<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
 				<table border="1" style="border-collapse: collapse">
 					<tbody><tr>
@@ -71,7 +74,7 @@ display:none;
 			
 			
 			<h5 style="margin-top:30px;">
-				<a href="/board/readFBoardList.do">글 목록 보기</a>
+				<a href="/board/readBoardList.do">글 목록 보기</a>
 			</h5>
 		
 		
@@ -81,5 +84,17 @@ display:none;
 		
 		
 	<jsp:include page="${pageContext.request.contextPath }/footer.jsp"></jsp:include>
+	
+	<script>
+		$(function(){
+			if($("#boardCategory").val()== "F"){
+				$("#categoryName").text("자유게시판");
+			} else if($("#boardCategory").val()=="S"){
+				$("#categoryName").text("자랑게시판");
+			} else if($("#boardCategory").val()=="R"){
+				$("#categoryName").text("추천게시판");
+			}
+		});
+	</script>
 </body>
 </html>
