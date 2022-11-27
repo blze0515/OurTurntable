@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class BoardVO {
+	private int rownum;
 	private int boardSeq;
 	//boardCategory는 header에서 게시판 메뉴 선택할때 쿼리스트링으로 지정된다.
 	private String boardCategory;

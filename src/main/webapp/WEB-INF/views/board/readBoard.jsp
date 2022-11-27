@@ -101,7 +101,7 @@
 					<a id="btnDelete" href="/board/deleteBoard.do?boardSeq=${board.boardSeq }">글 삭제</a>
 					
 					<!-- <a href="/board/deleteBoard.do?boardSeq=${board.boardSeq }">글 삭제</a> -->
-					<a href="/board/readBoardList.do">글 목록 보기</a><br>
+					<a href="/board/readBoardList.do?boardCategory=${board.boardCategory }">글 목록 보기</a><br>
 				</h5>
 					
 				</div>
@@ -138,7 +138,7 @@
 		}
 		
 		$(function() {
-			//상단 게시판 이름 표시
+			//상단 게시판 이름 표시 ("#id~") <- Jquery 문법
 			if($("#categoryName")=="F"){
 				$("#categoryName").text("자유게시판 ");
 			}

@@ -12,25 +12,27 @@
 	<!-- 쿼리 작성 영역 -->
 		<select id="getBoardList" parameterType="map" resultType="board">
 		<![CDATA[
-		SELECT *
-			FROM T_OTT_BOARD
+		SELECT @rownum:=@rownum+1 AS ROWNUM,
+				A.*
+			FROM T_OTT_BOARD A,
+				 (SELECT @rownum:=#{cri.startNum}) TMP
 			WHERE 1=1
-			AND BOARD_CATEGORY = #{boardSearch.boardCategory}
+			AND A.BOARD_CATEGORY = #{boardSearch.boardCategory}
 			]]>
 			<if test="boardSearch.searchKeyword != null and boardSearch.searchKeyword != ''">
 				<if test="boardSearch.searchCondition == 'all'">
-					AND BOARD_TITLE LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
-					 OR BOARD_CONTENT LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
-					 OR USER_ID LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					AND A.BOARD_TITLE LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					 OR A.BOARD_CONTENT LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					 OR A.USER_ID LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
 				</if>
 				<if test="boardSearch.searchCondition == 'title'">
-					AND BOARD_TITLE LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					AND A.BOARD_TITLE LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
 				</if>
 				<if test="boardSearch.searchCondition == 'content'">
-					AND BOARD_CONTENT LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					AND A.BOARD_CONTENT LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
 				</if>
 				<if test="boardSearch.searchCondition == 'writer'">
-					AND USER_ID LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					AND A.USER_ID LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
 				</if>
 			</if>
 			LIMIT #{cri.amount} OFFSET #{cri.startNum}
@@ -102,6 +104,7 @@
 		<![CDATA[
 			SELECT IFNULL(MAX(BOARD_SEQ), 0) + 1
 				FROM T_OTT_BOARD
+				WHERE BOARD_CATEGORY = #{boardCategory}
 		]]>
 	</select>
 	
@@ -122,8 +125,9 @@
 			(
 				SELECT IFNULL(MAX(A.BOARD_SEQ), 0) + 1
 					FROM T_OTT_BOARD A
+					WHERE BOARD_CATEGORY = #{boardCategory}
 			),
-			'F',
+			#{boardCategory},
 			#{userId},
 			#{boardTitle},
 			#{boardContent},
