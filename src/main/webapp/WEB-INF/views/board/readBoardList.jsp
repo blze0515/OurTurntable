@@ -89,7 +89,7 @@
 							</tr>
 			 	    <c:forEach var="board" items="${boardList }">
 						<tr class="tr-content tr-center tr-table-border">
-							<td class="tr-seq td-padding">${board.boardSeq }</td>
+							<td class="tr-seq td-padding">${board.rownum }</td>
 							<td class="tr-title td-padding tr-left">
 								<div>
 									<a href="/board/readBoard.do?boardSeq=${board.boardSeq }">${board.boardTitle }</a>

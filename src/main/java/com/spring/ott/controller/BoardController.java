@@ -38,10 +38,12 @@ public class BoardController {
 	@RequestMapping("/readBoardList.do")
 	//RequestParam 화면단(.jsp)에 name, value로 작성된 키와 값을 모두 받아온다.
 	//Map을 사용하면 자동으로 put 메서드가 실행된다. (Map에 값을 추가하는 메서드)
-	//command 객체(VO) 사용 하면 member 변수 이름과 키 값이 같으면 자동으로 setter가 실행 된다.
+	//command 객체(VO)를 사용 하면 member 변수 이름과 키 값이 같으면 자동으로 setter가 실행 된다.
 	//Map이랑 VO랑 비슷한거다.
 	public String readBoardList(HttpSession session, Model model,
 		@RequestParam Map<String, String> paramMap, Criteria cri) {
+		System.out.println("받아온 파람맵 = = = = == = == = == "+paramMap);
+		
 			UserVO loginUser = (UserVO)session.getAttribute("loginUser");
 			//System.out.println(paramMap.get("boardCategory"));
 		if(loginUser == null) {
@@ -49,21 +51,25 @@ public class BoardController {
 		}
 		
 		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
+		System.out.println("리스트로 받아온 파람맵 = = = = == = == = == "+paramMap);
+		
 		
 		//total = 작성돼있는 총 게시물 수 가져오는 변수
 		//getboardCnt에도 쿼리에 카테고리에 대한 조건을 줘야 해당 카테고리에 대한 글 개수를 표시할 수 있다.
 		int total = boardService.getBoardCnt(paramMap);
 		
 		//게시물 몇개인지 출력
-		System.out.println(" 게시물 개수 : " + total );
+		System.out.println(" 게시물 개수 : " + total);
 		
 		//게시물 정보 출력
 		for(int i=0; i < boardList.size(); i++) {
-			System.out.println(boardList.get(i).toString());
+			System.out.println("보드리스트= " +boardList.get(i).toString());
 		}
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pageMaker", new PageVO(cri, total));
+		
+		System.out.println("모델 출력 ========================= "+model.toString());
 		
 //		S 검색조건 선택했을 때 사용
 		if(paramMap.get("searchCondition") != null && !paramMap.get("searchCondition").equals("")) {

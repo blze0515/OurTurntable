@@ -39,6 +39,8 @@ display:none;
 							작성자
 						</td>
 						<td style="text-align: left;">
+<!-- value="${loginUser.userId } 이렇게 쓸 수 있는 이유가 log 후에 게시판에 들어오게 되었을 때에는
+UserController에서 setAttribute로 loginUser 키로 userVO를 저장해놨기 때문에 EL표기법으로(JSTL) 작성자를 가져올 수 있음 -->
 							<input type="text" name="userId" value="${loginUser.userId }" readonly="">
 						</td>
 					</tr>
@@ -74,7 +76,7 @@ display:none;
 			
 			
 			<h5 style="margin-top:30px;">
-				<a href="/board/readBoardList.do">글 목록 보기</a>
+				<a href="/board/readBoardList.do?boardCategory=${board.boardCategory }">글 목록 보기</a>
 			</h5>
 		
 		
