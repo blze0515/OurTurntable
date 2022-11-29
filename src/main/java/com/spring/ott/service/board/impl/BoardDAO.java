@@ -13,7 +13,7 @@ import com.spring.ott.VO.BoardFileVO;
 import com.spring.ott.VO.BoardVO;
 
 @Repository
-public class BoadDAO {
+public class BoardDAO {
 
 	@Autowired
 	SqlSessionTemplate mybatis;
@@ -23,8 +23,8 @@ public class BoadDAO {
 		mybatis.insert("BoardDAO.createBoard", boardVO);
 	}
 	
-	public int createNextBoardSeq() {
-		return mybatis.selectOne("BoardDAO.createNextBoardSeq");
+	public int createNextBoardSeq(String boardCategory) {
+		return mybatis.selectOne("BoardDAO.createNextBoardSeq", boardCategory);
 	}
 	
 	public List<BoardVO> getBoardList(Map<String, String> paramMap, Criteria cri) {
@@ -42,12 +42,12 @@ public class BoadDAO {
 											//getBoardCnt=mapper - select 태그의 id
 	}
 	
-	public BoardVO getBoard(int boardSeq) {
-		return mybatis.selectOne("BoardDAO.getBoard", boardSeq);
+	public BoardVO getBoard(BoardVO boardVO) {
+		return mybatis.selectOne("BoardDAO.getBoard", boardVO);
 	}
 	
-	public void updateBoardCnt(int boardSeq) {
-		mybatis.update("BoardDAO.updateBoardCnt", boardSeq);
+	public void updateBoardCnt(BoardVO boardVO) {
+		mybatis.update("BoardDAO.updateBoardCnt", boardVO);
 	}
 	
 	public void updateBoard(BoardVO boardVO) {
@@ -82,5 +82,8 @@ public class BoadDAO {
 		mybatis.insert("BoardDAO.createBoardFile", imgList);
 	}
 
-	
+	//selectList 검색
+	public List<BoardFileVO> getBoardFileList(BoardVO boardVO) {
+		return mybatis.selectList("BoardDAO.getBoardFileList", boardVO);
+	}
 }

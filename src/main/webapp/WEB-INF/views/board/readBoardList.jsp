@@ -92,7 +92,7 @@
 							<td class="tr-seq td-padding">${board.rownum }</td>
 							<td class="tr-title td-padding tr-left">
 								<div>
-									<a href="/board/readBoard.do?boardSeq=${board.boardSeq }">${board.boardTitle }</a>
+									<a href="/board/readBoard.do?boardSeq=${board.boardSeq }&boardCategory=${board.boardCategory}">${board.boardTitle }</a>
 								</div>
 							</td>
 							<td class="tr-nick td-padding tr-left">

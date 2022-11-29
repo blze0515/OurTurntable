@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,12 +66,12 @@
 								</td>
 								<td>
 									<c:forEach items="${fileList }" var="file">
-										<a class="downlink" id="${file.fileSeq }" href="${file.fileName }">
-											${file.originalFileName }
+										<a class="downlink" id="${file.imgSeq }" href="${file.imgFile }">
+											${file.imgFile }
 										</a>
-<!-- 										<button type="button" onclick="deleteBoardFile('${file.fileSeq}')">삭제</button>
- -->
-										<!-- <img src="/upload/${file.fileName }"> -->
+ 									<button type="button" onclick="deleteBoardFile('${file.imgSeq}')">삭제</button>	
+ 
+										<img src="/upload/${file.imgFile }" style="width: 100px; height: 100px;">
 										<br/>
 									</c:forEach>
 								</td>

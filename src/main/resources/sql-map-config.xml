@@ -13,6 +13,7 @@
 	<typeAliases>
 		<typeAlias type="com.spring.ott.VO.UserVO" alias="user"></typeAlias>
 		<typeAlias type="com.spring.ott.VO.BoardVO" alias="board"></typeAlias>
+		<typeAlias type="com.spring.ott.VO.BoardFileVO" alias="boardFile"></typeAlias>
 		<typeAlias type="com.spring.ott.common.CamelHashMap" alias="camelHashMap"></typeAlias>
 	</typeAliases>
 	

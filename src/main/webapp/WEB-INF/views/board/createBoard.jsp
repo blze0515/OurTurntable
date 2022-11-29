@@ -19,6 +19,7 @@ display:none;
 			<div class="row justify-content-center">
 	
 			<div class="board-form" >
+<!-- 게시판 제목 script로 표시함 / header에서 컨트롤러 타고 넘어온 페이지라 model에 boardCategory 담겨서 옴. -->
 			<h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3>
 			
 								<!-- 노션 메모에 enctype form-data 메모(form-data는 파일 등록할때 주로 쓴다고함) -->

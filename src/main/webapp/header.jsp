@@ -67,6 +67,7 @@
 								<li><a href="/board/readBoardList.do?boardCategory=F">자유 게시판</a></li>
 								<li><a href="/board/readBoardList.do?boardCategory=S">자랑 게시판</a></li>
 								<li><a href="/board/readBoardList.do?boardCategory=R">추천 게시판</a></li>
+								<li><a href="/board/createBoard.do?boardCategory=S">자랑게시판 글쓰기 페이지</a></li>
 							</ul>
 						</li>
 <!----------------------<li><a href="/main/services.do">Services</a></li>	 -->

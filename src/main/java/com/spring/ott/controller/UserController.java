@@ -79,7 +79,6 @@ public class UserController {
 	public String login(HttpSession session, UserVO userVO) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
 		//1. 존재하는 아이디인지 체크
 		
 		int idCheck = userService.idCheck(userVO.getUserId());
@@ -95,14 +94,23 @@ public class UserController {
 			} else {
 				//3. 로그인 처리
 				UserVO user = userService.login(userVO);
+//키나 벨류 이런거 모를 때 session 안에 이 때 뭐가 들어있는지 알고 싶으면?
+				System.out.println("홈페이지 접속 시 session : " + session);
+
+				
 				
 				session.setAttribute("loginUser", user);
+				System.out.println("로그인 직후 session : " + session.getAttribute("loginUser"));
 				
 				jsonMap.put("message", "loginSuccess");
 			}
 		}
-		
+		System.out.println("jsonMap 생성 초기(login 후) : " + jsonMap.toString());
+
+//jsonStr은 jsonMap을 Object -> String 타입으로 바꾸려고 만든 것. 리턴을 String 형태로.
 		String jsonStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonMap);
+		
+		System.out.println("jsonStr ============ : " + jsonStr);
 		
 		return jsonStr;
 	}
