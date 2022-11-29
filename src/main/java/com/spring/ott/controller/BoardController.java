@@ -1,3 +1,5 @@
+//11.28 기준 BoardController.java 백업
+
 package com.spring.ott.controller;
 
 import java.io.IOException;
@@ -43,11 +45,10 @@ public class BoardController {
 	public String readBoardList(HttpSession session, Model model,
 		@RequestParam Map<String, String> paramMap, Criteria cri) {
 		System.out.println("받아온 파람맵 = = = = == = == = == "+paramMap);
-		
 			UserVO loginUser = (UserVO)session.getAttribute("loginUser");
 			//System.out.println(paramMap.get("boardCategory"));
 		if(loginUser == null) {
-			return "/WEB-INF/view/user/login";
+			return "/WEB-INF/views/user/login";
 		}
 		
 		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
@@ -59,13 +60,13 @@ public class BoardController {
 		int total = boardService.getBoardCnt(paramMap);
 		
 		//게시물 몇개인지 출력
-		System.out.println(" 게시물 개수 : " + total);
+		System.out.println(" 게시물 개수(total) : " + total);
 		
 		//게시물 정보 출력
 		for(int i=0; i < boardList.size(); i++) {
 			System.out.println("보드리스트= " +boardList.get(i).toString());
 		}
-		
+		System.out.println("모델 속성 추가하기 전에 출력 ========================= "+model.toString());
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pageMaker", new PageVO(cri, total));
 		
@@ -105,10 +106,10 @@ public class BoardController {
 //			* 댓글 목록 조회
 //			* 좋아요 카운트 조회
 	
-	
 	//여기부터 게시글 상세보기 getboard.do
 	@RequestMapping("/readBoard.do")
-	public String getBoard(HttpSession session, @RequestParam int boardSeq, Model model) {
+	public String getBoard(HttpSession session, BoardVO boardVO, Model model,
+			HttpServletRequest request) {
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
 		
 		if(loginUser == null) {
@@ -116,20 +117,17 @@ public class BoardController {
 		}
 		
 		//게시물 클릭하면 조회수+1
-		boardService.updateBoardCnt(boardSeq);
+		//이것도 업데이트 해야됨. 지금은 새로고침 할때마다 카운트가 올라가는데
+		boardService.updateBoardCnt(boardVO);
 		
-		BoardVO board = boardService.getBoard(boardSeq);
-//		List<BoardFileVO> fileList = boardService.getBoardFile(boardSeq);
+		BoardVO board = boardService.getBoard(boardVO);
+		List<BoardFileVO> fileList = boardService.getBoardFileList(boardVO);
 		
 		model.addAttribute("board", board);
-		//model.addAttribute("fileList", fileList);
+		model.addAttribute("fileList", fileList);
 		
 		return "/WEB-INF/views/board/readBoard";
 	}
-	
-	
-	
-	
 	
 //	createBoard (게시글 등록)
 //		* 게시판 유형(1,2,3)에 따른 동적 쿼리' -> header.jsp에서 쿼리스트링으로 게시판 유형 구분해서 작동하도록 함 
@@ -152,13 +150,14 @@ public class BoardController {
 			return "/WEB-INF/views/user/login";
 		}
 		
-		int boardSeq = boardService.createNextBoardSeq();
+		int boardSeq = boardService.createNextBoardSeq(boardVO.getBoardCategory());
 		
 		FileUtils fileUtils = new FileUtils();
 		
 //		파일업로드 처리 및 속성 값들이 세팅된 BoardFileVO의 목록 리턴
 		List<Map<String, Object>> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
 //		List<MultipartFile> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
+//		imgList = BoardFileVO 객체를 담는 리스트(BoardFileVO타입) / BoardFileVO = 파일 객체
 		List<BoardFileVO> imgList = new ArrayList<BoardFileVO>();
 		
 		boardVO.setBoardSeq(boardSeq);
@@ -183,9 +182,11 @@ public class BoardController {
 					//2. VO
 					for(int i = 0; i < fileList.size(); i++) {
 						BoardFileVO boardFile = new BoardFileVO();
+//						Seq, 카테고리, '파일'(fileList)
 						boardFile.setBoardSeq(boardSeq);
 						boardFile.setBoardCategory(boardVO.getBoardCategory());
 						boardFile.setImgFile(fileList.get(i).get("fileName").toString());
+						boardFile.setImgOriginFile(fileList.get(i).get("originalFileName").toString());
 						
 						imgList.add(boardFile);
 					}

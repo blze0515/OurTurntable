@@ -16,7 +16,7 @@ import com.spring.ott.service.board.BoardService;
 public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
-	BoadDAO boardDAO;
+	BoardDAO boardDAO;
 	
 	public void createBoard(BoardVO boardVO) {
 		boardDAO.createBoard(boardVO);
@@ -36,13 +36,13 @@ public class BoardServiceImpl implements BoardService {
 
 
 	@Override
-	public BoardVO getBoard(int boardSeq) {
-		return boardDAO.getBoard(boardSeq);
+	public BoardVO getBoard(BoardVO boardVO) {
+		return boardDAO.getBoard(boardVO);
 	}
 
 	@Override
-	public void updateBoardCnt(int boardSeq) {
-		boardDAO.updateBoardCnt(boardSeq);
+	public void updateBoardCnt(BoardVO boardVO) {
+		boardDAO.updateBoardCnt(boardVO);
 		
 	}
 
@@ -60,8 +60,8 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	@Override 
-	public int createNextBoardSeq() {
-		return boardDAO.createNextBoardSeq();
+	public int createNextBoardSeq(String boardCategory) {
+		return boardDAO.createNextBoardSeq(boardCategory);
 	}
 
 	@Override
@@ -70,9 +70,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardFileVO> getBoardFile(int boardSeq) {
+	public List<BoardFileVO> getBoardFileList(BoardVO boardVO) {
 		// TODO Auto-generated method stub
-		return null;
+		return boardDAO.getBoardFileList(boardVO);
 	}
 
 	@Override

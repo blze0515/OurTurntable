@@ -15,9 +15,9 @@ public interface BoardService {
 
 	List<BoardVO> getBoardList(Map<String, String> paramMap, Criteria cri);
 	
-	BoardVO getBoard(int boardSeq);
+	BoardVO getBoard(BoardVO boardVO);
 	
-	void updateBoardCnt(int boardSeq);
+	void updateBoardCnt(BoardVO boardVO);
 	
 	void updateBoard(BoardVO boardVO);
 	
@@ -27,11 +27,12 @@ public interface BoardService {
 	
 	int getBoardCnt(Map<String, String> paramMap);
 	
-	int createNextBoardSeq();
+	int createNextBoardSeq(String boardCategory);
 	
 	void createBoardFile(List<BoardFileVO> imgList);
 	
-	List<BoardFileVO> getBoardFile(int boardSeq);
+	//등록한 파일들을 순서대로 불러오기
+	List<BoardFileVO> getBoardFileList(BoardVO boardVO);
 	
 	void deleteBoardFile(BoardFileVO boardFileVO);
 

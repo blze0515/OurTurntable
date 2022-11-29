@@ -64,11 +64,18 @@
 				$.ajax({
 					url: '/user/login.do',
 					type: 'post',
+//					jquery serialize 사용하는 이유
+//					JQuery Ajax로 호출하기 전에 serialize를 해주면 form 안의 값들을
+//					한 번에 전송 가능한 data로 만들 수 있어서 많은 data를 보낼때 유용하다.
+//					(Ajax가 아닌 다른 상황에서도 사용 할 수 있음)
+//					형태:  $("form id 또는 name").serialize();
+//					정리 : id=loginForm 안에 있는 데이터 들을 묶어서 한 번에 받아오는 기능.
 					data: $("#loginForm").serialize(),
-					//obj는 임의로 정한 이름
+					
+//					obj는 임의로 정한 이름
 					success: function(obj) {
 						const data = JSON.parse(obj);
-						
+
 						//1. 아이디 체크
 						if(data.message == 'idFail') {
 							alert("존재하지 않는 아이디입니다.");
@@ -83,6 +90,10 @@
 						//3. 로그인 처리
 						location.href = "/index.jsp";
 						console.log('login success');
+//						document.write("data에 담긴 값 : " + JSON.stringi(data));    -> 출력 결과 : data에 담긴 값 : {"message":"loginSuccess"}
+//						document.write("obj에 담긴 값 : " + JSON.stringi(data));    -> 출력 결과 : JSON.parse(obj)에 담긴 값 : "{\r\n \"message\" : \"loginSuccess\"\r\n}"
+//	obj에 담긴 값 확인		obj는 "mesagge : loginSuccess" 담기 위해 사용
+//						document.write("******************JSON.parse(obj)에 담긴 값 : " + JSON.stringify(obj));
 					},
 					error: function(e) {
 						console.log(e);
@@ -90,6 +101,7 @@
 				});
 			});
 		});
+
 	</script>
 </body>
 </html>
