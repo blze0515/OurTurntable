@@ -1,6 +1,6 @@
 package com.spring.ott.service.user;
 
-import com.spring.ott.VO.UserVO;
+import com.spring.ott.vo.UserVO;
 
 public interface UserService {
 

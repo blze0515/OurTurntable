@@ -31,30 +31,30 @@ public class MainController {
 	public String about(int boardSeq,MultipartHttpServletRequest multipartHttpServletRequest,
 			HttpServletRequest request) throws IOException {
 		//FileUpload 예제
-		FileUtils fileUtils = new FileUtils();
+		//FileUtils fileUtils = new FileUtils();
 		
 		//실제 멀티파트 파일 리스트
-		List<MultipartFile> multipartFileList = fileUtils.parseFileInfo(boardSeq, request, multipartHttpServletRequest);
+	///	List<MultipartFile> multipartFileList = fileUtils.parseFileInfo(boardSeq, request, multipartHttpServletRequest);
 		
 		//DB에 저장될 파일정보 리스트
 //		List<BoardFileVO> boardFileList = new ArrayList<BoardFileVO>();
 		
-		for(MultipartFile multipartFile : multipartFileList) {
-			if(!multipartFile.isEmpty()) {
-//				BoardFileVO boardFile = new BoardFileVO();
+//		for(MultipartFile multipartFile : multipartFileList) {
+//			if(!multipartFile.isEmpty()) {
+////				BoardFileVO boardFile = new BoardFileVO();
+////				
+////				boardFile.setBoardSeq(boardSeq);
+////				boardFile.setOriginalFileName(multipartFile.getOriginalFilename());
+////				String uuid = UUID.randomUUID().toString();
+////				boardFile.setFileName(uuid + multipartFile.getOriginalFilename());
+////				boardFile.setFilePath(rootPath + attachPath);
+////				
+////				boardFileList.add(boardFile);
 //				
-//				boardFile.setBoardSeq(boardSeq);
-//				boardFile.setOriginalFileName(multipartFile.getOriginalFilename());
-//				String uuid = UUID.randomUUID().toString();
-//				boardFile.setFileName(uuid + multipartFile.getOriginalFilename());
-//				boardFile.setFilePath(rootPath + attachPath);
-//				
-//				boardFileList.add(boardFile);
-				
-				//파일 업로드 처리는 FileUtils의 uploadFile메소드 사용
-				fileUtils.uploadFile(multipartFile, request);
-			}
-		}
+//				//파일 업로드 처리는 FileUtils의 uploadFile메소드 사용
+//				///fileUtils.uploadFile(multipartFile, request);
+//			}
+//		}
 		
 		return "/WEB-INF/views/services";
 	}

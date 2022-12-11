@@ -2,8 +2,8 @@ package com.spring.ott.service.chat;
 
 import java.util.List;
 
-import com.spring.ott.VO.ChatVO;
 import com.spring.ott.common.CamelHashMap;
+import com.spring.ott.vo.ChatVO;
 
 public interface ChatService {
 

@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.ott.Criteria;
-import com.spring.ott.VO.BoardFileVO;
-import com.spring.ott.VO.BoardVO;
-import com.spring.ott.VO.PageVO;
-import com.spring.ott.VO.UserVO;
 import com.spring.ott.service.board.BoardService;
 import com.spring.ott.utils.FileUtils;
+import com.spring.ott.vo.BoardFileVO;
+import com.spring.ott.vo.BoardVO;
+import com.spring.ott.vo.PageVO;
+import com.spring.ott.vo.UserVO;
 
 
 @Controller

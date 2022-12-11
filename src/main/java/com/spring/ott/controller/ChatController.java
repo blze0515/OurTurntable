@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.ott.VO.ChatVO;
-import com.spring.ott.VO.UserVO;
 import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.chat.ChatService;
+import com.spring.ott.vo.ChatVO;
+import com.spring.ott.vo.UserVO;
 
 @Controller
 @RequestMapping("/chat")

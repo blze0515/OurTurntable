@@ -3,11 +3,9 @@ package com.spring.ott.service.board;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.spring.ott.Criteria;
-import com.spring.ott.VO.BoardFileVO;
-import com.spring.ott.VO.BoardVO;
+import com.spring.ott.vo.BoardFileVO;
+import com.spring.ott.vo.BoardVO;
 
 public interface BoardService {
 	

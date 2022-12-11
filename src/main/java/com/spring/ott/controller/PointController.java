@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.spring.ott.VO.UserVO;
 import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.point.PointService;
+import com.spring.ott.vo.UserVO;
 
 @Controller
 @RequestMapping("/point")

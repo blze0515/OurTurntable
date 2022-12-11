@@ -8,8 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.spring.ott.VO.ChatVO;
 import com.spring.ott.common.CamelHashMap;
+import com.spring.ott.vo.ChatVO;
 
 @Repository
 public class ChatDAO {

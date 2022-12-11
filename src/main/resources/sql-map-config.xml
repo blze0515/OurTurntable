@@ -11,9 +11,9 @@
 	
 	<!-- VO객체의 별칭 지정 -->
 	<typeAliases>
-		<typeAlias type="com.spring.ott.VO.UserVO" alias="user"></typeAlias>
-		<typeAlias type="com.spring.ott.VO.BoardVO" alias="board"></typeAlias>
-		<typeAlias type="com.spring.ott.VO.BoardFileVO" alias="boardFile"></typeAlias>
+		<typeAlias type="com.spring.ott.vo.UserVO" alias="user"></typeAlias>
+		<typeAlias type="com.spring.ott.vo.BoardVO" alias="board"></typeAlias>
+		<typeAlias type="com.spring.ott.vo.BoardFileVO" alias="boardFile"></typeAlias>
 		<typeAlias type="com.spring.ott.common.CamelHashMap" alias="camelHashMap"></typeAlias>
 	</typeAliases>
 	

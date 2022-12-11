@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.ott.VO.ChatVO;
 import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.chat.ChatService;
+import com.spring.ott.vo.ChatVO;
 
 @Service
 public class ChatServiceImpl implements ChatService{

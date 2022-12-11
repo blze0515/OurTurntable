@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.ott.VO.UserVO;
 import com.spring.ott.service.user.UserService;
+import com.spring.ott.vo.UserVO;
 
 @Controller
 @RequestMapping("/user")

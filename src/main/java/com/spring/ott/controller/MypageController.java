@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.spring.ott.VO.UserVO;
 import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.mypage.MypageService;
+import com.spring.ott.vo.UserVO;
 
 @Controller
 @RequestMapping("/mypage")

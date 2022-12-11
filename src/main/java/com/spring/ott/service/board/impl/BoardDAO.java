@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.ott.Criteria;
-import com.spring.ott.VO.BoardFileVO;
-import com.spring.ott.VO.BoardVO;
+import com.spring.ott.vo.BoardFileVO;
+import com.spring.ott.vo.BoardVO;
 
 @Repository
 public class BoardDAO {
