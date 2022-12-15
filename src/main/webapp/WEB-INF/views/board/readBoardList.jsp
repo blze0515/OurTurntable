@@ -26,6 +26,7 @@
 		<div class="container" style="width:75%;">
 			<div class="row text-left justify-content-center mb-5" style="margin-bottom: -1rem!important;">
 				<div class="col-lg-12">
+				
 					<h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3></div>
 			</div>
 
@@ -61,32 +62,15 @@
 			</form>
 			<table class="tr-table-border">
 					<tr class="tr-head tr-center tr-table-border">
-						<td class="tr-seq th-padding">글번호</td>
-						<td class="tr-title th-padding">제 목</td>
-						<td class="tr-nick th-padding tr-left">작성자</td>
-						<td class="tr-date th-padding">작성일</td>
-						<td class="tr-view th-padding">조회수</td>
-						<td class="tr-like th-padding">좋아요</td>
-						<td class="tr-donation">후원금액</td>
+						<th class="tr-seq th-padding">글번호</th>
+						<th class="tr-title th-padding">제 목</th>
+						<th class="tr-nick th-padding tr-left">작성자</th>
+						<th class="tr-date th-padding">작성일</th>
+						<th class="tr-view th-padding">조회수</th>
+						<th class="tr-like th-padding">좋아요</th>
+						<th class="tr-donation">후원금액</th>
 					</tr>
 					
-					 <tr class="tr-content tr-center tr-table-border">
-							<td class="tr-seq td-padding">test-hard</td>
-							<td class="tr-title td-padding tr-left">
-								<div>
-									<a href="/board/readBoard.do">test-title</a>
-								</div>
-							</td>
-							<td class="tr-nick td-padding tr-left">
-								<div>
-									<a href="#">test-writer</a>
-								</div>
-							</td>
-							<td class="tr-date td-padding">test-hard</td>
-							<td class="tr-view td-padding">좋아요</td>
-							<td class="tr-like td-padding">후원금액</td>
-							<td class="tr-donation"></td>
-							</tr>
 			 	    <c:forEach var="board" items="${boardList }">
 						<tr class="tr-content tr-center tr-table-border">
 							<td class="tr-seq td-padding">${board.rownum }</td>
@@ -101,6 +85,7 @@
 								</div>
 							</td>
 							<td class="tr-date td-padding">${board.boardRgstdate }</td>
+							<td class="tr-like td-padding">${board.boardViewcount }</td>
 							<td class="tr-view td-padding">좋아요</td>
 							<td class="tr-like td-padding">후원금액</td>
 							<td class="tr-donation"></td>

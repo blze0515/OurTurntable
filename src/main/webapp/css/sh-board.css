@@ -1,0 +1,102 @@
+	.pagination {
+		list-style: none;
+		width: 100%;
+		display: inline-block;
+	}
+	
+	.pagination_button {
+		float: left;
+		margin-left: 5px;
+	}
+	
+	.searchMenu{
+		display:flex;
+		justify-content:end;
+		margin-bottom:15px;
+		margin-top:16px;
+	}
+	
+	.boardList-table{
+		width: 700px; 
+		border-collapse: collapse;
+	}
+	
+	.charge-style01{
+		text-align: center;
+		background-color: #f8f8f8;
+	}
+	
+	.charge-style02{
+		text-align: -webkit-center;
+		font-size:11px;
+		color:#a1a1a1;
+		width:100%;
+		border-top:2px solid gray;
+		border-bottom:1px solid gray;
+	}
+	
+	.charge-style03{
+		height: 100px;
+		width: 100%;
+		padding-top: 20px;
+		line-height: 2;
+		font-size: 15px;
+		text-align: center;
+		background-color: #f8f8f8;
+		margin: 5px 0 20px 0;
+		
+	}
+	
+	.charge-style04{
+		margin: 20px 0 30px 0;
+		display:flex;
+		justify-content: center;
+		width: 100%;	
+		
+	}
+	
+	
+	table{
+		border-collapse: collapse;
+		width: 70%;
+	}
+	col:nth-child(1){
+		width:15%;
+	}
+	col:nth-child(2){
+		width:35%;
+	}
+	col:nth-child(3){
+		width:50%;
+	}
+	
+	table th{
+	font-size:16px;
+	text-align: center;
+	color: black;
+	padding: 10px 15px 10px 15px;
+	}
+	
+	table td{
+	font-size: 14px;
+	color: black;
+	padding: 10px 15px 10px 15px;
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+	}
+	
+	tr td:first-child, tr td:nth-child(2){
+	text-align: center;
+	}
+	
+	tr td:last-child{
+	padding-left: 15%;
+	}
+	
+	tr span{
+	font-weight: 600;
+	color: rgb(124,14,24);
+	font-style: italic;
+	}
+
+	

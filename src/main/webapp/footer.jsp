@@ -22,9 +22,9 @@
 						<div class="widget">
 							<h3 class="heading">Contact</h3>
 							<ul class="list-unstyled quick-info links">
-								<li class="email"><a href="#">mail@example.com</a></li>
-								<li class="phone"><a href="#">+82 10 212 3819</a></li>
-								<li class="address"><a href="#">서울특별시 강남구 역삼동 819-3, <br>5층~9층</a></li>
+								<li class="email"><a href="#">scardzem@naver.com</a></li>
+								<li class="phone"><a href="#">+82 10 3036 4206</a></li>
+								<li class="address"><a href="#">서울특별시 강남구 역삼동 819-3, <br>5층~9층 비트캠프 강남 본원</a></li>
 							</ul>
 						</div>
 					</div>

@@ -66,13 +66,12 @@
 								     								<!-- ?뒤로 queryString (뒤에는 파라미터 키=벨류) -->
 								<li><a href="/board/readBoardList.do?boardCategory=F">자유 게시판</a></li>
 								<li><a href="/board/readBoardList.do?boardCategory=S">자랑 게시판</a></li>
-								<li><a href="/board/readBoardList.do?boardCategory=R">추천 게시판</a></li>
-								<li><a href="/board/createBoard.do?boardCategory=S">자랑게시판 글쓰기 페이지</a></li>
+								<li><a href="/board/readRecBoardList.do?boardCategory=R">추천 게시판</a></li>
 							</ul>
 						</li>
 <!----------------------<li><a href="/main/services.do">Services</a></li>	 -->
-						<li><a href="/mypage/readFollowList.do">팔로우</a></li>
-						<li><a href="/main/contact.do">문의</a></li>
+						<li><a href="/point/readChargePoint.do">포인트 충전</a></li>
+						<li><a href="/board/bookmark.do">북마크</a></li>
 						<!-- 로그인/회원가입/마이페이지 드롭다운 -->
 						<li class="has-children">
 						  <c:choose>
@@ -90,8 +89,9 @@
 										<li><a href="/user/createUser.do">회원가입</a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="/mypage/myMain.do">마이페이지</a></li>
+										<li><a href="/mypage/readMypage.do">마이페이지</a></li>
 										<li><a href="javascript:void(0)" onClick="javascript:logout()">로그아웃</a></li>
+										<li><a href="/user/contact.do">문의하기</a>
 									</c:otherwise>
 								</c:choose>
 							</ul>

@@ -73,15 +73,19 @@ public class ChatController {
 	@GetMapping("/readChatroomList.do")
 	public String readFollowList(HttpSession session, Model model) {
 		UserVO loginUser = new UserVO();
-		loginUser =  (UserVO)session.getAttribute("loginUser");
+		loginUser = (UserVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "WEB-INF/views/user/login";
+		}
 		
-		List<CamelHashMap> chatroomList = chatService.readChatroomList(loginUser.getUserId());
 		
-//		for(int i=0; i < chatroomList.size(); i++) {
-//			System.out.println("Ãª·ë¸ñ·Ï: " + chatroomList.get(i).toString());
-//		}
-		
-		model.addAttribute("chatroomList", chatroomList);
+//		List<CamelHashMap> chatroomList = chatService.readChatroomList(loginUser.getUserId());
+//		
+////		for(int i=0; i < chatroomList.size(); i++) {
+////			System.out.println("Ãª·ë¸ñ·Ï: " + chatroomList.get(i).toString());
+////		}
+//		
+//		model.addAttribute("chatroomList", chatroomList);
 		
 		return "/WEB-INF/views/readChatroomList";
 	}

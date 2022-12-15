@@ -68,14 +68,14 @@
 		 ON AAA.CHATROOM_SEQ = BBB.CHATROOM_SEQ;
 	</select>
 	
-	<select id="readChatList" parameterType="int" resultType="com.spring.ott.VO.ChatVO">
+	<select id="readChatList" parameterType="int" resultType="com.spring.ott.vo.ChatVO">
 		SELECT * from T_OTT_CHAT
 			WHERE CHATROOM_SEQ = #{chatroomSeq}
 	</select>
 	
-	<insert id="createChat" parameterType="com.spring.ott.VO.ChatVO">
+	<insert id="createChat" parameterType="com.spring.ott.vo.ChatVO">
 		INSERT INTO T_OTT_CHAT
-		(CHAT_SEQ, CHATROOM_SEQ, USER_ID, CHAT_RECEIVE_ID, CHAT_CONTENT, CHAT_RGSDATE, CHAT_READYN)
+		(CHAT_SEQ, CHATROOM_SEQ, USER_ID, CHAT_RECEIVE_ID, CHAT_CONTENT, CHAT_RGSTDATE, CHAT_READYN)
 		VALUES(
 			(SELECT IFNULL(MAX(A.CHAT_SEQ), 0) + 1 FROM T_OTT_CHAT A)
 			, #{chatroomSeq}, #{userId}, #{chatReceiveId}, #{chatContent}, NOW(), 'N')
@@ -92,7 +92,7 @@
 	<update id="updateChatroomMemberYn" parameterType="map">
 		UPDATE  T_OTT_CHATROOM
 			SET
-				CHATROOM_MEMBER1_YN = CASE WHEN CHATROOM_MEMBER1 = #{userId} THEN 'N' ELSE 'Y' END,
+				CHATROOM_MEMBER1_YN = (CASE WHEN CHATROOM_MEMBER1 = #{userId} THEN 'N' ELSE 'Y' END),
 			    CHATROOM_MEMBER2_YN = CASE WHEN CHATROOM_MEMBER2 = #{userId} THEN 'N' ELSE 'Y' END
 			WHERE
 				CHATROOM_SEQ = #{chatroomSeq}

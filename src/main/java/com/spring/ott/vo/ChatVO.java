@@ -11,6 +11,6 @@ public class ChatVO {
 	private String userId;
 	private String chatReceiveId;
 	private String chatContent;
-	private Date chatRgsdate;
+	private Date chatRgstdate;
 	private char chatReadyn;
 }

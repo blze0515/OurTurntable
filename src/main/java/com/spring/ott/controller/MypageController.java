@@ -21,8 +21,15 @@ public class MypageController {
 	MypageService mypageService;
 	
 //  readMypage
-	@RequestMapping("/myMain.do")
-	public String readMypage() {
+	@RequestMapping("/readMypage.do")
+	public String readMypage(HttpSession session) {
+		
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+//		System.out.println("마이페이지 로그인 유저 정보 : " + loginUser.toString());
+		if(loginUser==null){
+			return "WEB-INF/views/user/login";
+		}
+		
 		return "/WEB-INF/views/mypage/readMypage";
 	}
 	
@@ -34,15 +41,18 @@ public class MypageController {
 	public String readFollowList(HttpSession session, Model model) {
 		UserVO loginUser = new UserVO();
 		loginUser =  (UserVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "/WEB-INF/views/user/login";
+		}
 		
-		List<CamelHashMap> followingList = mypageService.readFollowingList(loginUser.getUserId());
-		
-//		for(int i=0; i < followingList.size(); i++) {
-//			System.out.println(followingList.get(i).toString());
-//		}
-		
-		model.addAttribute("relationCondition", "following");
-		model.addAttribute("relationUserList", followingList);
+//		List<CamelHashMap> followingList = mypageService.readFollowingList(loginUser.getUserId());
+//		
+////		for(int i=0; i < followingList.size(); i++) {
+////			System.out.println(followingList.get(i).toString());
+////		}
+//		
+//		model.addAttribute("relationCondition", "following");
+//		model.addAttribute("relationUserList", followingList);
 		
 		return "/WEB-INF/views/readRelationList";		
 	}
@@ -52,16 +62,19 @@ public class MypageController {
 	public String readFollowerList(HttpSession session, Model model) {
 		UserVO loginUser = new UserVO();
 		loginUser =  (UserVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "/WEB-INF/views/user/login";
+		}
 		
-		List<CamelHashMap> followerList = mypageService.readFollowerList(loginUser.getUserId());
-		
-//		for(int i=0; i < followerList.size(); i++) {
-//			System.out.println(followerList.get(i).toString());
-//		}
-		
-		model.addAttribute("relationCondition", "follower");
-		model.addAttribute("relationUserList", followerList);
-		
+//		List<CamelHashMap> followerList = mypageService.readFollowerList(loginUser.getUserId());
+//		
+////		for(int i=0; i < followerList.size(); i++) {
+////			System.out.println(followerList.get(i).toString());
+////		}
+//		
+//		model.addAttribute("relationCondition", "follower");
+//		model.addAttribute("relationUserList", followerList);
+//		
 		return "/WEB-INF/views/readRelationList";		
 	}	
 	
@@ -70,15 +83,18 @@ public class MypageController {
 	public String readBlockList(HttpSession session, Model model) {
 		UserVO loginUser = new UserVO();
 		loginUser =  (UserVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "/WEB-INF/views/user/login";
+		}
 		
-		List<CamelHashMap> readBlockList = mypageService.readBlockList(loginUser.getUserId());
-		
-//		for(int i=0; i < readBlockList.size(); i++) {
-//			System.out.println(readBlockList.get(i).toString());
-//		}
-		
-		model.addAttribute("relationCondition", "block");
-		model.addAttribute("relationUserList", readBlockList);
+//		List<CamelHashMap> readBlockList = mypageService.readBlockList(loginUser.getUserId());
+//		
+////		for(int i=0; i < readBlockList.size(); i++) {
+////			System.out.println(readBlockList.get(i).toString());
+////		}
+//		
+//		model.addAttribute("relationCondition", "block");
+//		model.addAttribute("relationUserList", readBlockList);
 		
 		return "/WEB-INF/views/readRelationList";	
 	}

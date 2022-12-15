@@ -54,6 +54,8 @@ public class BoardController {
 		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
 		System.out.println("리스트로 받아온 파람맵 = = = = == = == = == "+paramMap);
 		
+		System.out.println("model에 담긴 값=========="+model.toString());
+		System.out.println("paramMap에 담긴 값=========="+paramMap.toString());
 		
 		//total = 작성돼있는 총 게시물 수 가져오는 변수
 		//getboardCnt에도 쿼리에 카테고리에 대한 조건을 줘야 해당 카테고리에 대한 글 개수를 표시할 수 있다.
@@ -66,11 +68,11 @@ public class BoardController {
 		for(int i=0; i < boardList.size(); i++) {
 			System.out.println("보드리스트= " +boardList.get(i).toString());
 		}
-		System.out.println("모델 속성 추가하기 전에 출력 ========================= "+model.toString());
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pageMaker", new PageVO(cri, total));
 		
-		System.out.println("모델 출력 ========================= "+model.toString());
+		
+		
 		
 //		S 검색조건 선택했을 때 사용
 		if(paramMap.get("searchCondition") != null && !paramMap.get("searchCondition").equals("")) {
@@ -95,10 +97,17 @@ public class BoardController {
 		return "/WEB-INF/views/board/readBoardList";
 	}
 	
-//	readRecBoadList (추천게시판 목록 조회)
+//	readRecBoadList (추천게시판 목록 조회)///////////////////////////////////////////////////////
 	@RequestMapping("/readRecBoardList.do")
-	public String readRecBoardList() {
-		return "/WEB-INF/views/readRecBoardList";
+	public String readRecBoardList(HttpSession session, Model model,
+			@RequestParam Map<String, String> paramMap, Criteria cri) {
+		return "/WEB-INF/views/board/readRecBoardList";
+	}
+	
+	//북마크 페이지 이동
+	@RequestMapping("/bookmark.do")
+	public String bookmarkView() {
+		return "WEB-INF/views/board/bookmark";
 	}
 	
 //	readBoard (게시글 상세 조회)
@@ -123,6 +132,8 @@ public class BoardController {
 		BoardVO board = boardService.getBoard(boardVO);
 		List<BoardFileVO> fileList = boardService.getBoardFileList(boardVO);
 		
+		//request.setAttribute == model
+		//session, request, model, applicationcontext, jsp // 이것들에 담긴 건 EL표기법으로 사용 가능
 		model.addAttribute("board", board);
 		model.addAttribute("fileList", fileList);
 		
@@ -205,7 +216,7 @@ public class BoardController {
 //	updateBoard (게시글 수정)
 	@RequestMapping("/updateBoard.do")
 	public String updateBoard(BoardVO boardVO, HttpServletRequest request,
-			MultipartHttpServletRequest multipartServletRequest) throws IOException {
+			MultipartHttpServletRequest multipartServletRequest, Model model ) throws IOException {
 //		FileUtils fileUtils = new FileUtils();
 		int boardSeq = boardVO.getBoardSeq();
 		
@@ -214,20 +225,23 @@ public class BoardController {
 //		if(!CollectionUtils.isEmpty(fileList)) {
 //			boardService.insertBoardFile(fileList);
 //		}
-		
+		model.addAttribute("boardCategory", boardVO.getBoardCategory());
+		model.addAttribute("boardSeq", boardVO.getBoardSeq());	
 		boardService.updateBoard(boardVO);
 		
-//		return "redirect:/board/readBoardList.do?boardCategory="+boardVO.getBoardCategory()+"&boardSeq="+boardVO.getBoardSeq();
-		return "redirect:/board/readBoard.do?boardSeq="+boardVO.getBoardSeq();
+//		return "redirect:/board/readBoardList.do?boardCategory="+boardVO.getBoardCategory();
+//			매개변수에 @RequestParam Map<String, String> paramMap 넣어서 paramMap으로 넣을땐
+		return "redirect:/board/readBoard.do";
+//		return "redirect:/board/readBoard.do?boardCategory="+boardVO.getBoardCategory()+"&boardSeq="+boardVO.getBoardSeq();
 	}
 	
 //	deleteBoard (게시글 삭제)
 
 	@RequestMapping(value="/deleteBoard.do")
-	public String deleteBoard(@RequestParam int boardSeq) {
-		boardService.deleteBoard(boardSeq);
+	public String deleteBoard(BoardVO boardVO) {
+		boardService.deleteBoard(boardVO.getBoardSeq());
 		
-		return "redirect:/board/readBoardList.do";
+		return "redirect:/board/readBoardList.do?boardCategory="+boardVO.getBoardCategory();
 	}
 
 

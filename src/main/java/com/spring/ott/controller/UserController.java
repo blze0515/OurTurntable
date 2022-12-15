@@ -54,7 +54,7 @@ public class UserController {
 	@PostMapping("/createUser.do")
 	public String createUser(UserVO userVO) {
 		System.out.println("11111111111");
-		System.out.println(userVO.toString());
+		System.out.println("회원가입 성공 " + userVO.toString());
 		//회원가입 정보가 넘어오지 않았을 때는 회원가입 화면으로
 		//if(userVO.getUserId() == null || userVO.getUserId().equals("")) {
 			//return "/WEB-INF/views/user/createUser";
@@ -93,14 +93,15 @@ public class UserController {
 				jsonMap.put("message", "pwFail");
 			} else {
 				//3. 로그인 처리
+//				login(userVO)에는 로그인한 id,pw확인하고 UserVO(*) 리턴.
 				UserVO user = userService.login(userVO);
 //키나 벨류 이런거 모를 때 session 안에 이 때 뭐가 들어있는지 알고 싶으면?
-				System.out.println("홈페이지 접속 시 session : " + session);
+//				System.out.println("홈페이지 접속 시 session : " + session);
 
 				
 				
 				session.setAttribute("loginUser", user);
-				System.out.println("로그인 직후 session : " + session.getAttribute("loginUser"));
+//				System.out.println("로그인 직후 session : " + session.getAttribute("loginUser"));
 				
 				jsonMap.put("message", "loginSuccess");
 			}
@@ -143,9 +144,25 @@ public class UserController {
 		return "redirect:/index.jsp";
 	}
 	
+	@RequestMapping(value="/contact.do", method=RequestMethod.GET)
+	public String contactView(HttpSession session) {
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "WEB-INF/views/user/login";
+		}
+		
+		return "WEB-INF/views/user/contact";
+	}
 	
+	@GetMapping("/updatePw.do")
+	public String updatePwView() {
+		return "/WEB-INF/views/user/updatePw";
+	}
 	
-	
+	@PostMapping("updatePw.do")
+	public String updatePw() {
+		return "";
+	}
 	
 	
 	

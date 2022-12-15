@@ -35,7 +35,8 @@
 	<!-- Root Logger -->
 	<root>
 		<priority value="debug" />
-		<appender-ref ref="console" />
+<!-- 디버그 메시지때문에 콘솔창 도배돼서 주석처리해놓음 -->
+<!-- 		<appender-ref ref="console" /> -->
 	</root>
 	
 </log4j:configuration>
