@@ -12,12 +12,13 @@
 	
 	<div class="untree_co-section">
 		<div class="container my-5">
-	<h3 style="text-align:center;" id="categoryName"> 상세</h3>
+			<h3 style="text-align:center;" id="categoryName"> </h3>
+	
 			<div style="display:block; justify-content: center; align-items: center;">
 				
 				<div style="display:flex; justify-content:center; width:100%;">
 					<form action="/board/updateBoard.do" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
+					<input type="hidden" name="boardCategory" id="boardCategory" value="${board.boardCategory }">
 						<input type="hidden" name="boardSeq" value="${board.boardSeq }">
 						<table border="1" style="border-collapse: collapse;">
 							<tr>
@@ -99,7 +100,9 @@
 					<a href="/board/createFBoard.do">글 쓰기</a><br>
 <!--********** ***************************************************
 	id="btnDelete"를 놔두면 버튼이 hide 됨(script에는 로그인유저가 열면 삭제가 보여야 되는데 숨겨짐) -->
-					<a id="btnDelete" href="/board/deleteBoard.do?boardSeq=${board.boardSeq }">글 삭제</a>
+<!-- 					board.boardSeq는 boardController에서 model.addAttribute("board", board);로 "board"에 
+						BoardVO를 담아놓았기 때문에 board.boardCategory로 사용 할 수 있는 것 -->
+					<a id="btnDelete" href="/board/deleteBoard.do?boardSeq=${board.boardSeq }&boardCategory=${board.boardCategory}">글 삭제</a>
 					
 					<!-- <a href="/board/deleteBoard.do?boardSeq=${board.boardSeq }">글 삭제</a> -->
 					<a href="/board/readBoardList.do?boardCategory=${board.boardCategory }">글 목록 보기</a><br>
@@ -140,8 +143,12 @@
 		
 		$(function() {
 			//상단 게시판 이름 표시 ("#id~") <- Jquery 문법
-			if($("#categoryName")=="F"){
-				$("#categoryName").text("자유게시판 ");
+			if($("#boardCategory").val()=="F"){
+				$("#categoryName").text("자유게시판");
+			} else if ($("#boardCategory").val()=="S"){
+				$("#categoryName").text("자랑게시판");
+			} else if ($("#boardCategory").val()=="R"){
+				$("#categoryName").text("추천게시판");
 			}
 			
 			

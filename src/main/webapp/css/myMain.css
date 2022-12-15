@@ -5,11 +5,11 @@
 	margin-bottom: 5%;
 }
 .monthInfo img{
-	width:150px;
-	height:150px;
+	width:100px;
+	height:100px;
 }
 .monthInfo a{
-	font-size: 50px;
+	font-size: 35px;
 }
 .myInfo{
 	display: grid;

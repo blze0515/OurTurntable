@@ -14,7 +14,7 @@
 	<div class="untree_co-section" style="margin-top:5%;">
 	    <div class="container" style="max-width:1200px; padding:0; display:flex;">
 		     <jsp:include page="${pageContext.request.contextPath }/mySide.jsp"></jsp:include>   
-	         <div class="container-content" style="width:80%; padding-left:5%;">
+	         <div class="container-content" style="width:75%; padding-left:5%;">
 	         	<!-- 이번달 요약 정보 -->
 	         	<div class="monthInfo">
 	         		<!-- 수익 -->
@@ -75,10 +75,15 @@
 		         			<table>       				
 			         				<tr>
 			         					<c:choose>
-				         					<!-- 게시물 번호 -->
-				         					<th>번호</th>
-				         					<!-- 게시물 제목 -->
-				         					<td>제목 입니다~~~~~~~~</td>
+										<c:when test="${loginUser eq null }">
+											<li><a href="/user/login.do">로그인</a></li>
+										</c:when>
+										<c:otherwise>
+					         					<!-- 게시물 번호 -->
+					         					<th>번호</th>
+					         					<!-- 게시물 제목 -->
+					         					<td>제목 입니다~~~~~~~~</td>
+										</c:otherwise>
 			         					</c:choose>
 			         				</tr>
 		         			</table>
@@ -95,10 +100,15 @@
 		         			<table>       				
 			         				<tr>
 			         					<c:choose>
-				         					<!-- 게시물 번호 -->
-				         					<th>번호</th>
-				         					<!-- 게시물 제목 -->
-				         					<td>제목 입니다~~~~~~~~</td>
+										<c:when test="${loginUser eq null }">
+											<li><a href="/user/login.do">로그인</a></li>
+										</c:when>
+										<c:otherwise>
+					         					<!-- 게시물 번호 -->
+					         					<th>번호</th>
+					         					<!-- 게시물 제목 -->
+					         					<td>제목 입니다~~~~~~~~</td>
+										</c:otherwise>
 			         					</c:choose>
 			         				</tr>
 		         			</table>
@@ -115,10 +125,15 @@
 		         			<table>       				
 			         				<tr>
 			         					<c:choose>
-				         					<!-- 게시물 번호 -->
-				         					<th>번호</th>
-				         					<!-- 게시물 제목 -->
-				         					<td>제목 입니다~~~~~~~~</td>
+										<c:when test="${loginUser eq null }">
+											<li><a href="/user/login.do">로그인</a></li>
+										</c:when>
+										<c:otherwise>
+					         					<!-- 게시물 번호 -->
+					         					<th>번호</th>
+					         					<!-- 게시물 제목 -->
+					         					<td>제목 입니다~~~~~~~~</td>
+										</c:otherwise>
 			         					</c:choose>
 			         				</tr>
 		         			</table>

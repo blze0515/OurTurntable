@@ -49,6 +49,13 @@
 				    </tr>
 				  </thead>
 				  <tbody>
+	  					<tr>
+							<th scope="row">1</th>
+							<td><img src="/../images_img_1.jpg" width="150px"> </td>
+							<td>팔로워</td>
+							<td>2022-12-11</td>
+							<td><button type="button" class="btn btn-secondary">해제</button></td>
+						</tr>
 				    <c:forEach var="relationUser" items="${relationUserList }">
 						<tr>
 							<th scope="row">1</th>

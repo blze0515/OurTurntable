@@ -22,6 +22,15 @@
 				<div class="chat-space" style="width: 100%; display: flex;">
 					<div class="chat-space-left" style="width: 30%;">
 						<h1>대화방 목록</h1>
+			<ul class="list-group">
+					<li class="list-group-item" style="cursor: pointer;" onclick="onClickLi(this)">
+					  <span class="d-block">1</span>
+					  <span class="d-block"><img src="/images/img_1.jpg" width="50px"></span>
+					  <span class="d-block">1</span>
+					  <span class="d-block">채팅내용</span>
+					  <span class="d-block">1</span>
+				  	</li>
+			</ul>
 						<ul class="list-group">
 							<c:forEach var="chatRoom" items="${chatroomList }">
 								<li class="list-group-item" style="cursor: pointer;" onclick="onClickLi(this)">

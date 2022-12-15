@@ -10,29 +10,29 @@
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
-	
-	
 	<div class="untree_co-section" style="margin-top:5%;">
-	    <div class="container" style="max-width:1200px; padding:0; display:flex;">
-	    	<jsp:include page="${pageContext.request.contextPath }/mySide.jsp"></jsp:include>        
-       		<div class="container-content" style="width: 950px; margin-left: 5%">
+	    <div class="container" style="max-width:1140px; padding:0; display:flex;">
+	    	<jsp:include page="${pageContext.request.contextPath }/mySide.jsp"></jsp:include>  
+	    	
+	    	      
+       		<div class="container-content" style="width: 890px; margin-left: 5%">
        			<h1>포인트 충전 및 사용내역 확인</h1>
 		
 				<table class="table table-striped">
 				  <thead>
 				    <tr>
 				      <th scope="col">날짜 및 시간</th>
-				      <th scope="col">사용 내역</th>
+				      <th scope="col">충전 포인트</th>
 					  <!-- 사용내역은 구분코드(1, 2, 3,...)에 따라 조건문 돌려서 다른 메세지가 나오게 하기 -->
 				      <th scope="col">금액(+, -)</th>
-				      <th scope="col">회원</th>
+				      <th scope="col">상대</th>
 				      <!-- 회원은 포인트를 후원했거나 후원 받았을 경우에만 아이디 표기하기 -->
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <c:forEach var="pointHistory" items="${pointHistoryList }">
 						<tr>
-							<th scope="row">${pointHistory.pointRgsdate }</th>
+							<th scope="row">${pointHistory.pointRgstdate }</th>
 							
 							<c:choose>
 						        <c:when test="${pointHistory.pointCommonCode == '1'}">
@@ -85,14 +85,6 @@
     </div>
 	
 	<jsp:include page="${pageContext.request.contextPath }/footer.jsp"></jsp:include>
-	
-	<div id="overlayer"></div>
-  <div class="loader">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-  
   	<script>
 	</script>
 </body>
