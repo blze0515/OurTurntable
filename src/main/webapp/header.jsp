@@ -70,7 +70,7 @@
 							</ul>
 						</li>
 <!----------------------<li><a href="/main/services.do">Services</a></li>	 -->
-						<li><a href="/point/readChargePoint.do">포인트 충전</a></li>
+						<li><a href="/point/readChargePoint.do">포인트 충전하기</a></li>
 						<li><a href="/board/bookmark.do">북마크</a></li>
 						<!-- 로그인/회원가입/마이페이지 드롭다운 -->
 						<li class="has-children">

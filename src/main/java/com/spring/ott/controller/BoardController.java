@@ -94,15 +94,53 @@ public class BoardController {
 //		userVO.setUserId("sh");
 //		model.addAttribute("user", userVO);
 		
-		return "/WEB-INF/views/board/readBoardList";
+		
+		if(paramMap.get("boardCategory")=="R") {
+		return "/WEB-INF/views/board/readRecBoardList";
+		} else {
+			System.out.println("paramMap============================"+paramMap.get("boardCategory"));
+			return "/WEB-INF/views/board/readBoardList";
+		}
 	}
 	
-//	readRecBoadList (추천게시판 목록 조회)///////////////////////////////////////////////////////
+	//////////////////////////////recboardList.do 임시
 	@RequestMapping("/readRecBoardList.do")
-	public String readRecBoardList(HttpSession session, Model model,
+	public String readRecBoardListView(HttpSession session, Model model,
 			@RequestParam Map<String, String> paramMap, Criteria cri) {
-		return "/WEB-INF/views/board/readRecBoardList";
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			return "/WEB-INF/views/user/login";
+		}
+		
+		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
+		
+		int total = boardService.getBoardCnt(paramMap);
+		
+		//게시물 정보 출력
+		for(int i=0; i < boardList.size(); i++) {
+			System.out.println("보드리스트= " +boardList.get(i).toString());
+		}
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pageMaker", new PageVO(cri, total));
+		
+		
+//		S 검색조건 선택했을 때 사용
+		if(paramMap.get("searchCondition") != null && !paramMap.get("searchCondition").equals("")) {
+			System.out.println("searchCondition================" + paramMap.get("searchCondition"));
+			model.addAttribute("searchCondition", paramMap.get("searchCondition"));
+		}
+		
+		if(paramMap.get("searchKeyword") != null && !paramMap.get("searchKeyword").equals("")) {
+			model.addAttribute("searchKeyword", paramMap.get("searchKeyword"));
+		}
+//		E 검색조건 선택
+		
+		model.addAttribute("boardCategory", paramMap.get("boardCategory"));
+		
+		return "WEB-INF/views/board/readRecBoardList";
 	}
+	
 	
 	//북마크 페이지 이동
 	@RequestMapping("/bookmark.do")
@@ -137,6 +175,7 @@ public class BoardController {
 		model.addAttribute("board", board);
 		model.addAttribute("fileList", fileList);
 		
+		
 		return "/WEB-INF/views/board/readBoard";
 	}
 	
@@ -148,8 +187,11 @@ public class BoardController {
 		
 //		boardService.createBoard(boardVO)
 		model.addAttribute("boardCategory", boardCategory);
-		
-		return "/WEB-INF/views/board/createBoard";
+		if(boardCategory=="R") {
+			return "WEB-INF/views/board/createRecBoard";
+		}  else {
+			return "/WEB-INF/views/board/createBoard";
+		}
 	}
 	
 	@RequestMapping(value="/createBoard.do", method=RequestMethod.POST, produces="text/html; charset=UTF-8")

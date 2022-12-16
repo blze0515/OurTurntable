@@ -18,15 +18,19 @@ display:none;
 		<div class="container my-5">
 	
 			<div class="board-form" >
-<!-- 게시판 제목 script로 표시함 / header에서 컨트롤러 타고 넘어온 페이지라 model에 boardCategory 담겨서 옴. -->
+<!-- 게시판 제목 <script>로 표시함 / header에서 컨트롤러 타고 넘어온 페이지라 model에 boardCategory 담겨서 옴. -->
 			<h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3>
 			
-								<!-- 노션 메모에 enctype form-data 메모(form-data는 파일 등록할때 주로 쓴다고함) -->
 			<form action="/board/createBoard.do" method="post" enctype="multipart/form-data">
 			<!-- input hidden은 form 을 submit 하면 input들도 같이 넘어가는데 boardCategory 값을 넘겨주기 위해서 추가한 것임. -->
 				<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
 				<table border="1" style="border-collapse: collapse">
 					<tbody>
+						<tr>
+							<td style="text-align:center;">
+								<img src="/images/heart-empty.png">
+							</td>
+						</tr>
 						<tr>
 							<td style="background: orange; width: 70px;">
 								제목
@@ -40,8 +44,6 @@ display:none;
 								작성자
 							</td>
 							<td style="text-align: left;">
-	<!-- value="${loginUser.userId } 이렇게 쓸 수 있는 이유가 log 후에 게시판에 들어오게 되었을 때에는
-	UserController에서 setAttribute로 loginUser 키로 userVO를 저장해놨기 때문에 EL표기법으로(JSTL) 작성자를 가져올 수 있음 -->
 								<input type="text" name="userId" value="${loginUser.userId }" readonly="">
 							</td>
 						</tr>
