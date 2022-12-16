@@ -6,9 +6,10 @@
 <meta charset="UTF-8">
 <title></title>
 <style>
-/*form input::file-selector-button{
-display:none;
-}*/
+.back-img{width:550px; height:auto;}
+tr td{height: 50px;}
+tr td input{height:30px; border: none; background-color: unset;}
+.td-2{width:600px;}
 </style>
 </head>
 <body>
@@ -27,36 +28,42 @@ display:none;
 				<table border="1" style="border-collapse: collapse">
 					<tbody>
 						<tr>
-							<td style="text-align:center;">
-								<img src="/images/heart-empty.png">
+							<td style="background: orange; width: 100px;">
+								사진
+							</td>
+							<td class="td-2">
+								<img class="back-img" src="${pageContext.request.contextPath }/images/cafe-Earth17.png" alt="기본사진">
 							</td>
 						</tr>
 						<tr>
-							<td style="background: orange; width: 70px;">
-								제목
+							<td style="background: orange; width: 100px;" >
+								상호 또는 단체명
 							</td>
-							<td style="text-align: left;">
-								<input type="text" name="boardTitle" id="boardTitle" required="">
+							<td class="td-2" style="text-align: left;">
+								<input type="text" name="boardTitle" id="boardTitle" required="" style="width:100%;" autofocus>
 							</td>
 						</tr>
 						<tr>
 							<td style="background: orange;">
 								작성자
 							</td>
-							<td style="text-align: left;">
-								<input type="text" name="userId" value="${loginUser.userId }" readonly="">
+							<td class="td-2" style="text-align: left;">
+								<input type="text" name="userId" value="${loginUser.userId }" readonly>
 							</td>
 						</tr>
 						<tr>
-							<td style="background: orange; width: 70px;">
-								내용
+							<td style="background: orange; width: 100px;">
+								정보 <br>
+								(공연 정보 /<br> 
+								메뉴 추천 / <br>
+								가격 정보 등)
 							</td>
-							<td style="text-align: left;">
-								<textarea name="boardContent" cols="40" rows="10" required=""></textarea>
+							<td class="td-2" style="text-align: left;">
+								<textarea name="boardContent" cols="40" rows="10" required="" style="width:100%;height:250px;"></textarea>
 							</td>
 						</tr>
 						<tr>
-							<td style="background: orange; width: 70px;">
+							<td style="background: orange; width: 100px;">
 								업로드
 							</td>
 							<td align="left">

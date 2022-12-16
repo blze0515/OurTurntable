@@ -27,7 +27,7 @@
 			
 			<div class="" style="border:solid gray 2px;">
 			<div class="flex-right" style="height:20px; margin:15px 15px 10px 0; text-align:end!important;">
-				<a href="/board/readBoardList.do">
+				<a href="/board/readBoardList.do?boardCategory=S">
 					더 보기 <img src="/images/img_logo.jpg" style="height:20px;">
 				</a>
 			</div>
