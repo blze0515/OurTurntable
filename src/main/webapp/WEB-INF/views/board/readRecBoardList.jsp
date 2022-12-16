@@ -245,7 +245,7 @@
 				<div class="flex-right" style="margin-bottom:50px;">
 				<!-- 글쓰기 화면에서도 일단 전부 input 만들어놓고 카테고리별로 필요 없는건 input에 disabled 주고 hide까지 줘야 한다.
 					disabled만 주면 화면에는 보이기 때문에 -->
-				<a href="/board/createBoard.do?boardCategory=${boardCategory }">
+				<a href="/board/createRecBoard.do?boardCategory=${boardCategory }">
 					<button type="button">
 						글쓰기
 					</button>
