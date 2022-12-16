@@ -15,7 +15,7 @@
 	
 	.pagination_button {
 		float: left;
-		margin-left: 5px;
+		margin: 0 5px 0 5px;
 	}
 </style>
 </head>
@@ -30,6 +30,7 @@
 					<h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3></div>
 			</div>
 
+<!-- 검색메뉴 -->
 			<form id="searchForm" action="/board/readBoardList.do" method="post">
 				<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
 								<!-- 키 값으로 객체를 꺼낸 뒤, 객체의 값을 꺼내는데 항상 field 이름으로 꺼낸다. -->

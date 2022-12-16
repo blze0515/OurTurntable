@@ -1615,3 +1615,34 @@ padding: 7rem 0 15rem 0;*/
     .board-form tr{
     text-align: center;
     }
+
+
+/* readBoard S     */
+	.like{
+	width: 100%;
+	display:flex;
+	justify-content: end;
+	}
+    
+    .like button{
+	    margin:5px 5px 5px 5px;
+	}
+    
+    .like img{
+    width: 25px;
+    height: 25px;
+    }
+/* readBoard E     */
+
+
+/* readRecBoard S */
+
+  .page-item a{
+    color:black;
+  }
+  .searchbar{
+    margin-bottom:5%;
+    display: flex;
+    justify-content:flex-end;
+  }
+ /* readRecBoard E */
