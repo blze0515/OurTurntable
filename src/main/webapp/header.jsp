@@ -66,11 +66,11 @@
 								     								<!-- ?뒤로 queryString (뒤에는 파라미터 키=벨류) -->
 								<li><a href="/board/readBoardList.do?boardCategory=F">자유 게시판</a></li>
 								<li><a href="/board/readBoardList.do?boardCategory=S">자랑 게시판</a></li>
-								<li><a href="/board/readRecBoardList.do?boardCategory=R">추천 게시판</a></li>
+								<li><a href="/board/readBoardList.do?boardCategory=R">추천 게시판</a></li>
 							</ul>
 						</li>
 <!----------------------<li><a href="/main/services.do">Services</a></li>	 -->
-						<li><a href="/point/readChargePoint.do">포인트 충전하기</a></li>
+						<li><a href="/point/createPoint.do">포인트 충전하기</a></li>
 						<li><a href="/board/bookmark.do">북마크</a></li>
 						<!-- 로그인/회원가입/마이페이지 드롭다운 -->
 						<li class="has-children">

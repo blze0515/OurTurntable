@@ -21,11 +21,11 @@
 				<div style="display:flex; justify-content:center; width:100%;">
 					<form action="/board/updateBoard.do" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="boardCategory" id="boardCategory" value="${board.boardCategory }">
-						<input type="hidden" name="boardSeq" value="${board.boardSeq }">
-						<div class="like" style="margin-top:15px;">
-							<button class="donation-btn"><img src="/images/donation.png" alt="후원하기"></button>
-							<button class="like-btn"><img src="/images/bookmark-empty.png" alt="북마크"></button>
-							<button class="like-btn"><img src="/images/heart-empty.png" alt="북마크"></button>
+					<input type="hidden" name="boardSeq" value="${board.boardSeq }">
+						<div class="co-btn" style="margin-top:15px;">
+							<button class="donation-btn"><img src="${pageContext.request.contextPath }/images/donation.png" alt="후원하기"></button>
+							<button class="like-btn"><img src="${pageContext.request.contextPath }/images/bookmark-empty.png" alt="북마크"></button>
+							<button class="like-btn"><img src="${pageContext.request.contextPath }/images/heart-empty.png" alt="북마크"></button>
 						</div>
 						<table border="1" style="border-collapse: collapse;">
 							<tr>
@@ -146,14 +146,13 @@
 		//후원하기 버튼 숨김
 	  	if($("#boardCategory").val() == "F" ) {
 	        $(".donation-btn").hide();
-	        
 	        //$("#boardWriter").hide();
 	     } else if($("#boardCategory").val() == "R") {
 	    	 $(".donation-btn").hide();
 	     } 
-		
+
+		//상단 게시판 이름 표시 ("#id~") <- Jquery 문법
 		$(function() {
-			//상단 게시판 이름 표시 ("#id~") <- Jquery 문법
 			if($("#boardCategory").val()=="F"){
 				$("#categoryName").text("자유게시판");
 			} else if ($("#boardCategory").val()=="S"){
@@ -163,6 +162,7 @@
 			}
 			
 			
+			//작성자 외에 제목, 콘텐츠 읽기만 가능하게 만들기
 			const loginUserId = '${loginUser.userId}';
 			const boardWriter = '${board.userId}';
 			

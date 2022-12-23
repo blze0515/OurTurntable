@@ -10,6 +10,7 @@ public class Criteria {
 	private int startNum;
 	
 	public Criteria() {
+		
 		this(1, 10);
 	}
 	
@@ -18,8 +19,11 @@ public class Criteria {
 		this.amount = amount;
 	}
 	
+	//board-mapping에 LIMIT #{cri.amount} OFFSET #{cri.startNum} 이부분
+	//LIMIT(몇 개) OFFSET(0부터) <- 0부터 시작(index[0])
+	
 	@Override
-	//object가 최상위 객체이고 @~~~어쩌고로 출력되는데(object 클래스 가보면) 알아보기 쉽게 출력하기위해서 쓴것임.
+	//object가 최상위 객체이고 (object 클래스 가보면)@~~~어쩌고로 출력되는데 알아보기 쉽게 출력하기위해서 쓴것임.
 	public String toString() {
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", startNum=" + startNum + "]";
 	}
