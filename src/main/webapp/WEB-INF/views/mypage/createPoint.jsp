@@ -18,7 +18,7 @@
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
 		<div class="untree_co-section">
 			<div class="container" style="width:75%;">
-		<form action="/point/createChargePoint.do" name="chargeForm" method="post" >
+		<form action="/point/createPoint.do" name="chargeForm" method="post" >
 		
 		<div class="charge-style01">
 			<p style="margin-bottom:5px;">LP를 구매하여 친구에게 선물하기, 후원을 할 수 있습니다.</p>
@@ -66,8 +66,11 @@
 		
 		
 		<div class="charge-style04">
-			<input type="button" value="충전하기">
+			<input type="submit" value="충전하기">
 		</div>
+		
+		<input type="hidden" name="pointMoney" id="pointMoney">
+		
 		</form>
 		
 		
@@ -79,6 +82,18 @@
 		</div>
 	<jsp:include page="${pageContext.request.contextPath }/footer.jsp"></jsp:include>
 	
+
+
+	<script>
+		$(function(){
+			$("#pointMoney").val(100)
+			
+			$("input[name='lp']").on("click", function(){
+				$("#pointMoney").val($(this).val())
+			});
+			
+		});
+	</script>
 
 </body>
 </html>

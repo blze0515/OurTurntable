@@ -31,37 +31,23 @@ public class UserController {
 		return "/WEB-INF/views/user/myPage";
 	}
 	
-//	@GetMapping("/createUser.do")
-//	public String createUserView () {
-//		return "/WEB-INF/views/user/createUser";
-//	}
-	
-	/*221102 한글 깨지는지 테스트 utf-8 저장*/ 
 	
 	@GetMapping("/createUser.do")
 	public String createUserView() {
-		//회원가입 정보가 넘어오지 않았을 때는 회원가입 화면으로
-		//if(userVO.getUserId() == null || userVO.getUserId().equals("")) {
-			//return "/WEB-INF/views/user/createUser";
-		//} else {
-			//회원가입 정보가 넘어왔을 때는 회원가입 처리 후 로그인 화면으로
 		return "/WEB-INF/views/user/createUser";
-			
-		//}
 	}
 	
 //	createUser ( 쉶 썝媛  엯)
 	@PostMapping("/createUser.do")
 	public String createUser(UserVO userVO) {
-		System.out.println("11111111111");
-		System.out.println("회원가입 성공 " + userVO.toString());
+		
 		//회원가입 정보가 넘어오지 않았을 때는 회원가입 화면으로
 		//if(userVO.getUserId() == null || userVO.getUserId().equals("")) {
 			//return "/WEB-INF/views/user/createUser";
 		//} else {
 			//회원가입 정보가 넘어왔을 때는 회원가입 처리 후 로그인 화면으로
 			userService.createUser(userVO);
-			
+			System.out.println("회원가입 성공 " + userVO.toString());
 			return "/WEB-INF/views/user/login";
 		//}
 	}
@@ -99,7 +85,7 @@ public class UserController {
 //				System.out.println("홈페이지 접속 시 session : " + session);
 
 				
-				
+				//로그인 유저의 정보를 불러와서 session에 담는다.(웹에서 기본 30분 유지)
 				session.setAttribute("loginUser", user);
 //				System.out.println("로그인 직후 session : " + session.getAttribute("loginUser"));
 				
@@ -117,6 +103,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/idCheck.do")
+	//회원가입 시 id 중복확인 기능
 	//ViewResolver를 타게 되면 ResponseBody를 HTML 구조로 만들어서 화면을 리턴
 	//ViewResolver를 안태우고 반환 값 자체를 ResponseBody로 만들려면 @ResponseBody 사용
 	@ResponseBody
@@ -142,16 +129,6 @@ public class UserController {
 		session.invalidate();
 		
 		return "redirect:/index.jsp";
-	}
-	
-	@RequestMapping(value="/contact.do", method=RequestMethod.GET)
-	public String contactView(HttpSession session) {
-		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-		if(loginUser==null) {
-			return "WEB-INF/views/user/login";
-		}
-		
-		return "WEB-INF/views/user/contact";
 	}
 	
 	@GetMapping("/updatePw.do")

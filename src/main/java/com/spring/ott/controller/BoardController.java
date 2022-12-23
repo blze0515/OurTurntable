@@ -51,11 +51,19 @@ public class BoardController {
 			return "/WEB-INF/views/user/login";
 		}
 		
+		//카테고리 R일때는 9개 가져오고 나머지는 10개 가져와서 게시판 리스트에 표출
+		if(paramMap.get("boardCategory").equals("R")) {
+			cri.setAmount(9);
+		} else {
+			cri.setAmount(10);
+		}
+		
 		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
 		System.out.println("리스트로 받아온 파람맵 = = = = == = == = == "+paramMap);
 		
 		System.out.println("model에 담긴 값=========="+model.toString());
 		System.out.println("paramMap에 담긴 값=========="+paramMap.toString());
+		
 		
 		//total = 작성돼있는 총 게시물 수 가져오는 변수
 		//getboardCnt에도 쿼리에 카테고리에 대한 조건을 줘야 해당 카테고리에 대한 글 개수를 표시할 수 있다.
@@ -66,8 +74,9 @@ public class BoardController {
 		
 		//게시물 정보 출력
 		for(int i=0; i < boardList.size(); i++) {
-			System.out.println("보드리스트= " +boardList.get(i).toString());
+		System.out.println("보드리스트= " +boardList.get(i).toString());
 		}
+		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pageMaker", new PageVO(cri, total));
 		
@@ -95,69 +104,12 @@ public class BoardController {
 //		model.addAttribute("user", userVO);
 		
 		
-		if(paramMap.get("boardCategory")=="R") {
+		if("R".equals(paramMap.get("boardCategory"))) {
 		return "/WEB-INF/views/board/readRecBoardList";
 		} else {
 			System.out.println("paramMap============================"+paramMap.get("boardCategory"));
 			return "/WEB-INF/views/board/readBoardList";
 		}
-	}
-	
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////// recboardList.do 임시 ///////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////recboardList.do 임시 ///////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping("/readRecBoardList.do")
-	public String readRecBoardListView(HttpSession session, Model model,
-			@RequestParam Map<String, String> paramMap, Criteria cri) {
-		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-		
-		if(loginUser == null) {
-			return "/WEB-INF/views/user/login";
-		}
-		
-		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
-		
-		int total = boardService.getBoardCnt(paramMap);
-		
-		//게시물 정보 출력
-		for(int i=0; i < boardList.size(); i++) {
-			System.out.println("보드리스트= " +boardList.get(i).toString());
-		}
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("pageMaker", new PageVO(cri, total));
-		
-		
-//		S 검색조건 선택했을 때 사용
-		if(paramMap.get("searchCondition") != null && !paramMap.get("searchCondition").equals("")) {
-			System.out.println("searchCondition================" + paramMap.get("searchCondition"));
-			model.addAttribute("searchCondition", paramMap.get("searchCondition"));
-		}
-		
-		if(paramMap.get("searchKeyword") != null && !paramMap.get("searchKeyword").equals("")) {
-			model.addAttribute("searchKeyword", paramMap.get("searchKeyword"));
-		}
-//		E 검색조건 선택
-		
-		model.addAttribute("boardCategory", paramMap.get("boardCategory"));
-		
-		return "WEB-INF/views/board/readRecBoardList";
 	}
 	
 	
@@ -189,13 +141,18 @@ public class BoardController {
 		BoardVO board = boardService.getBoard(boardVO);
 		List<BoardFileVO> fileList = boardService.getBoardFileList(boardVO);
 		
+		
 		//request.setAttribute == model
 		//session, request, model, applicationcontext, jsp // 이것들에 담긴 건 EL표기법으로 사용 가능
 		model.addAttribute("board", board);
 		model.addAttribute("fileList", fileList);
 		
+		if(boardVO.getBoardCategory().equals("R")) {
+			return "WEB-INF/views/board/readRecBoard";
+		} else {
+			return "/WEB-INF/views/board/readBoard";
+		}
 		
-		return "/WEB-INF/views/board/readBoard";
 	}
 	
 //	createBoard (게시글 등록)
@@ -206,7 +163,7 @@ public class BoardController {
 		
 //		boardService.createBoard(boardVO)
 		model.addAttribute("boardCategory", boardCategory);
-		if(boardCategory=="R") {
+		if("R".equals(boardCategory)) {
 			return "WEB-INF/views/board/createRecBoard";
 		}  else {
 			return "/WEB-INF/views/board/createBoard";
@@ -270,100 +227,15 @@ public class BoardController {
 			boardService.createBoard(boardVO);
 		}
 		
-		return "redirect:/board/readBoardList.do?boardCategory="+boardVO.getBoardCategory();
-//		return "redirect:/board/readBoard.do?boardCategory="+boardVO.getBoardCategory();
-	}
-	
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////createRecBoard.do 임시 //////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////createRecBoard.do 임시 //////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value="/createRecBoard.do", method=RequestMethod.GET)
-	public String createRecBoardView(@RequestParam("boardCategory") String boardCategory, Model model) {
-		
-//		boardService.createBoard(boardVO)
-		model.addAttribute("boardCategory", boardCategory);
-
-			return "/WEB-INF/views/board/createRecBoard";
-		
-	}
-	
-	@RequestMapping(value="/createRecBoard.do", method=RequestMethod.POST, produces="text/html; charset=UTF-8")
-	public String createRecBoard(HttpSession session, BoardVO boardVO, HttpServletRequest request,
-			MultipartHttpServletRequest multipartServletRequest) throws IOException {
-		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-		System.out.println("boardVO============================" + boardVO.toString());
-		if(loginUser == null) {
-			return "/WEB-INF/views/user/login";
-		}
-		
-		int boardSeq = boardService.createNextBoardSeq(boardVO.getBoardCategory());
-		
-		FileUtils fileUtils = new FileUtils();
-		
-//		파일업로드 처리 및 속성 값들이 세팅된 BoardFileVO의 목록 리턴
-		List<Map<String, Object>> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
-//		List<MultipartFile> fileList = fileUtils.parseFileInfo(boardSeq, request, multipartServletRequest);
-//		imgList = BoardFileVO 객체를 담는 리스트(BoardFileVO타입) / BoardFileVO = 파일 객체
-		List<BoardFileVO> imgList = new ArrayList<BoardFileVO>();
-		
-		boardVO.setBoardSeq(boardSeq);
-		
-		if(!CollectionUtils.isEmpty(fileList)) {
-//			boardService.createBoardFile(fileList);
-			//자랑 게시판에서는 파일을 하나만 첨부할 것이기 때문에 fileList.get(0)으로 첫번째 것만 가져온다.
-			if(boardVO.getBoardCategory().equals("S")) {
-				
-				boardVO.setBoardMfile(fileList.get(0).get("fileName").toString());
-				boardVO.setOriginalFileName(fileList.get(0).get("originalFileName").toString());
-				
-				boardService.createBoard(boardVO);
-			} else {
-				boardService.createBoard(boardVO);
-				
-				//파일이 있으면(size>0) 파일을 추가해서 보내기
-				if(fileList.size() > 0) {
-					//1. List<Map>>
-					//boardService.createBoardFile(fileList);
-					
-					//2. VO
-					for(int i = 0; i < fileList.size(); i++) {
-						BoardFileVO boardFile = new BoardFileVO();
-//						Seq, 카테고리, '파일'(fileList)
-						boardFile.setBoardSeq(boardSeq);
-						boardFile.setBoardCategory(boardVO.getBoardCategory());
-						boardFile.setImgFile(fileList.get(i).get("fileName").toString());
-						boardFile.setImgOriginFile(fileList.get(i).get("originalFileName").toString());
-						
-						imgList.add(boardFile);
-					}
-					
-					boardService.createBoardFile(imgList);
-				}
-			}
+		if(boardVO.getBoardCategory().equals("R")) {
+			return "redirect:/board/readBoardList.do?boardCategory="+boardVO.getBoardCategory();
 		} else {
-			boardService.createBoard(boardVO);
-		}
-		
 		return "redirect:/board/readBoardList.do?boardCategory="+boardVO.getBoardCategory();
 //		return "redirect:/board/readBoard.do?boardCategory="+boardVO.getBoardCategory();
+		}
+		 
 	}
+	
 	
 	
 	
@@ -389,7 +261,11 @@ public class BoardController {
 		
 //		return "redirect:/board/readBoardList.do?boardCategory="+boardVO.getBoardCategory();
 //			매개변수에 @RequestParam Map<String, String> paramMap 넣어서 paramMap으로 넣을땐
+		if(boardVO.getBoardCategory().equals("R")) {
+			return "redirect:/board/readBoardList.do";
+		} else {
 		return "redirect:/board/readBoard.do";
+		}
 //		return "redirect:/board/readBoard.do?boardCategory="+boardVO.getBoardCategory()+"&boardSeq="+boardVO.getBoardSeq();
 	}
 	

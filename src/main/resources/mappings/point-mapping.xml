@@ -48,4 +48,26 @@
 				WHERE A.USER_ID = B.USER_ID
 			) BB
 	</select>	
+	
+	<select id="chargePoint" parameterType="point">
+	<![CDATA[
+		INSERT INTO T_OTT_POINT(
+			POINT_SEQ,
+			USER_ID,
+			POINT_COMMON_CODE,
+			POINT_MONEY,
+			POINT_RGSTDATE
+		) VALUES (
+			(
+				SELECT IFNULL(MAX(A.POINT_SEQ),0) + 1 
+					FROM T_OTT_POINT A
+			),
+			#{userId},
+			'1',
+			#{pointMoney},
+			NOW()
+		)
+	]]>
+
+	</select>
 </mapper>

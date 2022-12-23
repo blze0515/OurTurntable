@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.mypage.MypageService;
@@ -128,5 +129,13 @@ public class MypageController {
 //	readMyLikeList (내가좋아요 누른 게시글 조회)
 
 
-	
+	@RequestMapping(value="/contact.do", method=RequestMethod.GET)
+	public String contactView(HttpSession session) {
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "WEB-INF/views/user/login";
+		}
+		
+		return "WEB-INF/views/mypage/contact";
+	}
 }

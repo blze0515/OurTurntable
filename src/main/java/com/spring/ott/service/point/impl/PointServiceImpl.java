@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.point.PointService;
+import com.spring.ott.vo.PointVO;
 
 @Service
 public class PointServiceImpl implements PointService{
@@ -22,5 +23,10 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public int readPointBalance(String userId) {
 		return pointDAO.readPointBalance(userId);
+	}
+	
+	@Override
+	public void chargePoint(PointVO point) {
+		pointDAO.chargePoint(point);
 	}
 }

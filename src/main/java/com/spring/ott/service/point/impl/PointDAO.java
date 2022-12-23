@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.ott.common.CamelHashMap;
+import com.spring.ott.vo.PointVO;
 
 @Repository
 public class PointDAO {
@@ -20,6 +21,10 @@ public class PointDAO {
 
 	public int readPointBalance(String userId) {
 		return mybatis.selectOne("PointDAO.readPointBalance", userId);
+	}
+	
+	public void chargePoint(PointVO point) {
+		mybatis.insert("PointDAO.chargePoint", point);
 	}
 
 }

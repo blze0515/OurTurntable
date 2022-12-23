@@ -1497,7 +1497,7 @@ padding: 7rem 0 15rem 0;*/
 	display:table-column;
 	}
 	
-	/*占쏙옙占쏙옙화占쏙옙 占쌉시깍옙 占쏙옙占 ******************************************/
+	/*메인화면 게시글 목록******************************************/
 	.sh-container{
 	max-width:90%;
 	}
@@ -1547,7 +1547,7 @@ padding: 7rem 0 15rem 0;*/
 	}
 	
 	
-	/*占쌘띰옙占쌉쏙옙占쏙옙 style****************************************/
+	/*자랑게시판 style****************************************/
 	.board-table{
 	border-bottom: 2px solid white;
 	border-top: 2px solid white;
@@ -1559,7 +1559,7 @@ padding: 7rem 0 15rem 0;*/
 	justify-content:right;
 	}
 	
-	/*占쏙옙占쏙옙占쌉쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쌓쏙옙트*************占쏙옙 占쏙옙 트*************************/
+	/*자유게시판 적용 전 테스트*************테 스 트*************************/
 	
 	.tr-table-border{
 	border-bottom: 2px solid white;
@@ -1618,17 +1618,19 @@ padding: 7rem 0 15rem 0;*/
 
 
 /* readBoard S     */
-	.like{
+	.co-btn{
 	width: 100%;
 	display:flex;
 	justify-content: end;
 	}
     
-    .like button{
+    .co-btn button{
 	    margin:5px 5px 5px 5px;
+	    background-color: unset;
+	    border-style: hidden;
 	}
     
-    .like img{
+    .co-btn img{
     width: 25px;
     height: 25px;
     }
@@ -1637,12 +1639,28 @@ padding: 7rem 0 15rem 0;*/
 
 /* readRecBoard S */
 
-  .page-item a{
-    color:black;
-  }
-  .searchbar{
-    margin-bottom:5%;
-    display: flex;
-    justify-content:flex-end;
-  }
+	.recList-Wrapper{
+		display:grid; 
+		gap:15px;
+/* 		grid-template-columns:repeat(auto-fit, minmax(30%, auto)); */
+		grid-template-columns:repeat(3, 1fr);
+		margin-top: 6%;
+		margin-bottom: 50px;
+	}
+
+	.page-item a{
+		color:black;
+	}
+	.searchbar{
+		margin-bottom:5%;
+		display: flex;
+		justify-content:flex-end;
+	}
+	
+/* 	List페이지 게시물 이미지 */
+	.item img{
+		width:300px;
+	}
+
+  
  /* readRecBoard E */

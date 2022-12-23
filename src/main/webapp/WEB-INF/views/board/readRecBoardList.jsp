@@ -5,12 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
-<style>
-	.item img{
-	width:300px;
-	}
-</style>
+<title>추천 장소 게시판</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/sh-board.css">
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
@@ -24,12 +20,9 @@
 					<h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3></div>
 			</div>
 
-<!-- 검색메뉴 -->	     	
-			<form id="searchForm" action="/board/readRecBoardList.do" method="post">
+<!-- 검색메뉴 S-->	     	
+			<form id="searchForm" action="/board/readBoardList.do" method="post">
 				<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
-								<!-- 키 값으로 객체를 꺼낸 뒤, 객체의 값을 꺼내는데 항상 field 이름으로 꺼낸다. -->
-								<!-- boardController의 "sh 예시" 부분 확인 -->
-<%-- 				<input type="hidden" name="userId" id="userId" value="${user.userId }"> --%>
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 				<table border="1" style="width: 700px; border-collapse: collapse;">
@@ -55,8 +48,7 @@
 					</tr>
 				</table>
 			</form>
-	     	
-	     	
+<!-- 검색메뉴 E-->	  
 <!-- 기존 검색 메뉴  	     	
 		     <div class="searchbar">
 		     	  <select name="searchCondition" style="width:90px; height:35px; margin-right:5px;">
@@ -76,12 +68,38 @@
 	              </form>
 	          </div>
 -->  
+<!-- 게시글 컨텐츠 부분 S -->
+					
+					<div class="recList-Wrapper">
+					<c:forEach var="board" items="${boardList }">
+				        <div class="item">
+				            <img src="${pageContext.request.contextPath }/images/menu1.jpg" alt="메뉴1">
+				            <span class="d-flex align-items-center loc mb-2">
+								<span class="icon-room mr-3"></span>
+								<span>수원 영통구</span>
+							</span>
+							<div class="d-flex align-items-center">
+								<div>
+									<h3>
+										<a href="/board/readBoard.do?boardSeq=${board.boardSeq }
+										&boardCategory=${board.boardCategory}" style="font-weight:600">
+										${board.boardTitle }
+										</a>
+									</h3>
+									<div class="price ml-auto">
+										<span style="font-weight:400;">- 라이브 카페</span>
+									</div>
+								</div>							
+							</div>
+				        </div>
+				        </c:forEach>
+				    </div>
+				    
+<!-- 게시글 컨텐츠 부분 E -->
+				    
 
-	         
-	    	<div class="wrapper grid" style="display:grid; gap:15px;
-	    									 grid-template-columns:repeat(auto-fit, minmax(30%, auto));
-											 margin-top: 6%;
-										     margin-bottom: 50px;">
+<!-- 페이지게시물예시자료 S
+	    	<div class="recList-Wrapper">
 				        <div class="item">
 				            <img src="${pageContext.request.contextPath }/images/menu1.jpg" alt="메뉴1">
 				            <span class="d-flex align-items-center loc mb-2">
@@ -101,7 +119,7 @@
 				            <img src="${pageContext.request.contextPath }/images/menu2.jpg" alt="메뉴2">
 				             <span class="d-flex align-items-center loc mb-2">
 								<span class="icon-room mr-3"></span>
-								<span>수원 영통구</span>
+								<span>수원 영통구111</span>
 							</span>
 							<div class="d-flex align-items-center">
 								<div>
@@ -218,9 +236,28 @@
 							</div>
 				        </div>
 				    </div>
+
+--><!-- 페이지게시물예시자료 E -->
+
+
+				    
+				    
+<!--             글쓰기, 페이지네이션 추가 -->
+				<div class="flex-right" style="margin-bottom:50px;">
+				<!-- 글쓰기 화면에서도 일단 전부 input 만들어놓고 카테고리별로 필요 없는건 input에 disabled 주고 hide까지 줘야 한다.
+					disabled만 주면 화면에는 보이기 때문에 -->
+				<a href="/board/createBoard.do?boardCategory=${boardCategory }">
+					<button type="button">
+						글쓰기
+					</button>
+					</a>
+				</div>				    
+				    
 			    </div>
 		    </div>
      
+     
+<!-- 기존 페이지네이션      
        		<div>
                 <ul class="pagination" style="display: flex; justify-content: center;">
                    <li class="page-item">
@@ -239,18 +276,11 @@
                    </li>
                 </ul>
             </div>
+ -->           
+     
+     
             
-            
-<!--             글쓰기, 페이지네이션 추가 -->
-				<div class="flex-right" style="margin-bottom:50px;">
-				<!-- 글쓰기 화면에서도 일단 전부 input 만들어놓고 카테고리별로 필요 없는건 input에 disabled 주고 hide까지 줘야 한다.
-					disabled만 주면 화면에는 보이기 때문에 -->
-				<a href="/board/createRecBoard.do?boardCategory=${boardCategory }">
-					<button type="button">
-						글쓰기
-					</button>
-					</a>
-				</div>
+
 			
 
 				<div >
