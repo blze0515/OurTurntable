@@ -28,4 +28,9 @@ public class MypageServiceImpl implements MypageService{
 	public List<CamelHashMap> readFollowerList(String userId) {
 		return mypageDAO.readFollowerList(userId);
 	}
+	
+	@Override
+	public int readUserPoint(String userId) {
+		return mypageDAO.readUserPoint(userId);
+	}
 }

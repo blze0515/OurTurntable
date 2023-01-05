@@ -70,6 +70,7 @@
 							</ul>
 						</li>
 <!----------------------<li><a href="/main/services.do">Services</a></li>	 -->
+						<li><a href="/test/readTest.do">테스트페이지</a></li>
 						<li><a href="/point/createPoint.do">포인트 충전하기</a></li>
 						<li><a href="/board/bookmark.do">북마크</a></li>
 						<!-- 로그인/회원가입/마이페이지 드롭다운 -->
@@ -90,8 +91,9 @@
 									</c:when>
 									<c:otherwise>
 										<li><a href="/mypage/readMypage.do">마이페이지</a></li>
+										<!-- javascript: <- 스크립트에서 찾게 만드는 문구(안써도 됨) -->
 										<li><a href="javascript:void(0)" onClick="javascript:logout()">로그아웃</a></li>
-										<li><a href="/user/contact.do">문의하기</a>
+										<li><a href="/mypage/contact.do">문의하기</a>
 									</c:otherwise>
 								</c:choose>
 							</ul>
@@ -113,6 +115,7 @@
 	
 	<script>
 		/* 로그아웃 요청을 POST로 보내기 */
+		//
 		function logout(){
 		    let f = document.createElement('form');
 		    f.setAttribute('method', 'post');

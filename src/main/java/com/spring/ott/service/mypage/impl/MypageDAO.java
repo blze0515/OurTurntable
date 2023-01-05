@@ -25,4 +25,8 @@ public class MypageDAO {
 	public List<CamelHashMap> readFollowerList(String userId) {
 		return mybatis.selectList("MypageDAO.readFollowerList", userId);
 	}
+	
+	public int readUserPoint(String userId) {
+		return mybatis.selectOne("MypageDAO.readUserPoint", userId);
+	}
 }
