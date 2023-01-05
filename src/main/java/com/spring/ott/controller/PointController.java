@@ -1,6 +1,7 @@
 package com.spring.ott.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.point.PointService;
@@ -82,7 +84,18 @@ public class PointController {
 	
 	//포인트 충전 페이지
 	@RequestMapping(value="/createPoint.do", method=RequestMethod.GET)
-	public String createPointView() {
+	public String createPointView(HttpSession session) {
+		UserVO loginUser = new UserVO();
+		loginUser = (UserVO)session.getAttribute("loginUser");
+		
+		if(loginUser==null) {
+			return "WEB-INF/views/user/login";
+		}
+//      파라미터에 넣어서 추가하려고 했던 것
+//		, Model model,
+//		@RequestParam Map<String, String> doublePoint
+//		model.addAttribute("doublePoint", doublePoint.get("doublePoint"));
+		
 		return "/WEB-INF/views/mypage/createPoint";
 	}
 	
@@ -90,9 +103,6 @@ public class PointController {
 	public String createPoint(HttpSession session, Model model,
 			PointVO point) {
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-		
-		
-		
 /* 			구분코드
 			1: 충전(+)
 			2: 환전(-)
@@ -107,9 +117,9 @@ public class PointController {
 		
 		//포인트충전
 		 pointService.chargePoint(point);
-		
 		 //redirect로 보내기로 했으니까 mypage.do (컨트롤러)에서 잔액 계산 되도록 만들어야 함.
-				 
+		
+		 
 		return "redirect:/mypage/readMyPage.do";
 	}
 	

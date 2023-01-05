@@ -17,7 +17,7 @@
 			<h3 class="section-title text-left" style="text-align-last:center;" id="categoryName"></h3>
 			
 								<!-- 노션 메모에 enctype form-data 메모(form-data는 파일 등록할때 주로 쓴다고함) -->
-			<form action="/board/createRecBoard.do" method="post" enctype="multipart/form-data">
+			<form action="/board/createBoard.do" method="post" enctype="multipart/form-data">
 			<!-- input hidden은 form 을 submit 하면 input들도 같이 넘어가는데 boardCategory 값을 넘겨주기 위해서 추가한 것임. -->
 				<input type="hidden" name="boardCategory" id="boardCategory" value="${boardCategory }">
 				<table border="1" style="border-collapse: collapse">

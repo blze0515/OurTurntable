@@ -45,7 +45,7 @@ public class BoardController {
 	public String readBoardList(HttpSession session, Model model,
 		@RequestParam Map<String, String> paramMap, Criteria cri) {
 		System.out.println("받아온 파람맵 = = = = == = == = == "+paramMap);
-			UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
 			//System.out.println(paramMap.get("boardCategory"));
 		if(loginUser == null) {
 			return "/WEB-INF/views/user/login";
@@ -60,7 +60,6 @@ public class BoardController {
 		
 		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
 		System.out.println("리스트로 받아온 파람맵 = = = = == = == = == "+paramMap);
-		
 		System.out.println("model에 담긴 값=========="+model.toString());
 		System.out.println("paramMap에 담긴 값=========="+paramMap.toString());
 		
@@ -115,7 +114,12 @@ public class BoardController {
 	
 	//북마크 페이지 이동
 	@RequestMapping("/bookmark.do")
-	public String bookmarkView() {
+	public String bookmarkView(HttpSession session) {
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		if(loginUser == null) {
+			
+		}
+		
 		return "WEB-INF/views/board/bookmark";
 	}
 	

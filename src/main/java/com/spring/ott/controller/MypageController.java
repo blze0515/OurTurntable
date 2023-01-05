@@ -1,7 +1,5 @@
 package com.spring.ott.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.spring.ott.common.CamelHashMap;
 import com.spring.ott.service.mypage.MypageService;
 import com.spring.ott.vo.UserVO;
 
@@ -23,13 +20,17 @@ public class MypageController {
 	
 //  readMypage
 	@RequestMapping("/readMypage.do")
-	public String readMypage(HttpSession session) {
+	public String readMypage(HttpSession session, Model model) {
 		
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
 //		System.out.println("마이페이지 로그인 유저 정보 : " + loginUser.toString());
 		if(loginUser==null){
 			return "WEB-INF/views/user/login";
 		}
+		
+		int userPoint = mypageService.readUserPoint(loginUser.getUserId());
+		model.addAttribute("userPoint", userPoint);
+		
 		
 		return "/WEB-INF/views/mypage/readMypage";
 	}
@@ -137,5 +138,25 @@ public class MypageController {
 		}
 		
 		return "WEB-INF/views/mypage/contact";
+	}
+	
+	@RequestMapping(value="/donation.do", method=RequestMethod.GET)
+	public String donationView() {
+		return "/WEB-INF/views/mypage/readDonation";
+	}
+	
+	@RequestMapping(value="/donation.do", method=RequestMethod.POST)
+	public String donation(HttpSession session, Model model) {
+		UserVO loginUser = new UserVO();
+		loginUser = (UserVO)session.getAttribute("loginUser");
+		
+		if(loginUser==null) {
+			return "WEB-INF/views/user/login";
+		}
+		
+		
+		
+		
+		return "redirect:/mypage/readMyPage.do";
 	}
 }

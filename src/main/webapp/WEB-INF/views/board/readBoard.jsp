@@ -23,9 +23,37 @@
 					<input type="hidden" name="boardCategory" id="boardCategory" value="${board.boardCategory }">
 					<input type="hidden" name="boardSeq" value="${board.boardSeq }">
 						<div class="co-btn" style="margin-top:15px;">
-							<button class="donation-btn"><img src="${pageContext.request.contextPath }/images/donation.png" alt="후원하기"></button>
-							<button class="like-btn"><img src="${pageContext.request.contextPath }/images/bookmark-empty.png" alt="북마크"></button>
-							<button class="like-btn"><img src="${pageContext.request.contextPath }/images/heart-empty.png" alt="북마크"></button>
+<!-- 후원하기 버튼 -->			<button type="button" class="donationBtn" id="donationBtn" name="donationBtn" onclick="location.href='/mypage/donation.do'"><img src="${pageContext.request.contextPath }/images/donation.png" alt="후원하기"></button>
+<!-- 팝업 또는 모달 창으로 후원할 금액 입력하는 창 열고 후원하기 취소버튼과 후원하기 버튼 삽입 -->							
+
+						    <div class="background">
+						      <div class="window">
+						        <div class="popup">
+						          <button id="close" >팝업닫기</button>
+						          
+						          <!-- 팝업 영역 S-->
+						          
+						          <p stype="text-align:center;">후원할 금액</p>
+						          <p><input type="text" > &nbsp;원</p>
+						          
+						          
+						          
+						          
+						          
+						          
+						          
+						          
+						          <!-- 팝업 영역 E-->
+						        </div>
+						      </div>
+						    </div>
+
+
+
+
+
+<%-- 	즐겨찾기 대신 좋아요로 통일	<button class="likeBtn"><img src="${pageContext.request.contextPath }/images/bookmark-empty.png" alt="북마크"></button> --%>
+							<button class="likeBtn"><img src="${pageContext.request.contextPath }/images/heart-empty.png" alt="북마크"></button>
 						</div>
 						<table border="1" style="border-collapse: collapse;">
 							<tr>
@@ -102,7 +130,7 @@
 				</div>
 				
 				
-				<div style="height:20px; width:100%;"></div>
+				<div style="height:20px; width:100%;"></div> <!-- body, footer 간 간격 조정을 위해 삽입 -->
 				<hr/>
 				<h5 style="margin-top:10px; text-align:center;">
 					<a href="/board/createBoard.do?boardCategory=${board.boardCategory }" }>글 쓰기</a><br>
@@ -144,13 +172,14 @@
 		}
 		
 		//후원하기 버튼 숨김
-	  	if($("#boardCategory").val() == "F" ) {
-	        $(".donation-btn").hide();
+	  	if($("#boardCategory").val() == "S" ) {
+	        $(".donationBtn").show();
 	        //$("#boardWriter").hide();
-	     } else if($("#boardCategory").val() == "R") {
-	    	 $(".donation-btn").hide();
+	     } else {
+	    	 $(".donationBtn").hide();
 	     } 
-
+		
+		//게시글 접근 권한 설정 S
 		//상단 게시판 이름 표시 ("#id~") <- Jquery 문법
 		$(function() {
 			if($("#boardCategory").val()=="F"){
@@ -180,6 +209,31 @@
 				window.location = "/board/fileDown.do?fileName=" + fileName;
 			});
 		});
+		//게시글 접근 권한 설정 E
+		
+		
+		
+		//후원하기 버튼 클릭시 /mypage/donation.do 요청
+// 		$.ajax({
+// 			url: '/mypage/donation.do';
+// 			type: 'post';
+//		 키 값은 문자열로 묶을 필요 없다.(알아서 문자열로 들어감, 써도 되고 안써도 됨) / data는 중괄호로 묶어서 보내야함
+// 			data: {
+// 				boardCategory: $("input[name='boardCategory']").val(),
+// 				boardSeq : $("input[name='boardSeq']").val(),
+// 				"receiver" : $("input[name='userId']").val()
+//					}
+//		요청을 보내서 처리까지 완료(성공)하고 나면 success 부분 실행, 여기나 controller에서 처리 중에 에러가 발생하면 error부분이 실행됨
+//		아래 function(매개변수) <- 매개변수 부분은 controller에서 처리 끝난 후 리턴값을 매개변수로 받아오는 것임.
+// 			success: function(매개변수){
+				
+// 			}
+
+//			error : ~~~
+				
+// 		})
+		
+		
 	</script>
 </body>
 </html>

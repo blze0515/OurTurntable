@@ -28,7 +28,8 @@
 		                <span class="userPoint">
 		                  <a>보유 포인트 : </a>
 		                  <!-- value 넣을곳 -->
-		                  <a href="#" style="font-style: italic; color: skyblue;">10,000</a>
+ <!-- script에서 a링크의 텍스트를 가져와서 콤마 찍고(정규식으로) 다시 .text()로 a링크에 보내면 콤마가 찍혀서 입력된다. -->
+		                  <a href="/point/readPointHistoryList.do" style="font-style: italic; color: skyblue;"  name="str" value="str">${requestScope.userPoint }</a>
 		                </span>
 	                </div>
 	                <dt>
@@ -83,4 +84,14 @@
 	                </dd>
 	            </dl>
 	        </div>
+	        
+	    <script>
+	  	//천 단위 콤마 찍고 숫자
+
+
+	  
+
+	    </script>    
+        
+</body>
 </html>

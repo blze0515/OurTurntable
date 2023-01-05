@@ -26,12 +26,6 @@ public class UserController {
 	UserService userService;
 	
 	
-	@RequestMapping("/myPage.do")
-	public String myPageView() {
-		return "/WEB-INF/views/user/myPage";
-	}
-	
-	
 	@GetMapping("/createUser.do")
 	public String createUserView() {
 		return "/WEB-INF/views/user/createUser";
