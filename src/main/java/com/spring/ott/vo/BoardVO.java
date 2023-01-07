@@ -27,6 +27,9 @@ public class BoardVO {
 	private String boardSyoutubelink;
 	private char boardSuploadyn;
 	
+	//좋아요 기능 목적으로 userVO, boardVO에 요소 추가하고 DB에 collumn 추가 
+	private int boardLikeCount;
+	
 
 	
 }
