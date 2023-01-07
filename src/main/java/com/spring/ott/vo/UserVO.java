@@ -19,5 +19,16 @@ public class UserVO {
 	private String userRole;
 	private String userPw;
 	private String userProfileImg;
+	
+	//좋아요 기능 목적으로 userVO, boardVO에 요소 추가하고 DB에 collumn 추가 
+	private int userLikeBoardSeq;
 
+	/*
+		userRole
+		c : 일반회원
+		v : 프리미엄 회원
+		a : 관리자
+	 */
+	
+	
 }

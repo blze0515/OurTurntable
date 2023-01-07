@@ -23,10 +23,10 @@
 			) VALUES ( 
 			#{userId}, #{userName}, 
 			#{userNickname}, #{userEmail}, 
-			'11111', #{userAddress}, 
-			'11111', #{userPw}, 
+			#{userTel}, #{userAddress}, 
+			'zipcode', #{userPw}, 
 			NOW(), NOW(), 
-			'ROLE_USER', 'Y', 
+			'c', 'Y', 
 			null
 			)
 	]]>

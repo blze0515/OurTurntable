@@ -53,7 +53,7 @@
 
 
 <%-- 	즐겨찾기 대신 좋아요로 통일	<button class="likeBtn"><img src="${pageContext.request.contextPath }/images/bookmark-empty.png" alt="북마크"></button> --%>
-							<button class="likeBtn"><img src="${pageContext.request.contextPath }/images/heart-empty.png" alt="북마크"></button>
+							<input class="likeBtn"><img src="${pageContext.request.contextPath }/images/heart-empty.png" alt="좋아요"></button>
 						</div>
 						<table border="1" style="border-collapse: collapse;">
 							<tr>
@@ -211,7 +211,18 @@
 		});
 		//게시글 접근 권한 설정 E
 		
-		
+		//좋아요 클릭 이벤트
+		$(function(){
+			var test=0;
+			$(".likeBtn").on("click", function(){
+				if(test<1){
+					test = 1;
+				} else if(1<=test){
+					test = 0;
+				}
+				alert("작성자 : '${board.userId}', 로그인유저 : ${loginUser.userId}, 좋아요 : "+ test);
+			});
+		});
 		
 		//후원하기 버튼 클릭시 /mypage/donation.do 요청
 // 		$.ajax({

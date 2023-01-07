@@ -103,6 +103,9 @@ public class PointController {
 	public String createPoint(HttpSession session, Model model,
 			PointVO point) {
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			return "WEB-INF/vies/user/login";
+		}
 /* 			구분코드
 			1: 충전(+)
 			2: 환전(-)
@@ -120,12 +123,9 @@ public class PointController {
 		 //redirect로 보내기로 했으니까 mypage.do (컨트롤러)에서 잔액 계산 되도록 만들어야 함.
 		
 		 
-		return "redirect:/mypage/readMyPage.do";
+		return "redirect:/mypage/readMypage.do";
 	}
-	
-	public String chargePoint(HttpSession session, Model model) {
-		return "redirect:/mypage/readMyPage.do";
-	}
+
 	
 	
 

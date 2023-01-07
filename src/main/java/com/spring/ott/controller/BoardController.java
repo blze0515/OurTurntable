@@ -106,7 +106,8 @@ public class BoardController {
 		if("R".equals(paramMap.get("boardCategory"))) {
 		return "/WEB-INF/views/board/readRecBoardList";
 		} else {
-			System.out.println("paramMap============================"+paramMap.get("boardCategory"));
+//			System.out.println("paramMap============================"+paramMap.get("boardCategory"));
+			System.out.println("paramMap============================"+paramMap.toString());
 			return "/WEB-INF/views/board/readBoardList";
 		}
 	}
@@ -150,6 +151,10 @@ public class BoardController {
 		//session, request, model, applicationcontext, jsp // 이것들에 담긴 건 EL표기법으로 사용 가능
 		model.addAttribute("board", board);
 		model.addAttribute("fileList", fileList);
+		
+//		model.addAttribute("loginUser", loginUser); loginUser 세션에 있어서 model에 넣을 필요 없음(01.07)
+		
+		
 		
 		if(boardVO.getBoardCategory().equals("R")) {
 			return "WEB-INF/views/board/readRecBoard";
