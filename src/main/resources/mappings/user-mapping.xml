@@ -39,6 +39,7 @@
 		SELECT COUNT(*)
 			FROM T_OTT_USER
 			WHERE USER_ID = #{userId}
+			AND USER_ACTIVEYN = 'Y'
 	]]>
 	</select>
 	
@@ -57,9 +58,29 @@
 			FROM T_OTT_USER
 			WHERE USER_ID = #{userId}
 			  AND USER_PW = #{userPw}
+			  AND USER_ACTIVEYN = 'Y'
 	]]>
 	</select>
-
+	
+	<update id="deleteUser" parameterType="user">
+		UPDATE T_OTT_USER
+		SET USER_ID = #{userId}
+		  , USER_NAME = '탈퇴회원'
+		  , USER_NICKNAME = #{userId}
+		  , USER_EMAIL  = ''
+		  , USER_TEL = ''
+		  , USER_ADRESS =''
+		  , USER_ZIPCODE = ''
+		  , USER_PW  = ''
+		  , USER_RGSTDATE = NOW()
+		  , USER_MDFDATE = NOW()
+		  , USER_ROLE = 'd'
+		  , USER_ACTIVEYN = 'N'
+		  , USER_PROFILE_IMG = null
+		WHERE 1=1
+		AND USER_ID = #{userId}
+		AND USER_PW = #{userPw}
+	</update>
 
 
 </mapper>

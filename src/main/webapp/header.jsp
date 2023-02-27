@@ -72,7 +72,7 @@
 <!----------------------<li><a href="/main/services.do">Services</a></li>	 -->
 						<li><a href="/test/readTest.do">테스트페이지</a></li>
 						<li><a href="/point/createPoint.do">포인트 충전하기</a></li>
-						<li><a href="/board/bookmark.do">북마크</a></li>
+						<li><a href="/board/myLikeList.do">좋아요 모음</a></li>
 						<!-- 로그인/회원가입/마이페이지 드롭다운 -->
 						<li class="has-children">
 						  <c:choose>

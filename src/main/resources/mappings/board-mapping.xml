@@ -192,4 +192,73 @@
 			WHERE BOARD_SEQ = #{boardSeq}
 			  AND BOARD_CATEGORY = #{boardCategory}
 	</select>
+	
+	<insert id="insertBoardLike" parameterType="map">
+		INSERT INTO T_OTT_LIKE	(
+		USER_ID, BOARD_SEQ, BOARD_CATEGORY, LIKE_DATE
+		) VALUES (
+		#{loginUser}, #{boardSeq}, #{boardCategory}, NOW()
+		)
+	</insert>
+	
+	<select id="likeCheck" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM T_OTT_LIKE
+		WHERE 1=1
+		AND BOARD_SEQ = #{boardSeq}
+		AND BOARD_CATEGORY = #{boardCategory}
+		AND USER_ID = #{loginUser}
+	</select>
+	
+	<select id="boardLikeCnt" parameterType="board" resultType="int">
+		SELECT COUNT(*)
+		FROM T_OTT_LIKE
+		WHERE 1=1
+		AND BOARD_SEQ = #{boardSeq}
+		AND BOARD_CATEGORY = #{boardCategory}
+	</select>
+	
+	<delete id="deleteBoardLike" parameterType="map">
+		DELETE FROM T_OTT_LIKE
+		WHERE 1=1
+		AND BOARD_SEQ = #{boardSeq}
+		AND BOARD_CATEGORY = #{boardCategory}
+		AND USER_ID = #{loginUser}
+	</delete>
+	
+	
+	<select id="getMyLikeList" parameterType="map" resultType="board">
+		<![CDATA[
+		SELECT @rownum:=@rownum+1 AS ROWNUM,
+				A.*
+			FROM T_OTT_BOARD A,
+				 (SELECT @rownum:=#{cri.startNum}) TMP
+			WHERE 1=1
+			AND (A.BOARD_SEQ, A.BOARD_CATEGORY)
+				 IN (
+						SELECT B.BOARD_SEQ, B.BOARD_CATEGORY
+							FROM T_OTT_LIKE B
+							WHERE B.USER_ID = #{userId}
+				     )
+			]]>
+			<if test="boardSearch.searchKeyword != null and boardSearch.searchKeyword != ''">
+				<if test="boardSearch.searchCondition == 'all'">
+					AND A.BOARD_TITLE LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					 OR A.BOARD_CONTENT LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+					 OR A.USER_ID LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+				</if>
+				<if test="boardSearch.searchCondition == 'title'">
+					AND A.BOARD_TITLE LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+				</if>
+				<if test="boardSearch.searchCondition == 'content'">
+					AND A.BOARD_CONTENT LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+				</if>
+				<if test="boardSearch.searchCondition == 'writer'">
+					AND A.USER_ID LIKE CONCAT('%', #{boardSearch.searchKeyword}, '%')
+				</if>
+			</if>
+			ORDER BY ROWNUM DESC, BOARD_SEQ DESC
+			LIMIT #{cri.amount} OFFSET #{cri.startNum}
+		</select>
+	
 </mapper>

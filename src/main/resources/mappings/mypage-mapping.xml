@@ -54,7 +54,7 @@
 	
 	<select id="readUserPoint" parameterType="string" resultType="int">
 		<![CDATA[
-			SELECT SUM(POINT_MONEY) POINT_BALANCE
+			SELECT IFNULL(SUM(POINT_MONEY),0) POINT_BALANCE
 			FROM T_OTT_POINT
 			WHERE USER_ID = #{userId}
 		]]>

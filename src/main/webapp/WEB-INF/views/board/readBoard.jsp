@@ -10,7 +10,6 @@
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath }/header.jsp"></jsp:include>
-	
 	<div class="untree_co-section">
 		<div class="container my-5">
 		
@@ -24,36 +23,14 @@
 					<input type="hidden" name="boardSeq" value="${board.boardSeq }">
 						<div class="co-btn" style="margin-top:15px;">
 <!-- 후원하기 버튼 -->			<button type="button" class="donationBtn" id="donationBtn" name="donationBtn" onclick="location.href='/mypage/donation.do'"><img src="${pageContext.request.contextPath }/images/donation.png" alt="후원하기"></button>
-<!-- 팝업 또는 모달 창으로 후원할 금액 입력하는 창 열고 후원하기 취소버튼과 후원하기 버튼 삽입 -->							
-
-						    <div class="background">
-						      <div class="window">
-						        <div class="popup">
-						          <button id="close" >팝업닫기</button>
-						          
-						          <!-- 팝업 영역 S-->
-						          
-						          <p stype="text-align:center;">후원할 금액</p>
-						          <p><input type="text" > &nbsp;원</p>
-						          
-						          
-						          
-						          
-						          
-						          
-						          
-						          
-						          <!-- 팝업 영역 E-->
-						        </div>
-						      </div>
-						    </div>
-
-
-
-
-
-<%-- 	즐겨찾기 대신 좋아요로 통일	<button class="likeBtn"><img src="${pageContext.request.contextPath }/images/bookmark-empty.png" alt="북마크"></button> --%>
-							<input class="likeBtn"><img src="${pageContext.request.contextPath }/images/heart-empty.png" alt="좋아요"></button>
+<%-- 	즐겨찾기 대신 좋아요로 통일	<button class="bookMark"><img src="${pageContext.request.contextPath }/images/bookmark-empty.png" alt="북마크"></button> --%>
+							<c:if test="${likeCnt == 0 }">
+								<input type="image" src="${pageContext.request.contextPath }/images/heart-empty.png" class="likeBtn" >
+							</c:if>
+							<c:if test="${likeCnt != 0 }">
+								<input type="image" src="${pageContext.request.contextPath }/images/heart-like.png" class="likeBtn active">
+							</c:if>
+								<span id="boardLikeCnt" style="padding-left:3px;">${board.boardLikeCount }</span>
 						</div>
 						<table border="1" style="border-collapse: collapse;">
 							<tr>
@@ -208,42 +185,117 @@
 				const fileName = $(this).attr("href");
 				window.location = "/board/fileDown.do?fileName=" + fileName;
 			});
+			
+	//좋아요 버튼
+			$(".likeBtn").on("click", function(e) {
+				//$(".likeBtn")은 서브밋 되지 않게 만듦.
+				e.preventDefault();
+				
+				if(!$(this).hasClass('active')) {
+ 					addLike();
+				} else {
+					deleteLike();
+ 				}
+			});
 		});
 		//게시글 접근 권한 설정 E
 		
-		//좋아요 클릭 이벤트
-		$(function(){
-			var test=0;
-			$(".likeBtn").on("click", function(){
-				if(test<1){
-					test = 1;
-				} else if(1<=test){
-					test = 0;
-				}
-				alert("작성자 : '${board.userId}', 로그인유저 : ${loginUser.userId}, 좋아요 : "+ test);
-			});
-		});
+		
+		//https://eunbc-2020.tistory.com/118 여기(servlet) 따라하다가 강사님한테 질문함.
+		//01.08 강사님 팁 
+		//addlike(), deletelike() 호출에 따라서 컨트롤러에서 기능 실행
+		//(controller에서)해당 게시글에 좋아요 눌렀으면 
+		//jstl - 로 좋아요 누른 게시글이면 빨간하트 띄우고 안 누른 게시글이면 빈 하트 띄움. 눌렀는지 여부는 db 데이터로 확인
+		function addLike(){
+	        var query = {idx : ${board.boardSeq}}
+	        $.ajax({
+	            url : "/board/insertBoardLike.do",
+	            type: "get",
+	            data: {
+	            	boardSeq : ${board.boardSeq},
+	            	boardCategory : "${board.boardCategory}",
+	            	loginUser : "${loginUser.userId}"
+	            },
+	            success:function(data) {
+	            	console.log(data);
+	                //addLike() 호출되면 좋아요 버튼에 'active' 클래스를 만든다.
+	                //(내가 좋아요 누른 페이지인지 표시하는거)
+	                //addClass() <- jquery 메서드
+	                //location.reload();
+//  	                $(".likeBtn").addClass('active');
+				var jsonData = JSON.parse(data);
+				console.log(jsonData);
+	            
+				if(jsonData.likeYn==1){
+            		$(".likeBtn").attr("src", "/images/heart-like.png");
+            		$(".likeBtn").addClass("active");
+            	} else{
+            		$(".likeBtn").attr("src", "/images/heart-empty.png")
+            		$(".likeBtn").removeClass("active");
+            	}
+				
+				$("#boardLikeCnt").text(jsonData.boardLikeCnt);
+	            }
+	        });
+		}
+		
+		function deleteLike(){
+	        var query = {idx : ${board.boardSeq}}
+	        
+	        $.ajax({
+	            url : "/board/deleteBoardLike.do",
+	            type: "get",
+	            data: {
+	            	boardSeq : ${board.boardSeq},
+	            	boardCategory : "${board.boardCategory}",
+	            	loginUser : "${loginUser.userId}"
+	            },
+	            success:function(data) {  //좋아요 개수와 좋아요 여부가 String으로 돌아온다.
+	            	console.log(data);
+	            	//JSON.parse() : JSON을 객체로 바꿔준다.
+	            	//JSON.stringify() : 객체를 JSON으로 바꿔준다.
+	            	var jsonData = JSON.parse(data)  //String이면 속성값을 . 으로 꺼내서 쓸 수가 없기 때문에 객체로 바꾼다.
+	                //deleteLike() 호출되면 좋아요 버튼에 'active' 클래스를 지운다.
+	                //(내가 좋아요 누른 페이지인지 표시하는거)
+	                //removeClass <- jquery 메서드
+// 	                $(".likeBtn").removeClass('active');
+	            	console.log(jsonData);  //JS에서 데이터 주고 받을 떄는 그냥 JSON객체로 하는게 편하고, 일단 이것만 알고있자.
+	            	
+	            	if(jsonData.likeYn==0){
+	            		$(".likeBtn").attr("src", "/images/heart-empty.png");
+	            		$(".likeBtn").removeClass("active");
+	            	} else{
+	            		$(".likeBtn").attr("src", "/images/heart-like.png")
+	            		$(".likeBtn").addClass("active");
+	            	}
+	            	
+// 	                location.reload();
+					
+					$("#boardLikeCnt").text(jsonData.boardLikeCnt);
+	            }
+	        });
+		}
+		
 		
 		//후원하기 버튼 클릭시 /mypage/donation.do 요청
 // 		$.ajax({
-// 			url: '/mypage/donation.do';
-// 			type: 'post';
+// 			url: '/mypage/donation.do',
+// 			type: 'post',
 //		 키 값은 문자열로 묶을 필요 없다.(알아서 문자열로 들어감, 써도 되고 안써도 됨) / data는 중괄호로 묶어서 보내야함
 // 			data: {
 // 				boardCategory: $("input[name='boardCategory']").val(),
 // 				boardSeq : $("input[name='boardSeq']").val(),
 // 				"receiver" : $("input[name='userId']").val()
-//					}
+//					},
 //		요청을 보내서 처리까지 완료(성공)하고 나면 success 부분 실행, 여기나 controller에서 처리 중에 에러가 발생하면 error부분이 실행됨
 //		아래 function(매개변수) <- 매개변수 부분은 controller에서 처리 끝난 후 리턴값을 매개변수로 받아오는 것임.
 // 			success: function(매개변수){
 				
-// 			}
+// 			},
 
 //			error : ~~~
 				
 // 		})
-		
 		
 	</script>
 </body>

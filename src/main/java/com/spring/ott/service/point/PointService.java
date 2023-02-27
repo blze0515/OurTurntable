@@ -12,4 +12,6 @@ public interface PointService {
 	int readPointBalance(String userId);
 
 	void chargePoint(PointVO point);
+
+	void deletePoint(String userId); //회원탈퇴 시 사용되는 메소드
 }

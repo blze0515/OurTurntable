@@ -4,6 +4,7 @@ package com.spring.ott.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +18,13 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.ott.Criteria;
 import com.spring.ott.service.board.BoardService;
 import com.spring.ott.utils.FileUtils;
@@ -44,7 +50,7 @@ public class BoardController {
 	//Map이랑 VO랑 비슷한거다.
 	public String readBoardList(HttpSession session, Model model,
 		@RequestParam Map<String, String> paramMap, Criteria cri) {
-		System.out.println("받아온 파람맵 = = = = == = == = == "+paramMap);
+//		System.out.println("받아온 파람맵 = = = = == = == = == "+paramMap);
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
 			//System.out.println(paramMap.get("boardCategory"));
 		if(loginUser == null) {
@@ -59,21 +65,22 @@ public class BoardController {
 		}
 		
 		List<BoardVO> boardList = boardService.getBoardList(paramMap, cri);
-		System.out.println("리스트로 받아온 파람맵 = = = = == = == = == "+paramMap);
-		System.out.println("model에 담긴 값=========="+model.toString());
-		System.out.println("paramMap에 담긴 값=========="+paramMap.toString());
+		
+		//좋아요 눌렀는지 여부로 만든 리스트
+		//List<BoardVO> myLikeList = boardService.getMyLikeList(paramMap, cri); 
+
+		
+		
 		
 		
 		//total = 작성돼있는 총 게시물 수 가져오는 변수
 		//getboardCnt에도 쿼리에 카테고리에 대한 조건을 줘야 해당 카테고리에 대한 글 개수를 표시할 수 있다.
 		int total = boardService.getBoardCnt(paramMap);
 		
-		//게시물 몇개인지 출력
-		System.out.println(" 게시물 개수(total) : " + total);
 		
 		//게시물 정보 출력
 		for(int i=0; i < boardList.size(); i++) {
-		System.out.println("보드리스트= " +boardList.get(i).toString());
+//		System.out.println("보드리스트= " +boardList.get(i).toString());
 		}
 		
 		model.addAttribute("boardList", boardList);
@@ -81,20 +88,21 @@ public class BoardController {
 		
 		
 		
-		
-//		S 검색조건 선택했을 때 사용
+//		검색조건 선택했을 때 사용
 		if(paramMap.get("searchCondition") != null && !paramMap.get("searchCondition").equals("")) {
-			System.out.println("searchCondition================" + paramMap.get("searchCondition"));
+//			System.out.println("searchCondition================" + paramMap.get("searchCondition"));
 			model.addAttribute("searchCondition", paramMap.get("searchCondition"));
 		}
 		
 		if(paramMap.get("searchKeyword") != null && !paramMap.get("searchKeyword").equals("")) {
 			model.addAttribute("searchKeyword", paramMap.get("searchKeyword"));
 		}
-//		E 검색조건 선택
 		
 //		map으로 받은 boardCategory get으로 가져와서  model에 주입
 		model.addAttribute("boardCategory", paramMap.get("boardCategory"));
+		
+		//좋아요 표시한 게시글 모음 페이지
+		
 		
 		
 //		sh 예시
@@ -107,22 +115,11 @@ public class BoardController {
 		return "/WEB-INF/views/board/readRecBoardList";
 		} else {
 //			System.out.println("paramMap============================"+paramMap.get("boardCategory"));
-			System.out.println("paramMap============================"+paramMap.toString());
+//			System.out.println("paramMap============================"+paramMap.toString());
 			return "/WEB-INF/views/board/readBoardList";
 		}
 	}
 	
-	
-	//북마크 페이지 이동
-	@RequestMapping("/bookmark.do")
-	public String bookmarkView(HttpSession session) {
-		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-		if(loginUser == null) {
-			
-		}
-		
-		return "WEB-INF/views/board/bookmark";
-	}
 	
 //	readBoard (게시글 상세 조회)
 //		* 서비스에서 구현할 내용: 
@@ -146,14 +143,18 @@ public class BoardController {
 		BoardVO board = boardService.getBoard(boardVO);
 		List<BoardFileVO> fileList = boardService.getBoardFileList(boardVO);
 		
+		//좋아요 기능
+		int likeCnt = boardService.likeCheck(boardVO, loginUser.getUserId());
+		int boardLikeCnt = boardService.boardLikeCnt(boardVO);
 		
+		board.setBoardLikeCount(boardLikeCnt);  //좋아요 총 개수 카운트
+		System.out.println(likeCnt);
 		//request.setAttribute == model
 		//session, request, model, applicationcontext, jsp // 이것들에 담긴 건 EL표기법으로 사용 가능
 		model.addAttribute("board", board);
 		model.addAttribute("fileList", fileList);
-		
+		model.addAttribute("likeCnt", likeCnt);
 //		model.addAttribute("loginUser", loginUser); loginUser 세션에 있어서 model에 넣을 필요 없음(01.07)
-		
 		
 		
 		if(boardVO.getBoardCategory().equals("R")) {
@@ -163,13 +164,12 @@ public class BoardController {
 		}
 		
 	}
-	
+
 //	createBoard (게시글 등록)
-//		* 게시판 유형(1,2,3)에 따른 동적 쿼리' -> header.jsp에서 쿼리스트링으로 게시판 유형 구분해서 작동하도록 함 
-	
+//		* 게시판 유형(1,2,3)에 따른 동적 쿼리' -> header.jsp에서 쿼리스트링으로 게시판 유형 구분해서 작동하도록 함 z
 	@RequestMapping(value="/createBoard.do", method=RequestMethod.GET)
-	public String createBoardView(@RequestParam("boardCategory") String boardCategory, Model model) {
-		
+	public String createBoardView(HttpSession session, @RequestParam("boardCategory") String boardCategory, Model model) {
+
 //		boardService.createBoard(boardVO)
 		model.addAttribute("boardCategory", boardCategory);
 		if("R".equals(boardCategory)) {
@@ -183,7 +183,7 @@ public class BoardController {
 	public String createBoard(HttpSession session, BoardVO boardVO, HttpServletRequest request,
 			MultipartHttpServletRequest multipartServletRequest) throws IOException {
 		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
-		System.out.println("boardVO============================" + boardVO.toString());
+//		System.out.println("boardVO============================" + boardVO.toString());
 		if(loginUser == null) {
 			return "/WEB-INF/views/user/login";
 		}
@@ -289,6 +289,7 @@ public class BoardController {
 
 
 	
+	
 //	createReply (댓글등록)
 
 	
@@ -299,9 +300,124 @@ public class BoardController {
 
 	
 //	createBoardLike (좋아요 등록)
+	@ResponseBody
+	@RequestMapping("/insertBoardLike.do")
+	public String insertBoardLike(@RequestParam Map<String, String> likeMap) throws JsonProcessingException {
+		System.out.println("likeMap.toString()111 = "+likeMap.toString());
+		
+		boardService.insertBoardLike(likeMap);
+		
+		BoardVO boardVO = new BoardVO();
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		boardVO.setBoardCategory(likeMap.get("boardCategory"));
+		boardVO.setBoardSeq(Integer.parseInt(likeMap.get("boardSeq")));
+		
+		int likeYn = boardService.likeCheck(boardVO, likeMap.get("loginUser"));
+		int boardLikeCnt = boardService.boardLikeCnt(boardVO);
+		
+		jsonMap.put("likeYn", likeYn);
+		jsonMap.put("boardLikeCnt", boardLikeCnt);
+		jsonMap.put("likeMap", likeMap);
+		
+		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonMap);  //Object -> json 문자(writeValueAsString())
+		
+		return json;
+	}
+		/*  좋아요 기능 작동 구조에 대한 메모
+//		return "redirect:/board/readBoard";
+ 		
+ 		redirect를 할거면 ajax를 쓰는 의미가 없다. 화면 새로고침 안되는 방식으로 처리해야 한다.
+ 		사용할 방법은 ajax에서 보낸 데이터를 받아서 기능을 처리한 후에
+ 		바뀐 좋아요에 대한 정보를 다시 ajax의 success부분으로 보내준 다음
+ 		ajax 처리부분에서 화면에 보이는 부분을 메소드를 사용해서 변경해주는 작업을 해서 완료한다.
+ 		그렇게 하려면
+ 		1. Controller에서 받은 요청을 기능적으로 처리한다.
+ 		2. ajax로 보낸 data를 이용해서 처리된 후의 data를 다시 jsp(화면)로 보낸다(ajax의 success부분에서 쓸 자료)
+ 			- 자료를 주고 받는 방법은 JSON 객체를 이용하는 것이 편하다
+ 			- 그럴려면 JSON 객체를 생성해야 하고, 그 객체에 boardSeq, boardCategory, userId 정보를 담아서 보내면 된다.
+ 			- JSON객체는 이름이 긴 메소드를 사용해서 만든다. deleteBoardLike()에서 사용한 아래의 메소드 참고
+ 				String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonMap);
+			- json 객체에 담길 데이터는 맵으로 담는다. 맵에 해당 게시물의 카테고리, Seq, 로그인유저의 로그인 정보를 담아서 보낸다.
+			- 담는 방법은 put메소드 사용.
+				- deleteBoardLike()를 보면 Map은 String타입으로 만들었다. boardSeq는 int타입이기 때문에 Integer.parseInt()로 변환해줘야 한다.
+			- json객체에 jsp에서 필요한 데이터를 다 담았다면 메소드를 종료한다. return json; (화면에 대한 처리를 하지 않고 json객체를 return한다.)
+			- json객체를 받은 ajax의 success부분에서는 JSON을 객체형태로 다시 변환해준다.(왜였지?) 
+	            	//JSON.parse() : JSON 문자열을 JavaScript 객체로 바꿔준다.
+	            	//JSON.stringify() : JavaScript객체를 JSON문자열로 바꿔준다.
+        	- 
+		
+		*/
+		
+	
+	@ResponseBody
+	@RequestMapping("/deleteBoardLike.do")
+	public String deleteBoardLike(@RequestParam Map<String, String> likeMap) throws JsonProcessingException {  //likeMap에 화면에서 보낸 data 있다
+		System.out.println(likeMap.toString());
+		
+//		BoardVO board = BoardVO.builder()    //이런것도 있음.. 
+//							   .boardSeq(1)
+//							   .boardCategory("F")
+//							   .build();
+		
+		BoardVO boardVO = new BoardVO();  //값이 0, null로 초기화 된 객체
+		ObjectMapper mapper = new ObjectMapper();  //ObjectMapper 클래스에서 제공하는 메소드를 사용하기 위해 객체 생성.(return 데이터를 JSON으로 변환하기 위해서)
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		boardVO.setBoardCategory(likeMap.get("boardCategory")); //화면에서 보낸 Category Key로 사용하는거고
+		boardVO.setBoardSeq(Integer.parseInt(likeMap.get("boardSeq")));  //boardSeq는 int라서 변환해야함.
+		
+		//01.29 ajax쓸때 json으로 변환하고 return json으로 받아서 화면 ajax success부분으로 돌려줘서 화면 리로드 말고 해당 부분만 수정되게 만들어야 한다.
+		boardService.deleteBoardLike(likeMap);
+		
+		int likeYn = boardService.likeCheck(boardVO, likeMap.get("loginUser")); //아이디 넣음
+		int boardLikeCnt = boardService.boardLikeCnt(boardVO);
+		
+		//메소드 실행(좋아요 취소)된 후의 정보를 다시 Map에 담는다.(ajax success 부분으로 돌려줄 데이터 생성)
+		jsonMap.put("likeYn", likeYn);  //유저가 좋아요 눌렀는지 여부
+		jsonMap.put("boardLikeCnt", boardLikeCnt);  //게시글에 눌러진 좋아요 개수 카운트
+		jsonMap.put("likeMap", likeMap);  //boardSeq, Category, 로그인유저 정보 담긴 매개변수
 
+		
+		//writeValueAsString()메소드는 ObjectMapper 클래스의 메소드이고 매개변수에 있는 객체를 JSON형태로 변환
+		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonMap);  
+		
+		return json;
+	}
+	
 	
 //	deleteBoardLike (좋아요 삭제)
-
+	
+	@RequestMapping("/myLikeList.do")
+	public String myLike(HttpSession session, Model model,
+			Map<String, String> likeParam, Criteria cri) {
+		
+		//로그인 유저 VO
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		
+		if(loginUser==null) {
+			return "/WEB-INF/views/user/login";
+		}
+		
+//		//추천게시판, 일반게시판 페이지 맞게 표시
+//		if(likeParam.get("boardCategory").equals("R")) {
+//			cri.setAmount(9);
+//		} else {
+//			cri.setAmount(10);
+//		}
+		List<BoardVO> boardList = boardService.getMyLikeList(likeParam, cri, loginUser.getUserId());
+		
+		model.addAttribute("boardList", boardList);
+		
+		//총 게시물 개수 가져오는 변수
+		int total = boardService.getBoardCnt(likeParam);
+		System.out.println("total : "+total);
+		System.out.println("Criteria : " + cri.toString());
+		System.out.println(likeParam.toString());
+		
+		return "/WEB-INF/views/board/myLikeList";
+	}
+	
 	
 }

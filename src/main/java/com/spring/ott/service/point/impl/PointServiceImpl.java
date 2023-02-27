@@ -29,4 +29,10 @@ public class PointServiceImpl implements PointService{
 	public void chargePoint(PointVO point) {
 		pointDAO.chargePoint(point);
 	}
+
+	@Override
+	public void deletePoint(String userId) {  //회원탈퇴하면 수행하는 메소드
+		pointDAO.deletePoint(userId);
+		
+	}
 }

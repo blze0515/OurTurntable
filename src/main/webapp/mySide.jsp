@@ -14,10 +14,10 @@
 	                <dt class="title">
 	                    <img src="${pageContext.request.contextPath }/images/profile.png"alt="프로필">
 	                </dt>
-	                <span class="userNick">
-	                  <a>회원 닉네임</a>
+	                <div class="userNick">
+	                  <a href="/mypage/readMypage.do">${loginUser.userNickname }</a>
 	                  <img src="${pageContext.request.contextPath }/images/pen.png"alt="수정" id="pen">
-	                </span>
+	                </div>
 	                <!-- grade/point=>GP -->
 	                <div class="userGP">
 		                <span class="userGrade">
@@ -29,7 +29,7 @@
 		                  <a>보유 포인트 : </a>
 		                  <!-- value 넣을곳 -->
  <!-- script에서 a링크의 텍스트를 가져와서 콤마 찍고(정규식으로) 다시 .text()로 a링크에 보내면 콤마가 찍혀서 입력된다. -->
-		                  <a href="/point/readPointHistoryList.do" style="font-style: italic; color: skyblue;"  name="str" value="str">${requestScope.userPoint }</a>
+		                  <a href="/point/readPointHistoryList.do" style="font-style: italic; color: skyblue;" >${requestScope.userPoint }</a>
 		                </span>
 	                </div>
 	                <dt>
@@ -79,7 +79,7 @@
 	                        <li class="menuli"><a href="/user/updatePw.do">비밀번호 변경</a></li>
 <!-- 	                        <li class="menuli"><a href="#">결제수단 변경</a></li> -->
 	                        <li class="menuli"><a href="#">회원정보 수정</a></li>		                       
-	                        <li class="endli"><a href="#">회원 탈퇴</a></li>
+	                        <li class="endli"><a href="/user/deleteUser.do">회원 탈퇴</a></li>
 	                    </ul>
 	                </dd>
 	            </dl>

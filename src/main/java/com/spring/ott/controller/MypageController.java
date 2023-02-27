@@ -1,5 +1,6 @@
 package com.spring.ott.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,6 @@ public class MypageController {
 		
 		int userPoint = mypageService.readUserPoint(loginUser.getUserId());
 		model.addAttribute("userPoint", userPoint);
-		
 		
 		return "/WEB-INF/views/mypage/readMypage";
 	}

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.ott.service.point.PointService;
 import com.spring.ott.service.user.UserService;
 import com.spring.ott.vo.UserVO;
 
@@ -24,6 +25,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	PointService pointService;
 	
 	
 	@GetMapping("/createUser.do")
@@ -135,28 +139,23 @@ public class UserController {
 		return "";
 	}
 	
+	@GetMapping("deleteUser.do")
+	public String deleteUserView() {
+		
+		return "WEB-INF/views/user/deleteUser";
+	}
 	
-	
-//	createSession (Î°úÍ∑∏ ù∏)
-	
-	
-//	deleteSession (Î°úÍ∑∏ ïÑ õÉ)
-	
-	
-//	readUserIdCheck ( ïÑ ù¥ îî Ï§ëÎ≥µÏ≤¥ÌÅ¨)
-
-	
-//	createFollow ( åîÎ°úÏö∞)
-	
-	
-//	createBlock (Ï∞®Îã®)
-	
-	
-//	deleteFollow ( åîÎ°úÏö∞  Ç≠ †ú)
-	
-	
-//	deleteBlock (Ï∞®Îã®  Ç≠ †ú)
-	
+	@PostMapping("deleteUser.do")
+	public String deleteUser(HttpSession session) {
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		
+		pointService.deletePoint(loginUser.getUserId());
+		userService.deleteUser(loginUser);
+		
+		session.invalidate();
+		
+		return "/index";
+	}
 
 
 }

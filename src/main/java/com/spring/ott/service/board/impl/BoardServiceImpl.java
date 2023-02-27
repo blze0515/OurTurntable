@@ -1,5 +1,6 @@
 package com.spring.ott.service.board.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +79,41 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteBoardFile(BoardFileVO boardFileVO) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void insertBoardLike(Map<String, String> likeMap) {
+		boardDAO.insertBoardLike(likeMap);
+		
+	}
+
+	@Override
+	public int likeCheck(BoardVO boardVO, String userId) {
+		Map<String, String> likeCheckMap = new HashMap<String, String>();
+		likeCheckMap.put("boardSeq", String.valueOf(boardVO.getBoardSeq()));
+		likeCheckMap.put("boardCategory", boardVO.getBoardCategory());
+		likeCheckMap.put("loginUser", userId);
+		//DAO에서 int를 리턴하는 함수를 만들어서 리턴문에 넣어야함
+		
+		
+		return boardDAO.likeCheck(likeCheckMap);
+	}
+
+	@Override
+	public int boardLikeCnt(BoardVO boardVO) {
+		// TODO Auto-generated method stub
+		return boardDAO.boardLikeCnt(boardVO);
+	}
+
+	@Override
+	public void deleteBoardLike(Map<String, String> likeMap) {
+		boardDAO.deleteBoardLike(likeMap);
+	}
+
+	@Override
+	public List<BoardVO> getMyLikeList(Map<String, String> paramMap, Criteria cri, String userId) {
+		// TODO Auto-generated method stub
+		return boardDAO.getMyLikeList(paramMap, cri, userId);
 	}
 
 
