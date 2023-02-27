@@ -33,6 +33,16 @@ public interface BoardService {
 	List<BoardFileVO> getBoardFileList(BoardVO boardVO);
 	
 	void deleteBoardFile(BoardFileVO boardFileVO);
+	//좋아요 추가
+	void insertBoardLike(Map<String, String> likeMap);
+
+	int likeCheck(BoardVO boardVO, String userId);
+
+	int boardLikeCnt(BoardVO boardVO);
+	//좋아요 제거
+	void deleteBoardLike(Map<String, String> likeMap);
+
+	List<BoardVO> getMyLikeList(Map<String, String> paramMap, Criteria cri, String userId);
 
 
 	

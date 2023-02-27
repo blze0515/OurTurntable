@@ -63,6 +63,7 @@
 			<table class="tr-table-border">
 					<tr class="tr-head tr-center tr-table-border">
 						<th class="tr-seq th-padding">글번호</th>
+						<th class="tr-seq2 th-padding">카테고리</th>
 						<th class="tr-title th-padding">제 목</th>
 						<th class="tr-nick th-padding tr-left">작성자</th>
 						<th class="tr-date th-padding">작성일</th>
@@ -74,6 +75,7 @@
 			 	    <c:forEach var="board" items="${boardList }">
 						<tr class="tr-content tr-center tr-table-border">
 							<td class="tr-seq td-padding">${board.rownum }</td>
+							<td class="tr-seq td-padding">${board.boardCategory == 'F' ? '자유' : 'R' ? '추천' : '자랑' }</td>
 							<td class="tr-title td-padding tr-left">
 								<div>
 									<a href="/board/readBoard.do?boardSeq=${board.boardSeq }&boardCategory=${board.boardCategory}">${board.boardTitle }</a>

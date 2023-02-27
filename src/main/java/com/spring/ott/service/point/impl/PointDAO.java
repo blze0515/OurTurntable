@@ -27,4 +27,9 @@ public class PointDAO {
 		mybatis.insert("PointDAO.chargePoint", point);
 	}
 
+	public void deletePoint(String userId) {
+		mybatis.delete("deletePoint", userId);
+		
+	}
+
 }

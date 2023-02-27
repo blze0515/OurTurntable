@@ -86,4 +86,33 @@ public class BoardDAO {
 	public List<BoardFileVO> getBoardFileList(BoardVO boardVO) {
 		return mybatis.selectList("BoardDAO.getBoardFileList", boardVO);
 	}
+
+	public void insertBoardLike(Map<String, String> likeMap) {
+		mybatis.insert("BoardDAO.insertBoardLike", likeMap);
+		
+	}
+
+	public int likeCheck(Map<String, String> likeCheckMap) {
+		//mapper에서 int 만든걸 가져와서 return에 바로 넣어준다.
+		return mybatis.selectOne("BoardDAO.likeCheck", likeCheckMap);
+	}
+
+	public int boardLikeCnt(BoardVO boardVO) {
+		// TODO Auto-generated method stub
+		return mybatis.selectOne("BoardDAO.boardLikeCnt", boardVO);
+	}
+
+	public void deleteBoardLike(Map<String, String> likeMap) {
+		mybatis.delete("BoardDAO.deleteBoardLike", likeMap);
+	}
+
+	public List<BoardVO> getMyLikeList(Map<String, String> paramMap, Criteria cri, String userId) {
+		Map<String, Object> pMap = new HashMap<String, Object>();
+		pMap.put("boardSearch", paramMap);
+		cri.setStartNum((cri.getPageNum() - 1) * cri.getAmount());
+		pMap.put("cri", cri);
+		pMap.put("userId", userId);
+		
+		return mybatis.selectList("BoardDAO.getMyLikeList", pMap);
+	}
 }

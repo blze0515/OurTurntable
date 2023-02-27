@@ -27,4 +27,10 @@ public class UserDAO {
 	public UserVO login(UserVO userVO) {
 		return (UserVO)mybatis.selectOne("UserDAO.login", userVO);
 	}
+	
+	public void deleteUser(UserVO loginUser) {
+		mybatis.update("UserDAO.deleteUser", loginUser);
+	}
+	
+	
 }

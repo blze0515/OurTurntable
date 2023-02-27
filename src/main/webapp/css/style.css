@@ -1512,15 +1512,18 @@ padding: 7rem 0 15rem 0;*/
 	.tr-seq{
 	width:120px;
 	}
+	.tr-seq2{
+	width:240px;
+	}
 	.tr-title{
-	width:750px;
+	width:730px;
 	padding-left:20px;
 	}
 	.tr-nick{
 	width:200px;
 	}
 	.tr-date{
-	width:120px;
+	width:140px;
 	}
 	.tr-view{
 	width:100px;
@@ -1622,6 +1625,7 @@ padding: 7rem 0 15rem 0;*/
 	width: 100%;
 	display:flex;
 	justify-content: end;
+	align-items: center;
 	}
     
     .co-btn button{
@@ -1633,6 +1637,12 @@ padding: 7rem 0 15rem 0;*/
     .co-btn img{
     width: 25px;
     height: 25px;
+    }
+    
+    input[type='image']{
+    width: 25px;
+    height: 25px;
+    
     }
 /* readBoard E     */
 
@@ -1666,7 +1676,7 @@ padding: 7rem 0 15rem 0;*/
  /* readRecBoard E */
  
  
- /* 후원하기 버튼 클릭 시 모달 css S */
+ /* 후원하기 버튼 클릭 시 모달 css S ****************/
 	/*  z-index로 모달을 화면의 맨 앞으로 위치하게 했고 background-color에서 맨 뒤에 0.3만큼 연하게 만들었음 */
  	.background{
 		position: fixed;
@@ -1717,4 +1727,13 @@ padding: 7rem 0 15rem 0;*/
 		transition: all .5s;
 	}
  	
- /* 후원하기 버튼 클릭 시 모달 css E */
+ /* 후원하기 버튼 클릭 시 모달 css E **********/
+ 
+ 
+ /*  user/deleteUser.jsp  */
+
+	.dCenter{
+		display: flex;
+		justify-content:center;
+		align-items: center;
+	}
