@@ -38,7 +38,7 @@
 										WHERE CHATROOM_MEMBER1 = #{userId}
 										   OR CHATROOM_MEMBER2 = #{userId}
 								  ) D
-							  WHERE  D.CHATROOM_MEMBER_YN = 'Y'		
+							  WHERE  D.CHATROOM_MEMBER_YN = 'y'		
 					) B
 				WHERE A.USER_ID = B.CHATROOM_MEMBER
 				) AA
@@ -83,7 +83,7 @@
 	
 	<update id="updateChatStatus" parameterType="map">
 		UPDATE T_OTT_CHAT
-			SET CHAT_READYN='Y'
+			SET CHAT_READYN='y'
 			WHERE CHATROOM_SEQ = #{chatroomSeq}
 			AND CHAT_RECEIVE_ID = #{userId}
 			AND CHAT_READYN = 'N'
@@ -92,8 +92,8 @@
 	<update id="updateChatroomMemberYn" parameterType="map">
 		UPDATE  T_OTT_CHATROOM
 			SET
-				CHATROOM_MEMBER1_YN = (CASE WHEN CHATROOM_MEMBER1 = #{userId} THEN 'N' ELSE 'Y' END),
-			    CHATROOM_MEMBER2_YN = CASE WHEN CHATROOM_MEMBER2 = #{userId} THEN 'N' ELSE 'Y' END
+				CHATROOM_MEMBER1_YN = (CASE WHEN CHATROOM_MEMBER1 = #{userId} THEN 'N' ELSE 'y' END),
+			    CHATROOM_MEMBER2_YN = CASE WHEN CHATROOM_MEMBER2 = #{userId} THEN 'N' ELSE 'y' END
 			WHERE
 				CHATROOM_SEQ = #{chatroomSeq}
 	</update>
@@ -103,7 +103,7 @@
 			(CHATROOM_SEQ, CHATROOM_MEMBER1, CHATROOM_MEMBER2, CHATROOM_CREATE, CHATROOM_MEMBER1_YN, CHATROOM_MEMBER2_YN)
 			VALUES(
 				(SELECT IFNULL(MAX(A.CHATROOM_SEQ), 0) + 1 FROM T_OTT_CHATROOM A), 
-				#{userId}, #{chatroomMember}, NOW(), 'Y', 'Y')
+				#{userId}, #{chatroomMember}, NOW(), 'y', 'y')
 	</insert>
 	
 	<select id="checkChatroom" parameterType="map">

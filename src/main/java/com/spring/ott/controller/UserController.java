@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -64,6 +65,7 @@ public class UserController {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		//1. 존재하는 아이디인지 체크
+		System.out.println("id = "+userVO.getUserId() + ", pw = " + userVO.getUserPw());
 		
 		int idCheck = userService.idCheck(userVO.getUserId());
 		
@@ -79,8 +81,7 @@ public class UserController {
 				//3. 로그인 처리
 //				login(userVO)에는 로그인한 id,pw확인하고 UserVO(*) 리턴.
 				UserVO user = userService.login(userVO);
-//키나 벨류 이런거 모를 때 session 안에 이 때 뭐가 들어있는지 알고 싶으면?
-//				System.out.println("홈페이지 접속 시 session : " + session);
+//키나 벨류 이런거 모를 때 session 안에 이 때 뭐가 들어있는지 알고 싶으면? (Map의 경우 keySet()이나 values()메소드로 확인 가능.
 
 				
 				//로그인 유저의 정보를 불러와서 session에 담는다.(웹에서 기본 30분 유지)
@@ -156,6 +157,71 @@ public class UserController {
 		
 		return "/index";
 	}
+	
+	//정보 수정하기 전에 비밀번호 확인
+	@GetMapping("/updateUserCheck.do")
+	public String updateUserCheckView() {
+		return "WEB-INF/views/user/updateUserCheck";
+	}
+	
+	@PostMapping("/updateUserCheck.do")
+	@ResponseBody
+	public String updateUserCheck(UserVO userVO) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		System.out.println("id = "+userVO.getUserId() + ", pw = " + userVO.getUserPw());
+		//1. id확인
+		int idCheck = userService.idCheck(userVO.getUserId());
+		if(idCheck<0) {
+			jsonMap.put("message", "idFail");
+		} else {
+			//2. 패스워드 확인
+			//pwCheck()메소드는 userId와 userPw를 T_OTT_USER에서 count한 int 값을 리턴한다.
+			int pwCheck = userService.pwCheck(userVO);
+			
+			//해당 유저의 pw를 확인한 값의 수(count)가 1보다 작으면(없으면) jsonMap에 "pwFail"을 "message"에 담는다.
+			if(pwCheck < 1) {
+				jsonMap.put("message", "pwFail");
+			} else {
+				//3. 비밀번호 확인 통과하면 updateUserCheck.jsp에서 ajax로 정보 수정하는 페이지로 이동
+				//   비밀번호가 일치하면 
+				jsonMap.put("message", "updateCheck Success");
+			}
+		}
+		
 
+//		jsonStr은 jsonMap을 Object -> String 타입으로 바꾸려고 만든 것. 리턴을 String 형태로.
+		String jsonStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonMap);
+		System.out.println("jsonStr = "+jsonStr.toString());
+		
+		return jsonStr;
+	}
+	
+	//비밀번호 확인 후 정보 수정하는 화면으로 이동
+	@GetMapping("/updateUser")
+	public String updateUserView() {
+		return "WEB-INF/views/user/updateUser";
+	}
+	//정보 수정하는 화면으로 이동
+	@PostMapping("/updateUser.do")
+	public String updateUser(HttpSession session, UserVO userVO) {
+		
+		userService.updateUser(userVO);
+		System.out.println("updateUser.do ======="+userVO);
+		
+		
+		//키나 벨류 이런거 모를 때 session 안에 이 때 뭐가 들어있는지 알고 싶으면? (Map의 경우 keySet()이나 values()메소드로 확인 가능.
 
+						
+						//로그인 유저의 정보를 불러와서 session에 담는다.(웹에서 기본 30분 유지)
+						
+		
+//		session.invalidate(); 로 로그아웃 시키고 다시 로그인하면서 변경사항 session에 반영할지, 수정 가능한 값들을 session에 set으로 각각 넣을지 고민중.
+//		session.invalidate();
+		UserVO user = userService.login(userVO);	
+		session.setAttribute("loginUser", user);
+		//다시 로그인해야 되는 문제 발생
+		
+		return "redirect:/mypage/readMypage.do";
+	}
 }

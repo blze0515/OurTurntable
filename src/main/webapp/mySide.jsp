@@ -78,7 +78,7 @@
 	                    <ul class="menu">
 	                        <li class="menuli"><a href="/user/updatePw.do">비밀번호 변경</a></li>
 <!-- 	                        <li class="menuli"><a href="#">결제수단 변경</a></li> -->
-	                        <li class="menuli"><a href="#">회원정보 수정</a></li>		                       
+	                        <li class="menuli"><a href="/user/updateUserCheck.do">회원정보 수정</a></li>		                       
 	                        <li class="endli"><a href="/user/deleteUser.do">회원 탈퇴</a></li>
 	                    </ul>
 	                </dd>
