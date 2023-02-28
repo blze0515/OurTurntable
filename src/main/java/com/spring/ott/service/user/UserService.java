@@ -14,4 +14,6 @@ public interface UserService {
 
 	void deleteUser(UserVO loginUser);
 
+	void updateUser(UserVO loginUser);
+
 }

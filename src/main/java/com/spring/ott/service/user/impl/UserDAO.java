@@ -31,6 +31,11 @@ public class UserDAO {
 	public void deleteUser(UserVO loginUser) {
 		mybatis.update("UserDAO.deleteUser", loginUser);
 	}
+
+	public void updateUser(UserVO userVO) {
+		mybatis.update("UserDAO.updateUser", userVO);
+		
+	}
 	
 	
 }

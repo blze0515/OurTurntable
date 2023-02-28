@@ -80,9 +80,9 @@
 						if(data.message == 'idFail') {
 							alert("존재하지 않는 아이디입니다.");
 							return;
+							//2. 비밀번호 체크
 						} else if(data.message == 'pwFail') {
 							
-							//2. 비밀번호 체크
 							alert("비밀번호가 틀렸습니다.");
 							return;
 						}

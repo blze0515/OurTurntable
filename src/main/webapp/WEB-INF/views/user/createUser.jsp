@@ -68,7 +68,7 @@
 								<input type="text" class="form-control" id="userTel" name="userTel" name="${_csrf.parameterName}" value="${_csrf.token}" required>
 							</div>
 							<div class="form-group">
-								<label class="text-black" for="adress">주소</label> 
+								<label class="text-black" for="userAddress">주소</label> 
 								<input type="text" class="form-control"id="userAddress"  name="userAddress" name="${_csrf.parameterName}" value="${_csrf.token}" required> 
 							</div>
 							
